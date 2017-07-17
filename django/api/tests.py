@@ -14,3 +14,20 @@ class ModelTestCase(TestCase):
         self.post.save()
         new_count = Post.objects.count()
         self.assertNotEqual(old_count, new_count)
+
+
+class ViewTestCase(TestCase):
+    """Test for API views."""
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.post_data = {'post_name': 'MSI GTX1080'}
+        self.response = self.client.post(
+            reverse('create'),
+            self.post_data,
+            format="json")
+
+    def test_api_can_create_a_post(self):
+        """Test the api has post creation capability"""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
