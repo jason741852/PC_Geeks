@@ -1,0 +1,41 @@
+<form class="form-horizontal" [formGroup]="registerForm" (submit)="onSubmit()">
+  <fieldset>
+    <legend>Login</legend>
+    <div class="form-group">
+      <label for="username" class="col-lg-2 control-label">Username</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="username" placeholder="Enter username..." formControlName="username">
+
+        <div class="alert alert-warning" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">You must enter a username!</div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Enter password..." formControlName="password">
+
+        <div class="alert alert-warning" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">You must enter a password!</div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword" class="col-lg-2 control-label">Confirm Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password..." formControlName="confirmPassword">
+
+        <div class="alert alert-warning" *ngIf="registerForm.controls['confirmPassword'].hasError('required') == true && registerForm.controls['confirmPassword'].touched">You must enter a password!</div>
+        <div class="alert alert-warning" *ngIf="registerForm.controls['confirmPassword'].getError('notEquivalent') == true && registerForm.controls['confirmPassword'].touched">Passwords do not match!</div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

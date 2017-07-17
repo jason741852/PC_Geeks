@@ -1,14 +1,14 @@
-import { MyProjectPage } from './app.po';
+import { Angular2PCPartReviewTestPage } from './app.po';
 
-describe('my-project App', () => {
-  let page: MyProjectPage;
+describe('angular2-pcpart-review-test App', function() {
+  let page: Angular2PCPartReviewTestPage;
 
   beforeEach(() => {
-    page = new MyProjectPage();
+    page = new Angular2PCPartReviewTestPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

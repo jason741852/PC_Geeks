@@ -1,0 +1,46 @@
+<!--<p>
+  review works!
+
+  <rating [(ngModel)]="starsCount" [max]="10">
+  </rating>
+</p>-->
+
+<div *ngIf="pcpart">
+  <div class="panel panel-deafult">
+    <div class="panel-heading">
+      <h2 class="panel-title">{{pcpart.title}}</h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="http://image.tmdb.org/t/p/w500/{{pcpart.poster_path}}">
+          <br />
+          <a *ngIf="pcpart.homepage" href="{{pcpart.homepage}}" target="_blank" class="btn btn-default center-block">Visit PCPart Website</a>
+        </div>
+        <div class="col-md-9">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">How would you like to rate this pcpart:</div>
+            <div class="panel-body">
+              <rating [(ngModel)]="starsCount" [max]="10">
+
+              </rating>
+            </div>
+          </div>
+
+          <div class="panel panel-deafult">
+            <div class="panel-heading">
+              Write a short review about the pcpart:
+            </div>
+            <div class="panel-body">
+              <textarea [(ngModel)]="reviewContent" class="form-control" rows="5">
+
+              </textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" (click)="addReview()" value="Add Review" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
