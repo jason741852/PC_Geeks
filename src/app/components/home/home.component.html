@@ -8,7 +8,7 @@
       <div *ngFor="let pcpart of mostRecentPCParts; let i = index" class="col-sm-6 col-md-4">
 
         <div class="thumbnail equal-height">
-          <img *ngIf="pcpart.poster_path" class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{pcpart.poster_path}}">
+          <img *ngIf="pcpart.poster_path" class="thumbnail" src="{{pcpart.poster_path}}">
           <div class="caption">
             <h3>{{pcpart.title}}</h3>
             <p>{{pcpart.overview.slice(0,150)}}...</p>

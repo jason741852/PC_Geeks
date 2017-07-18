@@ -16,9 +16,8 @@ export class PCPartsService {
         let today = new Date()
         let todayAsString = today.toISOString().slice(0, 10)
         let sevenDaysBefore = new Date()
-        sevenDaysBefore.setDate(today.getDate() - 7)
+        sevenDaysBefore.setDate(today.getDate() - 70)
         let sevenDaysBeforeAsString = sevenDaysBefore.toISOString().slice(0, 10)
-
         let headers = new Headers()
         headers.append('Content-Type', 'application/json')
 
