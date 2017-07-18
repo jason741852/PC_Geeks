@@ -1,18 +1,20 @@
-<div *ngIf="pcpart">
+<div *ngFor="let pcpart of mostRecentPCParts; let i = index" class="col-sm-6 col-md-4">
   <div class="panel panel-deafult">
     <div class="panel-heading">
       <h2 class="panel-title">{{pcpart.title}}</h2>
     </div>
     <div class="panel-body">
       <div class="row">
+
         <div class="col-md-5">
           <img src="{{pcpart.poster_path}}">
         </div>
         <div class="col-md-7">
           <ul class="list-group">
-            <li class="list-group-item">Genres: <span *ngFor="let genre of pcpart.genres">{{genre.name}} </span></li>
-            <li class="list-group-item">Release Date: {{pcpart.release_date}}</li>
-            <li class="list-group-item">{{pcpart.overview}}</li>
+            <li class="list-group-item">Category: {{pcpart.category}}</li>
+            <li class="list-group-item">Release Date: {{pcpart.released_date}}</li>
+            <li class="list-group-item">Overview: {{pcpart.overview}}</li>
+            <li class="list-group-item">Price: {{pcpart.price}}</li>
           </ul>
           <br>
           <a *ngIf="pcpart.homepage" href="{{pcpart.homepage}}" target="_blank" class="btn btn-default">Visit PCPart Website</a>
