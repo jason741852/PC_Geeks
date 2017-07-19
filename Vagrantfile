@@ -7,7 +7,7 @@
 # you're doing.
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
-  config.vm.network "forwarded_port", guest: 4200, host: 4200, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 80, host: 4200, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -22,9 +22,9 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./django", "/home/ubuntu/django"
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "django-contacts-demo"
+    vb.name = "cmpt-470-final-project"
     vb.cpus = 1
-    vb.memory = "512"
+    vb.memory = "1024"
     vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
     vb.gui = false
   end
