@@ -1,47 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
+import {RouterModule, Routes} from '@angular/router';
+import { SaleService } from './sale.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { RatingModule } from 'ngx-rating'
-
-import {routing} from './app.routing'
 import {AuthenticationService } from './service/authentication.service'
-import {PCPartsService } from './service/pcparts.service'
-import {ReviewsService } from './service/reviews.service'
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { RegisterComponent } from './components/authentication/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { PCPartComponent } from './components/pcpart/pcpart.component';
-import { ReviewComponent } from './components/review/review.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { LoginComponent } from './login/login.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FormComponent } from './form/form.component';
+import { SaleDetailComponent } from './sale-detail/sale-detail.component';
+import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 
+import { AppRoutingModule } from './app-routing.module';
+import {RegisterComponent} from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    MainPageComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-    PCPartComponent,
-    ReviewComponent
+    SidebarComponent,
+    FormComponent,
+    SaleDetailComponent,
+    DashboardSaleComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     JsonpModule,
-    routing,
-    ReactiveFormsModule,
-    RatingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    AuthenticationService,
-    PCPartsService,
-    ReviewsService,
-  ],
+  providers: [SaleService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
