@@ -16,7 +16,7 @@ class CreateView(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 class DetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles GET, PUT, PATCH and DELE TE requests."""
+    """This class handles GET, PUT, PATCH and DEL requests."""
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer

@@ -1,6 +1,12 @@
 from django.test import TestCase
 from .models import Post
+from apiclient import APIClient
 from django.contrib.auth.models import User
+from rest_framework.test import APIClient, force_authenticate
+from django.core.urlresolvers import reverse
+from rest_framework import status
+from rest_framework.response import Response
+
 # Create your tests here.
 
 class ModelTestCase(TestCase):
@@ -41,14 +47,15 @@ class ViewTestCase(TestCase):
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
     def test_authorization_is_enforced(self):
-        """Test teh api has user authorization"""
+        """Test the api has user authorization"""
         new_client = APIClient()
         res = new_client.get('/posts/', kwargs={'pk': 3}, format="json")
-        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_api_can_get_a_post(self):
         """Teset the api can get a given post"""
-        post = Post.objects.get(id=1)
+
+        post = Post.objects.get()
         response = self.client.get(
         '/posts/',
         kwargs={'pk': post.id}, format="json")
@@ -59,7 +66,8 @@ class ViewTestCase(TestCase):
     def test_api_can_update_post(self):
         """Test the api can update a given post"""
         post = Post.objects.get()
-        change_bucketlist = {'name': 'Something'}
+        self.assertEqual(post.post_name, 'MSI GTX1080')
+        change_post = {'post_name': 'Something'}
         res = self.client.put(
             reverse('details', kwargs={'pk': post.id}), change_post, format="json"
         )
@@ -68,7 +76,7 @@ class ViewTestCase(TestCase):
     def test_api_can_delete_post(self):
         """Test the api can delete a given post"""
         post = Post.objects.get()
-        response = self.client.delete(
+        res = self.client.delete(
             reverse('details', kwargs={'pk': post.id}), format="json", follow=True
         )
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
