@@ -1,3 +1,3 @@
 #!/bin/sh
 sleep 10
-/usr/local/bin/uwsgi --ini /home/ubuntu/exercise-8/uwsgi.ini --daemonize /var/log/django-contacts.log
+/usr/local/bin/uwsgi --ini /home/ubuntu/django/uwsgi.ini --daemonize /var/log/django.log
