@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, permissions
 from .serializers import PostSerializer
 from .models import Post
-from .serializers import MessagingSerializer
+from .serializers import MessagingSerializer, UserSerializer
 from .models import Messaging
 from .permissions import IsOwner
 from .permissions import IsStaffOrTargetUser
@@ -10,18 +10,18 @@ from .permissions import IsStaffOrTargetUser
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
- 
+
 
 # Create your views here.
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     model = User
- 
+
     def get_permissions(self):
         # allow non-authenticated user to create via POST
         return (AllowAny() if self.request.method == 'POST'
-                else IsStaffOrTargetUser()),
+                else IsStaffOrTargetUser),
 
 
 class CreateView(generics.ListCreateAPIView):
