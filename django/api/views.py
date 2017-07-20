@@ -5,12 +5,13 @@ from .models import Post
 from .serializers import MessagingSerializer
 from .models import Messaging
 from .permissions import IsOwner
+from .permissions import IsStaffOrTargetUser
 
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
  
-from .permissions import IsStaffOrTargetUser
+
 # Create your views here.
 
 class UserView(viewsets.ModelViewSet):
