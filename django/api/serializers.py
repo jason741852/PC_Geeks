@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Post
+from .models import Messaging
 
 class PostSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
@@ -10,3 +11,12 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'post_name', 'owner', 'date_created', 'date_modified')
         read_only_fields = ('date_created', 'date_modified')
+
+class MessagingSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = Messaging
+        fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
+        read_only_fields = ('date_created', 'send_userid', 'receive_userid')

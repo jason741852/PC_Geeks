@@ -9,6 +9,16 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
+class Messaging(models.Model):
+    """This class represents the Messaging model."""
+    owner = models.ForeignKey('auth.User',
+    related_name='messaging',
+    on_delete=models.CASCADE)
+    body = models.CharField(max_length=255, blank=False, unique=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    send_userid = models.IntegerField(default = 0)
+    receive_userid = models.IntegerField(default = 0)
+
     def __str__(self):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.post_name)
