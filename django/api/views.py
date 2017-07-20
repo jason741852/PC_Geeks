@@ -5,7 +5,23 @@ from .models import Post
 from .serializers import MessagingSerializer
 from .models import Messaging
 from .permissions import IsOwner
+
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
+ 
+from .permissions import IsStaffOrTargetUser
 # Create your views here.
+
+class UserView(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    model = User
+ 
+    def get_permissions(self):
+        # allow non-authenticated user to create via POST
+        return (AllowAny() if self.request.method == 'POST'
+                else IsStaffOrTargetUser()),
+
 
 class CreateView(generics.ListCreateAPIView):
     """This class defines the create behaviour of our rest api"""
