@@ -2,9 +2,11 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" routerLink="/main">MainPage</a>
+
+
+  <a class="navbar-brand" routerLink="main">MainPage</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav navbar-default">
+    <ul class="navbar-nav">
       <ul *ngIf="!auth.isLoggedIn()" class="nav navbar-nav navbar-right">
         <li><a routerLink="/login">Login</a></li>
         <li><a routerLink="/register">Register</a></li>
@@ -19,6 +21,14 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard">All Sales</a>
+
+      
+      <li class="nav-item">
+        <a class="nav-link" >Filler2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" >Filler3</a>
+
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
