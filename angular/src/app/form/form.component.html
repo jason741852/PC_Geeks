@@ -1,0 +1,20 @@
+<h2>Sales</h2>
+<div>
+  <label>Sale item:</label> <input #saleItem />
+  <label>Sale Category:</label> <input #saleCategory />
+  <label>Sale Price:</label> <input #salePrice />
+  <label>Sale Quality:</label> <input #saleQuality />
+        <label for="saleMan">Manufacturer</label>
+        <select name="manufacturer" #saleMan>
+          <option *ngFor="let each of manufacturers" [value]="each">{{each}}</option>
+        </select>
+  <button (click)="add(saleItem.value, saleCategory.value, 
+  salePrice.Value, saleQuality.value, saleMan.value)">
+    Add
+  </button>
+</div>
+<ul class="sales">
+  <li *ngFor="let sale of sales">
+    <span class="badge">{{sale.id}}</span> {{sale.manufacturer}} {{sale.item}}
+  </li>
+</ul>

@@ -1,0 +1,15 @@
+    <div *ngIf="sale" class="col-sm-6 col-md-4">
+      <div class="panel panel-deafult panel-heading">
+        <h2 class="panel-title">{{sale.item}}</h2>
+      </div>
+      <div class="panel-body row col-md-7">
+          <ul class="list-group description">
+            <li class="list-group-item">Item Name: {{sale.item}}</li>
+            <li class="list-group-item">Category: {{sale.category}}</li>
+            <li class="list-group-item">Quality: {{sale.quality}}</li>
+            <li class="list-group-item">Price: {{sale.price}}.00</li>
+            <li class="list-group-item">Manufacturer: {{sale.manufacturer}}</li>
+          </ul>
+      </div>
+    </div>
+        <button (click)="goBack()">Back</button>
