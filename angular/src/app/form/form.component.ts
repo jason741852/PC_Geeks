@@ -13,7 +13,6 @@ import { SaleService } from '../sale.service';
 export class FormComponent implements OnInit {
   sales: Sale[];
   selectedSale: Sale;
-
   constructor(
         private router: Router,
         private saleService: SaleService) { }
@@ -26,9 +25,13 @@ export class FormComponent implements OnInit {
     this.getSales();
   }
 
-  onSelect(sale: Sale): void {
-  this.selectedSale = sale;
+  add(title: string, item: string, category: string,
+        quality: string, price: number): void {
+  title = title.trim();
+  this.saleService.create(title, item, category, quality, price)
+    .then(sale => {
+      this.sales.push(sale);
+      this.selectedSale = null;
+    });
   }
-
-
 }

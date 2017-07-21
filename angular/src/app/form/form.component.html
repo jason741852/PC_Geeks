@@ -1,0 +1,17 @@
+<h2>Sales</h2>
+<div>
+  <label>Sale title:</label> <input #saleTitle />
+  <label>Sale item:</label> <input #saleItem />
+  <label>Sale Category:</label> <input #saleCategory />
+  <label>Sale Price:</label> <input #salePrice />
+  <label>Sale Quality:</label> <input #saleQuality />
+  <button (click)="add(saleTitle.value, saleItem.value, saleCategory.value, 
+  salePrice.Value, saleQuality.value)">
+    Add
+  </button>
+</div>
+<ul class="sales">
+  <li *ngFor="let sale of sales">
+    <span class="badge">{{sale.id}}</span> {{sale.title}}
+  </li>
+</ul>

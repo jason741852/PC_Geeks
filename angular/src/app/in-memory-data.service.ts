@@ -1,6 +1,7 @@
-import { Sale } from './sale';
-
-export const SALES: Sale[] = [
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+export class InMemoryDataService implements InMemoryDbService {
+  createDb() {
+    const sales = [
   { id: 1, title: 'Selling GTX 750', item: 'GTX 750', category: 'Video Card', price: 300.00, quality: 'Perfect Condition'},
   { id: 2, title: 'Selling GTX 760', item: 'GTX 760', category: 'Video Card', price: 500.00, quality: 'Poor Condition'},
   { id: 3, title: 'Selling GTX 780', item: 'GTX 780', category: 'Video Card', price: 400.00, quality: 'Okay Condition'},
@@ -11,4 +12,7 @@ export const SALES: Sale[] = [
   { id: 8, title: 'Selling GTX 1060', item: 'GTX 1060', category: 'Video Card', price: 600.00, quality: 'Perfect Condition'},
   { id: 9, title: 'Selling GTX 1070', item: 'GTX 1070', category: 'Video Card', price: 900.00, quality: 'Perfect Condition'},
   { id: 10, title: 'Selling GTX 1080', item: 'GTX 1080', category: 'Video Card', price: 800.00, quality: 'Perfect Condition'},
-];
+    ];
+    return {sales};
+  }
+}

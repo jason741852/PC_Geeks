@@ -10,7 +10,6 @@ import {AuthenticationService } from './service/authentication.service'
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
-
 import { LoginComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormComponent } from './form/form.component';
@@ -19,6 +18,9 @@ import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.componen
 
 import { AppRoutingModule } from './app-routing.module';
 import {RegisterComponent} from './register/register.component';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,9 @@ import {RegisterComponent} from './register/register.component';
     HttpModule,
     JsonpModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+
   ],
   providers: [SaleService, AuthenticationService],
   bootstrap: [AppComponent]
