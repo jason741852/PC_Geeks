@@ -1,0 +1,11 @@
+<div *ngIf="auth" class="col-sm-6 col-md-4">
+  <div class="panel panel-deafult panel-heading">
+    <h2 class="panel-title">User profile</h2>
+  </div>
+  <div class="panel-body row col-md-7">
+    <ul class="list-group description">
+      <li class="list-group-item">User Name: {{auth.getInfo()}}</li>
+    </ul>
+  </div>
+</div>
+<button (click)="goBack()">Back</button>

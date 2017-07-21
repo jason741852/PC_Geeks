@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
-import {RegisterComponent} from './register/register.component';
+import { RegisterComponent} from './register/register.component';
+import { ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
       path: 'register',
       component: RegisterComponent
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent
     },
     {
       path: 'form',

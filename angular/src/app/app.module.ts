@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {RegisterComponent} from './register/register.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import {ProfileComponent} from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { InMemoryDataService } from './in-memory-data.service';
     SidebarComponent,
     FormComponent,
     SaleDetailComponent,
-    DashboardSaleComponent
+    DashboardSaleComponent,
+    ProfileComponent
+
   ],
   imports: [
     BrowserModule,

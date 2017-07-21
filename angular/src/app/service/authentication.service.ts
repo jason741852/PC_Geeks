@@ -13,6 +13,7 @@ export class AuthenticationService {
     baseUrl: String;
     appKey: String;
     appSecret: String;
+    getUsername: String;
 
     constructor(private _http: Http, private router: Router) {
         this.baseUrl = kinvey.baseUrl;
@@ -26,7 +27,7 @@ export class AuthenticationService {
         let headers = new Headers();
         headers.append('Authorization', "Basic " + btoa(this.appKey + ":" + this.appSecret))
         headers.append('Content-Type', 'application/json');
-
+        this.getUsername = username
         return this._http.post(loginUrl, JSON.stringify(data), { headers: headers })
             .map(x => x.json())
             .subscribe(
@@ -67,6 +68,9 @@ export class AuthenticationService {
             },
             err => console.log
             )
+    }
+    getInfo() {
+      return this.getUsername
     }
 
 

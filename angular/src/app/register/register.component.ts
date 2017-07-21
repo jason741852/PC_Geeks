@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     let password = this.registerForm.controls['password'].value
     let confirmPassword = this.registerForm.controls['confirmPassword'].value
 
-    this.registerForm.controls['confirmPassword'].hasError('reqired')
+    this.registerForm.controls['confirmPassword'].hasError('required')
 
     this.authenticationService.register(username, password)
   }
