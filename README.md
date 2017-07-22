@@ -23,3 +23,5 @@ Look at Network to see the progress of the group
     Alin Paunescu: alin-messaging branch and chris/vagrant branch and userlogin branch.
     Django Backend DB set up. Django API, GET, POST, DELETE, user ownership, models.
     
+    Brandon Tuong Quan Nguyen: brandon/googlemapsapi branch
+    Implemented map to show the location of a sale post, using Google Maps API
