@@ -7,6 +7,9 @@
   1. To refresh the Django backend server, use `vagrant ssh` to get into the VM, then `sudo touch reload.ini` to restart the uWSGI server.
  
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~CHECKPOINT~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~
 #PLEASE LOOK AT THE BRANCHES and NETWORK, WE ARE WORKING ON SEPERATE BRANCHES AND CAN'T MERGE IT INTO ONE BRANCH YET
 #IF YOU WANT TO SEE A DEMO, GO INTO woody/chris/combined cd angular and run npm install > npm start
 #Checkpoint text:
