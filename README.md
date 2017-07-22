@@ -18,4 +18,8 @@ Look at Network to see the progress of the group
 
     Chang Yook Ahn: inside the chang branch:
     The login feature has been implemented which includes the register feature and the view profile.
-    In-progress: 1. The PC Parts rating feature 2.Change password feature
+    In-progress: 1. The PC Parts rating feature 2.Change password 
+    
+    Alin Paunescu: alin-messaging branch and chris/vagrant branch and userlogin branch.
+    Django Backend DB set up. Django API, GET, POST, DELETE, user ownership, models.
+    
