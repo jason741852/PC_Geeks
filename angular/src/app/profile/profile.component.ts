@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { User } from '../_models/index';
-import { UserService } from '../_services/index';
-import { AlertService, AuthenticationService } from '../_services/index';
+import { User } from '../_models/user';
+import { UserService } from '../_services/user.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-profile-detail',

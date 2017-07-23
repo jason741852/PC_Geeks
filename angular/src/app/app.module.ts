@@ -5,17 +5,18 @@ import {RouterModule, Routes} from '@angular/router';
 import { SaleService } from './sale.service';
 import {BaseRequestOptions, HttpModule, JsonpModule} from '@angular/http';
 import { RatingModule } from 'ngx-rating'
-import { fakeBackendProvider } from './_helpers/index';
+import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { AuthGuard } from './_guards/index';
+import { AlertService} from './_services/alert.service';
+import { AuthenticationService } from './_services/authentication.service'
+import { UserService } from './_services/user.service'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
@@ -53,7 +54,6 @@ import {ProfileComponent} from "./profile/profile.component";
   ],
   providers: [
     SaleService,
-    AuthGuard,
     AlertService,
     AuthenticationService,
     UserService,
