@@ -1,18 +1,12 @@
-from django.shortcuts import render
 from rest_framework import generics, permissions
-from .serializers import PostSerializer
-from .models import Post
-from .serializers import MessagingSerializer, UserSerializer
-from .models import Messaging
-from .permissions import IsOwner
-from .permissions import IsStaffOrTargetUser
+from .serializers import UserSerializer, PostSerializer, MessagingSerializer
+from .models import Post, Messaging
+from .permissions import IsOwner, IsStaffOrTargetUser
 
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
-
-# Create your views here.
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -24,34 +18,44 @@ class UserView(viewsets.ModelViewSet):
                 else IsStaffOrTargetUser),
 
 
-class CreateView(generics.ListCreateAPIView):
-    """This class defines the create behaviour of our rest api"""
+# Obtains a list of all Posts
+class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated,IsOwner)
 
+
+# Obtains a list of Posts belonging to a user
+class PostPrivateListCreateView(generics.ListCreateAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+    # Assign current user as Post owner
     def perform_create(self, serializer):
-        """Save the post data wen creating a new post"""
-        serializer.save(owner=self.request.user)
+        serializer.save(owner_id=self.request.user)
 
-class DetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles GET, PUT, PATCH and DEL requests."""
 
-    queryset = Post.objects.all()
+# Retrieves, modifies, and deletes Post instances
+class PostInstanceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsOwner)
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
 
 class CreateViewMessaging(generics.ListCreateAPIView):
     """This class defines the create behaviour of our rest api"""
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
-    permission_classes = (permissions.IsAuthenticated,IsOwner)
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
 
     def perform_create(self, serializer):
         """Save the post data wen creating a new post"""
         serializer.save(owner=self.request.user)
+
 
 class DetailsViewMessaging(generics.RetrieveUpdateDestroyAPIView):
     """This class handles GET, PUT, PATCH and DEL requests."""

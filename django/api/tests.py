@@ -1,13 +1,11 @@
 from django.test import TestCase
 from .models import Post
-from apiclient import APIClient
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient, force_authenticate
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.response import Response
 
-# Create your tests here.
 
 class ModelTestCase(TestCase):
 

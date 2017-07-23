@@ -1,23 +1,51 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Post
-from .models import Messaging
+from rest_framework.exceptions import ValidationError
+from .models import Post, Messaging
+from decimal import *
+
 
 class PostSerializer(serializers.ModelSerializer):
-    """Serializer to map the Model instance into JSON format."""
-    owner = serializers.ReadOnlyField(source='owner.username')
-
     class Meta:
-        """Meta class to map serializer's field with the model fields."""
         model = Post
-        fields = ('id', 'post_name', 'owner', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = (
+            'id',
+            'item',
+            'category',
+            'quality',
+            'manufacturer',
+            'body',
+            'price',
+            'location',
+            'latitude',
+            'longitude',
+            'owner_id',
+            'buyer_id',
+            'date_created',
+            'date_modified',
+        )
+        read_only_fields = (
+            'owner_id',
+            'buyer_id',
+            'date_created',
+            'date_modified',
+        )
+
+    def validate(self, data):
+        price = data.get('price')
+        latitude = data.get('latitude')
+        longitude = data.get('longitude')
+
+        if price is not None and price < 0:
+            raise ValidationError('Price cannot be negative')
+        if latitude is not None and (latitude < Decimal(-90) or latitude > Decimal(90)):
+            raise ValidationError('Latitude must be between -90 and 90')
+        if longitude is not None and (longitude < Decimal(-180) or longitude > Decimal(180)):
+            raise ValidationError('Latitude must be between -180 and 180')
 
 class MessagingSerializer(serializers.ModelSerializer):
-    """Serializer to map the Model instance into JSON format."""
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
-        """Meta class to map serializer's fields with the model fields."""
         model = Messaging
         fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
         read_only_fields = ('date_created', 'send_userid', 'receive_userid')
