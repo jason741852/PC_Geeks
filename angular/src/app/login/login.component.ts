@@ -1,40 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+﻿import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthenticationService } from '../../app/service/authentication.service'
+import { AlertService, AuthenticationService } from '../_services/index';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    moduleId: module.id,
+    templateUrl: 'login.component.html'
 })
+
 export class LoginComponent implements OnInit {
+    model: any = {};
+    loading = false;
+    returnUrl: string;
 
-  loginForm: FormGroup
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) { }
 
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
-  }
+    ngOnInit() {
+        // reset login status
+        this.authenticationService.logout();
 
-  ngOnInit() {
-    this.buildForm();
-  }
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
-  buildForm() {
-    this.loginForm = this.formBuilder.group({
-      username: this.formBuilder.control(null, Validators.required),
-      password: this.formBuilder.control(null, Validators.required)
-    });
-  }
-
-  resetForm() {
-    this.buildForm();
-  }
-
-  onSubmit() {
-    let username = this.loginForm.controls['username'].value
-    let password = this.loginForm.controls['password'].value
-
-    this.authenticationService.login(username, password)
-  }
+    login() {
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
 }

@@ -1,53 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+﻿import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../app/service/authentication.service'
+import { AlertService, UserService } from '../_services/index';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    moduleId: module.id,
+    templateUrl: 'register.component.html'
 })
-export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup
+export class RegisterComponent {
+    model: any = {};
+    loading = false;
 
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) { }
+    constructor(
+        private router: Router,
+        private userService: UserService,
+        private alertService: AlertService) { }
 
-  ngOnInit() {
-    this.buildForm();
-  }
-
-  buildForm() {
-    this.registerForm = this.formBuilder.group({
-      username: this.formBuilder.control(null, Validators.required),
-      password: this.formBuilder.control(null, Validators.required),
-      confirmPassword: this.formBuilder.control(null, Validators.required)
-    }, { validator: this.arePasswordsMatching('password', 'confirmPassword') });
-  }
-
-  resetForm() {
-    this.buildForm();
-  }
-
-  arePasswordsMatching(password: string, confirmPassword: string) {
-    return (group: FormGroup) => {
-      let passwordInput = group.controls[password];
-      let passwordConfirmationInput = group.controls[confirmPassword];
-      if (passwordInput.value !== passwordConfirmationInput.value) {
-        return passwordConfirmationInput.setErrors({ notEquivalent: true })
-      }
+    register() {
+        this.loading = true;
+        this.userService.create(this.model)
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
-  }
-
-  onSubmit() {
-    let username = this.registerForm.controls['username'].value
-    let password = this.registerForm.controls['password'].value
-    let confirmPassword = this.registerForm.controls['confirmPassword'].value
-
-    this.registerForm.controls['confirmPassword'].hasError('required')
-
-    this.authenticationService.register(username, password)
-  }
-
 }

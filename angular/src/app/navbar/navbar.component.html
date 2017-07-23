@@ -11,7 +11,7 @@
       </ul>
       <ul *ngIf="auth.isLoggedIn()" class="nav navbar-nav navbar-right">
         <li><a routerLink="/profile">Profile</a></li>
-        <Button type="button" (click)="logout()">Logout</Button>
+        <p><a [routerLink]="['/login']">Logout</a></p>
       </ul>
       <li class="nav-item">
         <a class="nav-link" routerLink="/form">Create Sale</a>

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { SaleService } from './sale.service';
 import { HttpModule } from '@angular/http';
-
+import { AuthGuard } from './_guards/index';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
     },
     {
       path: 'main',
-      component: MainPageComponent
+      component: MainPageComponent, canActivate: [AuthGuard]
     },
     {
       path: 'login',
