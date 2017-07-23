@@ -61,26 +61,26 @@ end
 cookbook_file '.npmrc' do
 	path '/home/ubuntu/.npmrc'
 end
-execute 'make_npm_packages_dir' do
-	command 'mkdir ~/.npm-packages'
+directory '/home/ubuntu/.npm-packages' do
+	action :create
 end
 execute 'npm_packages_env_var' do
 	command 'export NPM_PACKAGES="${HOME}/.npm-packages"'
 end
 execute 'path_env_var' do
 	command 'export PATH="$NPM_PACKAGES/bin:$PATH"'
-	not_if '[ -a /home/ubuntu/path_set ]'
+	not_if { ::File.exist?('/home/ubuntu/path_set') }
 end
 execute 'path_provision' do
 	command 'touch /home/ubuntu/path_set'
 end
 execute 'unset_manpath_env_var' do
 	command 'unset MANPATH'
-	not_if '[ -a /home/ubuntu/manpath_set ]'
+	not_if { ::File.exist?('/home/ubuntu/manpath_set') }
 end
 execute 'manpath_env_var' do
 	command 'export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"'
-	not_if '[ -a /home/ubuntu/manpath_set ]'
+	not_if { ::File.exist?('/home/ubuntu/manpath_set') }
 end
 execute 'manpath_provision' do
 	command 'touch /home/ubuntu/manpath_set'
@@ -93,6 +93,10 @@ execute "install_angular" do
 end
 execute 'npm_install' do
 	command 'npm install --no-bin-links'
+	cwd '/home/ubuntu/angular'
+end
+execute 'build_angular_app' do
+	command 'ng build'
 	cwd '/home/ubuntu/angular'
 end
 # execute 'run_angular_server' do
