@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
+import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 
 const routes: Routes = [
     {
@@ -15,7 +16,7 @@ const routes: Routes = [
     },
     {
       path: 'main',
-      component: MainPageComponent
+      component: MainPageComponent,
     },
     {
       path: 'login',
@@ -29,8 +30,13 @@ const routes: Routes = [
       path: 'dashboard',
       component: DashboardSaleComponent
     },
+    {
+      path:'dashboard/:make',
+      component: DashboardFilterComponent
+    },
     { path: 'detail/:id',
-        component: SaleDetailComponent },
+        component: SaleDetailComponent 
+    },
 
 ];
 

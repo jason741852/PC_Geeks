@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Sale } from '../sale';
 import { SaleService } from '../sale.service';
 
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -13,6 +12,7 @@ import { SaleService } from '../sale.service';
 export class FormComponent implements OnInit {
   sales: Sale[];
   selectedSale: Sale;
+
   manufacturers = [' ', 'AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',

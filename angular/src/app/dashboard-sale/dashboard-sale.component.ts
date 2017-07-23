@@ -10,10 +10,12 @@ import { SaleService } from '../sale.service';
 })
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];
+
   constructor(private saleService: SaleService) { }
   
   ngOnInit(): void {
     this.saleService.getSales()
       .then(sales => this.sales = sales.slice(0));
+    
   }
 }

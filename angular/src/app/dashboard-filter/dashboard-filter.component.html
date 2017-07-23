@@ -1,12 +1,12 @@
 <div class="row">
-<div class="col-md-4">
-  <app-sidebar></app-sidebar>
-</div>
+  <div class="col-md-4">
+    <app-sidebar></app-sidebar>
+  </div>
   <div class="col-md-8">
     <h1>All the Sales</h1>
     <div class="grid grid-pad">
       <span *ngFor="let sale of sales">
-      <a class="col-1-4 loopDisplay">
+      <a *ngIf="sale.category == make" class="col-1-4 loopDisplay">
         <div class="module sale">
           <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
             in {{sale.quality}}</h4>

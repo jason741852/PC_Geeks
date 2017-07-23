@@ -12,6 +12,8 @@ import { SaleService } from '../sale.service';
 })
 export class SaleDetailComponent implements OnInit {
     sale: Sale;
+    params: ParamMap;
+
 
     constructor(
       private saleService: SaleService,
@@ -19,14 +21,15 @@ export class SaleDetailComponent implements OnInit {
       private location: Location
     ) {}
 
-    ngOnInit(): void {
+    ngOnInit(): any {
       this.route.paramMap
         .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
         .subscribe(sale => this.sale = sale);
-  }
+          
+      }
 
-  goBack(): void {
-    this.location.back();
-  }
+    goBack(): void {
+      this.location.back();
+    }
 
 }

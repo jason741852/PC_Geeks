@@ -20,6 +20,7 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
     SidebarComponent,
     FormComponent,
     SaleDetailComponent,
-    DashboardSaleComponent
-  ],
+    DashboardSaleComponent,
+    DashboardFilterComponent ],
   imports: [
     BrowserModule,
     FormsModule,
