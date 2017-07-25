@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('api', '0005_extended_user_model'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

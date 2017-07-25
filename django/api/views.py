@@ -1,21 +1,21 @@
 from rest_framework import generics, permissions
 from .serializers import UserSerializer, PostSerializer, MessagingSerializer
-from .models import Post, Messaging
+from .models import User, Post, Messaging
 from .permissions import IsOwner, IsStaffOrTargetUser
 
-from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
 
 class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     model = User
 
     def get_permissions(self):
         # allow non-authenticated user to create via POST
         return (AllowAny() if self.request.method == 'POST'
-                else IsStaffOrTargetUser),
+                else IsStaffOrTargetUser()),
 
 
 # Obtains a list of all Posts
