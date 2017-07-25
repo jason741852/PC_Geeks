@@ -11,7 +11,7 @@ urlpatterns = {
     url(r'^posts/(?P<pk>[0-9]+)/$', PostInstanceView.as_view(), name="details"),
     url(r'^messaging/$', CreateViewMessaging.as_view(), name="create"),
     url(r'^messaging/(?P<pk>[0-9]+)/$', DetailsViewMessaging.as_view(), name="details"),
-    url(r'^users/', UserView.as_view({'get': 'list'}), name="name"),
+    url(r'^users/', UserView.as_view({'get': 'list', 'post': 'create'}), name="name"),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

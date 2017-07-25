@@ -49,10 +49,20 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active',
             'date_joined',
         )
- 
-    def restore_object(self, attrs, instance=None):
-        # call set_password on user object. Without this
-        # the password will be stored in plain text.
-        user = super(UserSerializer, self).restore_object(attrs, instance)
-        user.set_password(attrs['password'])
+
+    def create(self, validated_data):
+        user = User(
+            username=validated_data['username'],
+            email=validated_data.get('email', ''),
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            phone_number=validated_data.get('phone_number'),
+            is_superuser=validated_data.get('is_superuser', False),
+            is_staff=validated_data.get('is_staff', False),
+        )
+
+        # hash the password when creating a new User
+        user.set_password(validated_data.get('password'))
+
+        user.save()
         return user
