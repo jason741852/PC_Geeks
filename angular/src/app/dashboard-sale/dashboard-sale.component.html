@@ -1,0 +1,12 @@
+<h1>All the Sales</h1>
+<div class="grid grid-pad">
+  <a *ngFor="let sale of sales" class="col-1-4">
+    <div class="module sale">
+      <h4>{{sale.title}}</h4>
+      <p>
+        <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
+        <button class="btn btn-primary" role="button">Write a Review</button>
+      </p>
+    </div>
+  </a>
+</div>
