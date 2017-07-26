@@ -1,0 +1,22 @@
+<div class="row">
+<div class="col-md-4">
+  <app-sidebar></app-sidebar>
+</div>
+  <div class="col-md-8">
+    <h1>All the Sales</h1>
+    <div class="grid grid-pad">
+      <span *ngFor="let sale of sales">
+      <a class="col-1-4 loopDisplay">
+        <div class="module sale">
+          <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
+            in {{sale.quality}}</h4>
+          <p>
+            <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
+            <button class="btn btn-primary" role="button">Write a Review</button>
+          </p>
+        </div>
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
