@@ -17,6 +17,17 @@ package "python3-pip"
 package "nodejs"
 package "build-essential"
 
+# Set environment variables
+cookbook_file '.profile' do
+	path '/home/ubuntu/.profile'
+end
+ENV['DJANGO_SETTINGS_MODULE'] = 'final.settings_production'
+ENV['NPM_PACKAGES']           = "${HOME}/.npm-packages"
+ENV['MANPATH']                = "$NPM_PACKAGES/share/man:$(manpath)"
+ENV['PATH']                   = "/opt/chef/embedded/bin:$NPM_PACKAGES/bin:$HOME/bin:
+                                $HOME/.local/bin:/usr/local/sbin:/usr/local/bin:
+                                /usr/sbin:/usr/bin:/sbin:/bin"
+
 # Setup pip
 execute 'install_django' do
 	command 'pip3 install django djangorestframework psycopg2 uwsgi'
@@ -24,12 +35,12 @@ end
 
 # Setup Postgres
 execute 'postgres_create_database' do
-	command 'echo "CREATE DATABASE mydb; CREATE USER ubuntu WITH PASSWORD \'123\'; GRANT ALL PRIVILEGES ON DATABASE mydb TO ubuntu;" | sudo -u postgres psql'
+	command 'echo "CREATE DATABASE prod_db; CREATE USER ubuntu WITH PASSWORD \'hunter2\'; GRANT ALL PRIVILEGES ON DATABASE prod_db TO ubuntu;" | sudo -u postgres psql'
 end
 
 # Setup Django
 execute 'django_makemigrations' do
-	command 'python3 manage.py makemigrations'
+	command 'python3 manage.py makemigrations api'
 	cwd '/home/ubuntu/django'
 end
 execute 'django_migrate' do
@@ -40,10 +51,10 @@ end
 # 	command 'python3 manage.py collectstatic --noinput'
 # 	cwd '/home/ubuntu/django'
 # end
-# execute 'django_load_data' do
-# 	command 'python3 manage.py loaddata initial_data.json'
-# 	cwd '/home/ubuntu/django'
-# end
+execute 'django_load_data' do
+	command 'python3 manage.py loaddata test_data.json'
+	cwd '/home/ubuntu/django'
+end
 
 # Setup and run Django server with uWSGI
 cookbook_file 'rc.local' do
@@ -63,27 +74,6 @@ cookbook_file '.npmrc' do
 end
 directory '/home/ubuntu/.npm-packages' do
 	action :create
-end
-execute 'npm_packages_env_var' do
-	command 'export NPM_PACKAGES="${HOME}/.npm-packages"'
-end
-execute 'path_env_var' do
-	command 'export PATH="$NPM_PACKAGES/bin:$PATH"'
-	not_if { ::File.exist?('/home/ubuntu/path_set') }
-end
-execute 'path_provision' do
-	command 'touch /home/ubuntu/path_set'
-end
-execute 'unset_manpath_env_var' do
-	command 'unset MANPATH'
-	not_if { ::File.exist?('/home/ubuntu/manpath_set') }
-end
-execute 'manpath_env_var' do
-	command 'export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"'
-	not_if { ::File.exist?('/home/ubuntu/manpath_set') }
-end
-execute 'manpath_provision' do
-	command 'touch /home/ubuntu/manpath_set'
 end
 
 # Setup Angular
