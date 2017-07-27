@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 
 def get_deleted_user():
@@ -54,3 +56,47 @@ class Messaging(models.Model):
     # Return a human readable representation of the model instance.
     def __str__(self):
         return "{}".format(self.post_name)
+
+class potential_buyer(models.Model):
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='post_interested_in',
+        on_delete=models.CASCADE)
+    post_id = models.ForeignKey('Post',
+        related_name = 'potential_buyer',
+        on_delete=models.CASCADE)
+
+class buyer_rating(models.Model):
+    rater_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='submitted_buyer_rating',
+        on_delete=models.CASCADE)
+    buyer_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='rating_as_a_buyer',
+        on_delete=models.CASCADE)
+    post_id = models.ForeignKey('Post',
+        related_name = 'buyer_rating',
+        on_delete=models.CASCADE)
+    rating = models.IntegerField(
+        blank=False,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
+    comment = models.TextField(blank=False,max_length=1000)
+
+class seller_rating(models.Model):
+    rater_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='submitted_seller_rating',
+        on_delete=models.CASCADE)
+    seller_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='rating_as_a_seller',
+        on_delete=models.CASCADE)
+    post_id = models.ForeignKey('Post',
+        related_name = 'seller_rating',
+        on_delete=models.CASCADE)
+    rating = models.IntegerField(
+        blank=False,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
+    comment = models.TextField(blank=False,max_length=1000)
