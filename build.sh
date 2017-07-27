@@ -5,9 +5,6 @@ refresh-both() {
 	vagrant ssh -c '
 cd /home/ubuntu/angular;
 ng build;
-cd /home/ubuntu/django;
-python3 manage.py makemigrations;
-python3 manage.py migrate;
 cd /home/ubuntu;
 sudo touch reload.ini;'
 }
