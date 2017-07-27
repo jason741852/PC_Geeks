@@ -49,7 +49,7 @@ import {ProfileComponent} from "./profile/profile.component";
     JsonpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
 
   ],
   providers: [
