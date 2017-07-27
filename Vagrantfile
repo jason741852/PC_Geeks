@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./angular", "/home/ubuntu/angular"
   config.vm.synced_folder "./django", "/home/ubuntu/django"
 
-  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
   config.vm.provider "virtualbox" do |vb|
     vb.name = "cmpt-470-final-project"
     vb.cpus = 1
