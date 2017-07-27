@@ -14,10 +14,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
+import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
@@ -27,7 +27,6 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     NavbarComponent,
     MainPageComponent,
     LoginPageComponent,
-    SidebarComponent,
     FormComponent,
     SaleDetailComponent,
     DashboardSaleComponent,
@@ -38,6 +37,7 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     AppRoutingModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    SlideMenuModule
   ],
   providers: [SaleService],
   bootstrap: [AppComponent]

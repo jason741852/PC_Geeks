@@ -14,13 +14,15 @@ export class DashboardFilterComponent implements OnInit {
 
   //category: string;
   make: string;
-  
+  filter: string;
+
   constructor(
         private saleService: SaleService,
         private route: ActivatedRoute,
 ) { }
-  
+
   ngOnInit(): void {
+
     this.saleService.getSales()
       .then(sales => this.sales = sales.slice(0));
 
