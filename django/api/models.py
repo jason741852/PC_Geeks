@@ -57,15 +57,19 @@ class Messaging(models.Model):
     def __str__(self):
         return "{}".format(self.post_name)
 
-class potential_buyer(models.Model):
+
+class Potential_buyer(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='post_interested_in',
         on_delete=models.CASCADE)
     post_id = models.ForeignKey('Post',
         related_name = 'potential_buyer',
         on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
-class buyer_rating(models.Model):
+
+class Buyer_rating(models.Model):
     rater_id = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='submitted_buyer_rating',
         on_delete=models.CASCADE)
@@ -82,8 +86,11 @@ class buyer_rating(models.Model):
             MinValueValidator(1)
         ])
     comment = models.TextField(blank=False,max_length=1000)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
-class seller_rating(models.Model):
+
+class Seller_rating(models.Model):
     rater_id = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='submitted_seller_rating',
         on_delete=models.CASCADE)
@@ -100,3 +107,5 @@ class seller_rating(models.Model):
             MinValueValidator(1)
         ])
     comment = models.TextField(blank=False,max_length=1000)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)

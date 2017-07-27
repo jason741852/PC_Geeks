@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import User, Post, Messaging
+from .models import User, Post, Messaging, Potential_buyer, Buyer_rating, Seller_rating
 from decimal import *
 
 
@@ -66,3 +66,41 @@ class UserSerializer(serializers.ModelSerializer):
 
         user.save()
         return user
+
+
+class PotentialbuyerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Potential_buyer
+        fields = '__all__'
+        read_only_fields = (
+            'user_id',
+            'post_id',
+            'date_created',
+            'date_modified',
+        )
+
+
+class BuyerratingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Buyer_rating
+        fields = '__all__'
+        read_only_fields = (
+            'rater_id',
+            'buyer_id',
+            'post_id',
+            'date_created',
+            'date_modified'
+        )
+
+
+class SellerratingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Seller_rating
+        fields = '__all__'
+        read_only_fields = (
+            'rater_id',
+            'seller_id',
+            'post_id',
+            'date_created',
+            'date_modified'
+        )
