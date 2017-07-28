@@ -1,7 +1,8 @@
 from rest_framework import generics, permissions
-from .serializers import UserSerializer, PostSerializer, MessagingSerializer
-from .models import User, Post, Messaging
+from .serializers import UserSerializer, PostSerializer, MessagingSerializer, SearchSerializer
+from .models import User, Post, Messaging, Search
 from .permissions import IsOwner, IsStaffOrTargetUser
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
@@ -28,7 +29,11 @@ class PostPublicListView(generics.ListAPIView):
 class PostPrivateListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
+    filter_backends = (DjangoFilterBackend,)
+    #search_fields = ('manufacturer', 'quality')
+    filter_fields = ('manufacturer', 'quality')
 
+   
     def get_queryset(self):
         return Post.objects.filter(owner_id=self.request.user)
 
@@ -62,6 +67,26 @@ class DetailsViewMessaging(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwner)
+
+class CreateViewSearch(generics.ListCreateAPIView):
+    """This class defines the create behaviour of our rest api"""
+    queryset = Search.objects.all()
+    serializer_class = SearchSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def perform_create(self, serializer):
+        """Save the post data wen creating a new post"""
+        serializer.save(owner=self.request.user)
+
+
+class DetailsViewSearch(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles GET, PUT, PATCH and DEL requests."""
+
+    queryset = Search.objects.all()
+    serializer_class = SearchSerializer
     permission_classes = (
         permissions.IsAuthenticated,
         IsOwner)

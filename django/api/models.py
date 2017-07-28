@@ -41,6 +41,15 @@ class Post(models.Model):
         return "Owner: " + self.owner_id +\
                " Title: " + self.title
 
+class Search(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='search',
+        on_delete=models.CASCADE)
+    body = models.TextField(blank=False, unique=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    send_userid = models.IntegerField(default=0)
+    receive_userid = models.IntegerField(default=0)
+
 
 class Messaging(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import User, Post, Messaging
+from .models import User, Post, Messaging, Search
 from decimal import *
 
 
@@ -28,6 +28,13 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
+
+class SearchSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Search
+        fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
+        read_only_fields = ('date_created', 'send_userid', 'receive_userid')        
 
 
 class MessagingSerializer(serializers.ModelSerializer):
