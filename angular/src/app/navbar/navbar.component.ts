@@ -1,13 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
 
-/*
- * App Component
- * Top Level Component
- */
 @Component({
   selector: 'app-navbar',
   encapsulation: ViewEncapsulation.None,
@@ -17,8 +13,6 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
-  filter: string;
-
   private menuItemsArray: any[] = [
     {'title': 'Categories', 'link': '#',
       'subItems': [
@@ -28,9 +22,43 @@ export class NavbarComponent implements OnInit {
     },
     {'title': 'Manufacturers', 'link': '#',
       'subItems': [
+        {'title': 'AMD', 'link': '#'},
+        {'title': 'Asus', 'link': '#' },
+        {'title': 'ATI', 'link': '#'},
+        {'title': 'BFG', 'link': '#'},
+        {'title': 'Biostar', 'link': '#'},
+        {'title': 'Club 3D', 'link': '#'},
+        {'title': 'Corsair', 'link': '#'},
+        {'title': 'Dell', 'link': '#'},
+        {'title': 'Diamond', 'link': '#'},
+        {'title': 'ECS', 'link': '#'},
+        {'title': 'EVGA', 'link': '#'},
+        {'title': 'Gainward', 'link': '#'},
+        {'title': 'GALAX', 'link': '#'},
+        {'title': 'Galaxy', 'link': '#'},
+        {'title': 'Gigabyte', 'link': '#'},
+        {'title': 'HIS', 'link': '#'},
+        {'title': 'HP', 'link': '#'},
+        {'title': 'Inno3D', 'link': '#'},
+        {'title': 'Jaton', 'link': '#'},
+        {'title': 'KFA2', 'link': '#'},
+        {'title': 'Lenovo', 'link': '#'},
+        {'title': 'MSI', 'link': '#'},
+        {'title': 'NVIDIA', 'link': '#'},
+        {'title': 'OcUK', 'link': '#'},
+        {'title': 'Palit', 'link': '#'},
+        {'title': 'PNY', 'link': '#'},
+        {'title': 'PowerColor', 'link': '#'},
+        {'title': 'Sapphire', 'link': '#'},
+        {'title': 'Sparkle', 'link': '#'},
+        {'title': 'VisionTek', 'link': '#'},
+        {'title': 'XFX', 'link': '#'},
+        {'title': 'Zogis', 'link': '#'},
+        {'title': 'Zotac', 'link': '#'},
       ]
     },
   ];
+  public filter: string;
 
   constructor(private router: Router,
 
@@ -42,18 +70,23 @@ export class NavbarComponent implements OnInit {
     console.log('menu Opened');
   }
   private onItemSelect(item: any) {
+
     if (item.title === 'CPU') {
-      this.filter = 'category'
       this.router.navigate(['/dashboard/CPU'])
       location.reload()
+
     }
     if (item.title === 'Video Card') {
       this.router.navigate(['/dashboard/VideoCard'])
       location.reload()
+    }else if (item.title === 'Manufacturers' || item.title === 'Categories') {
+
+    }else {
+      this.router.navigate(['/dashboard/' + item.title])
+      location.reload()
     }
   }
   public ngOnInit() {
-
   }
 
 }
