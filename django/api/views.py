@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from .serializers import UserSerializer, PostSerializer, MessagingSerializer
-from .models import User, Post, Messaging
+from .serializers import *
+from .models import *
 from .permissions import IsOwner, IsStaffOrTargetUser
 
 from rest_framework import viewsets
@@ -65,3 +65,14 @@ class DetailsViewMessaging(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         permissions.IsAuthenticated,
         IsOwner)
+
+class  CreateBuyerRatingView(generics.ListCreateAPIView):
+    serializer_class = BuyerratingSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Buyer_rating.objects.filter(rater_id=self.request.user)
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        serializer.save(rater_id=self.request.user)

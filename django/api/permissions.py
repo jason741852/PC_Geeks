@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from .models import Post, Messaging
+from .models import *
 
 class IsStaffOrTargetUser(BasePermission):
     # allow user to list all users if logged in user is staff
@@ -14,6 +14,8 @@ class IsStaffOrTargetUser(BasePermission):
 class IsOwner(BasePermission):
     # Return True if permission is granted to the post owner.
     def has_object_permission(self, request, view, obj):
+        if isinstance(obj, Buyer_rating):
+            return obj.owner == request.user
         if isinstance(obj, Post):
             return obj.owner_id == request.user
         if isinstance(obj, Messaging):
