@@ -21,14 +21,6 @@ class UserView(viewsets.ModelViewSet):
                 else IsStaffOrTargetUser()),
 
 
-#Filtering
-#class PostFilter(django_filters.FilterSet):
-#    min_price = django_filters.NumberFilter(name="price", lookup_type='gte')
-#    max_price = django_filters.NumberFilter(name="price", lookup_type='lte')
-#    class Meta:
-#        model = Post
-#        fields = ['manufacturer', 'quality', 'min_price', 'max_price']
-
 
 # Obtains a list of all Posts
 class PostPublicListView(generics.ListAPIView):
