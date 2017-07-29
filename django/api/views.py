@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .serializers import UserSerializer, PostSerializer, MessagingSerializer, SearchSerializer
 from .models import User, Post, Messaging, Search
 from .permissions import IsOwner, IsStaffOrTargetUser
@@ -6,6 +6,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+import django_filters
+
 
 
 class UserView(viewsets.ModelViewSet):
@@ -19,19 +21,40 @@ class UserView(viewsets.ModelViewSet):
                 else IsStaffOrTargetUser()),
 
 
+#Filtering
+#class PostFilter(django_filters.FilterSet):
+#    min_price = django_filters.NumberFilter(name="price", lookup_type='gte')
+#    max_price = django_filters.NumberFilter(name="price", lookup_type='lte')
+#    class Meta:
+#        model = Post
+#        fields = ['manufacturer', 'quality', 'min_price', 'max_price']
+
+
 # Obtains a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
+
+
+    def get_queryset(self):
+        # quality may be None
+        return self.queryset \
+            .filter(quality=self.kwargs.get('quality')) \
+            .filter(author=self.request.user)
+
+
 # Obtains a list of Posts belonging to a user
 class PostPrivateListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
-    filter_backends = (DjangoFilterBackend,)
+
+    
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     #search_fields = ('manufacturer', 'quality')
-    filter_fields = ('manufacturer', 'quality')
+    filter_fields = ('manufacturer', 'quality', 'price')
+    ordering_fields = '__all__'
 
    
     def get_queryset(self):
