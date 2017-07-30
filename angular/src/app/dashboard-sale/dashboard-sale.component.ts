@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
-import { Sale } from '../sale';
-import { SaleService } from '../sale.service';
+import { Sale } from '../_models/sale';
+import { SaleService } from '../_services/sale.service';
 @Component({
   selector: 'app-dashboard-sale',
   templateUrl: './dashboard-sale.component.html',
@@ -11,7 +11,7 @@ import { SaleService } from '../sale.service';
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];
   constructor(private saleService: SaleService) { }
-  
+
   ngOnInit(): void {
     this.saleService.getSales()
       .then(sales => this.sales = sales.slice(0));

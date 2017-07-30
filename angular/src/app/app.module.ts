@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
-import {RouterModule, Routes} from '@angular/router';
-import { SaleService } from './sale.service';
-import {BaseRequestOptions, HttpModule, JsonpModule} from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import { SaleService } from './_services/sale.service';
+import { BaseRequestOptions, HttpModule, JsonpModule } from '@angular/http';
 import { RatingModule } from 'ngx-rating'
 import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -23,9 +23,9 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
-import {ProfileComponent} from "./profile/profile.component";
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService } from './in-memory-data.service';
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
   declarations: [

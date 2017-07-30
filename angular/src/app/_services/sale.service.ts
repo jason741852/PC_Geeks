@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Sale } from './sale';
+import { Sale } from '../_models/sale';
 // import { SALES } from './mock-sales';
 
 @Injectable()
@@ -21,12 +21,7 @@ export class SaleService {
       .catch(this.handleError);
     // return Promise.resolve(SALES);
   }
-  getHeroesSlowly(): Promise<Sale[]> {
-    return new Promise(resolve => {
-      // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(this.getSales()), 2000);
-    });
-  }
+
   getSale(id: number): Promise<Sale> {
     // return this.getSales()
     // .then(sales => sales.find(sale => sale.id === id));
