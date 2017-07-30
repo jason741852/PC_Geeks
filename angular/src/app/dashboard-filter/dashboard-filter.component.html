@@ -3,12 +3,20 @@
   </div>
   <div class="col-md-8">
     <h1>All the Sales</h1>
+
+
+
+    <form (keyup.enter)="search(saleItem.value)">
+      <input #saleItem />
+      <button (click)="search(saleItem.value)">
+        Search
+      </button>
+    </form>
+
     <div class="grid grid-pad">
 
       <span *ngFor="let sale of sales">
-      <a *ngIf="make != 'CPU' || 'Video Card'">
-        <a *ngIf="sale.manufacturer == make" class="col-1-4 loopDisplay">
-
+        <a *ngIf="sale.item.includes(make)" class="col-1-4 loopDisplay">
 
           <div class="module sale">
             <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
@@ -19,10 +27,19 @@
             </p>
           </div>
           </a>
-      </a>
-        <a *ngIf="make == 'CPU' || 'Video Card'">
-          <a *ngIf="sale.category == make" class="col-1-4 loopDisplay">
 
+        <a *ngIf="sale.manufacturer == make" class="col-1-4 loopDisplay">
+
+          <div class="module sale">
+            <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
+              in {{sale.quality}}</h4>
+            <p>
+              <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
+              <button class="btn btn-primary" role="button">Write a Review</button>
+            </p>
+          </div>
+          </a>
+          <a *ngIf="sale.category == make" class="col-1-4 loopDisplay">
 
             <div class="module sale">
               <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
@@ -33,7 +50,6 @@
               </p>
             </div>
             </a>
-        </a>
       </span>
     </div>
   </div>

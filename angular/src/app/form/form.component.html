@@ -3,12 +3,17 @@
   <label>Sale item:</label> <input #saleItem />
   <label>Sale Category:</label> <input #saleCategory />
   <label>Sale Price:</label> <input #salePrice />
-  <label>Sale Quality:</label> <input #saleQuality />
-        <label for="saleMan">Manufacturer</label>
-        <select name="manufacturer" #saleMan>
-          <option *ngFor="let each of manufacturers" [value]="each">{{each}}</option>
-        </select>
-  <button (click)="add(saleItem.value, saleCategory.value, 
+
+  <label for="saleQuality">Quality</label>
+  <select name="quality" #saleQuality>
+    <option *ngFor="let each of quality" [value]="each">{{each}}</option>
+  </select>
+
+  <label for="saleMan">Manufacturer</label>
+  <select name="manufacturer" #saleMan>
+    <option *ngFor="let each of manufacturers" [value]="each">{{each}}</option>
+  </select>
+  <button (click)="add(saleItem.value, saleCategory.value,
   salePrice.value, saleQuality.value, saleMan.value)">
     Add
   </button>

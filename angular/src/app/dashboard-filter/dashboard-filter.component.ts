@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Sale } from '../sale';
@@ -19,6 +20,7 @@ export class DashboardFilterComponent implements OnInit {
   constructor(
         private saleService: SaleService,
         private route: ActivatedRoute,
+        private router: Router
 ) { }
 
   ngOnInit(): void {
@@ -27,7 +29,13 @@ export class DashboardFilterComponent implements OnInit {
       .then(sales => this.sales = sales.slice(0));
 
     //this.category = this.concat + this.route.snapshot.params['category'];
-    this.make = this.route.snapshot.params['make'];
+    this.make = this.route.snapshot.params['make'].toUpperCase();
+    console.log(this.make);
+  }
+  search(saleItem: string) {
+    this.router.navigate(['/dashboard/' + saleItem])
+    location.reload()
+
   }
 }
 

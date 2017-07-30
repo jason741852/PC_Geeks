@@ -17,6 +17,9 @@ export class FormComponent implements OnInit {
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
 'NVIDIA', 'OcUK', 'Palit', 'PNY', 'PowerColor', 'Sapphire', 'Sparkle', 'VisionTek', 'XFX', 'Zogis', 'Zotac']
+
+  quality = [' ', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor']
+
   constructor(
         private router: Router,
         private saleService: SaleService) { }

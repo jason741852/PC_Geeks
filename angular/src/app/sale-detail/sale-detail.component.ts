@@ -25,7 +25,6 @@ export class SaleDetailComponent implements OnInit {
       this.route.paramMap
         .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
         .subscribe(sale => this.sale = sale);
-          
       }
 
     goBack(): void {
