@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SaleService } from './sale.service';
-import {BaseRequestOptions, HttpModule, JsonpModule} from '@angular/http';
-import { RatingModule } from 'ngx-rating'
-import { fakeBackendProvider } from './_helpers/fake-backend';
+import { BaseRequestOptions, HttpModule, JsonpModule } from '@angular/http';
+import { RatingModule } from 'ngx-rating';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { AlertService} from './_services/alert.service';
+import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
 
@@ -25,7 +24,7 @@ import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.componen
 import { AppRoutingModule } from './app-routing.module';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
-import {ProfileComponent} from "./profile/profile.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import {ProfileComponent} from "./profile/profile.component";
     AlertService,
     AuthenticationService,
     UserService,
-    fakeBackendProvider,
     MockBackend,
     BaseRequestOptions
 
