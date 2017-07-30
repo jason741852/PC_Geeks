@@ -11,7 +11,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post('localhost:4200/api/login/', JSON.stringify({ username: username, password: password }))
+        return this.http.post('http://localhost:4200/api/login/', JSON.stringify({ username: username, password: password }))
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let res = response.json();
@@ -26,29 +26,12 @@ export class AuthenticationService {
     }
 
     isLoggedIn() {
-      if (sessionStorage.getItem('token') != null) {
-        //this.http.post('localhost:8000/login')
-        return true;
-      }
-
-      return false;
+        if (sessionStorage.getItem('token') != null) {
+            return true;
+        }
+        return false;
     }
 
-    getFirstName() {
-      return JSON.parse(localStorage.getItem('currentUser'))['firstName'] ;
-    }
-    getLastName() {
-      return JSON.parse(localStorage.getItem('currentUser'))['lastName'] ;
-    }
-    getID() {
-      return JSON.parse(localStorage.getItem('currentUser'))['id'] ;
-    }
-    getEmail() {
-      return JSON.parse(localStorage.getItem('currentUser'))['email'] ;
-    }
-    getUsername() {
-      return JSON.parse(localStorage.getItem('currentUser'))['username'] ;
-    }
     logout() {
         // remove user from local storage to log user out
         sessionStorage.removeItem('token');
