@@ -34,7 +34,7 @@ export class FormComponent implements OnInit {
 
   add(item: string, category: string,
         quality: string, price: number, manufacturer: string): void {
-  this.saleService.create(item, category, quality, price, manufacturer)
+  this.saleService.create(item.toUpperCase(), category, quality, price, manufacturer)
     .then(sale => {
       this.sales.push(sale);
       this.selectedSale = null;
