@@ -1,0 +1,19 @@
+1:
+	user name: admin
+	email: admin@admin.com
+	password: qwerty123
+
+2:
+	username: tester1
+	email: test1@test.com
+	password: password
+
+3:
+	username: tester2
+	email: test2@test.com
+	password: password
+
+4:
+	username: tester3
+	email: test3@test.com
+	password: password
