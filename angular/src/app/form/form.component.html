@@ -1,25 +1,35 @@
-<h2>Sales</h2>
-<div>
-  <label>Sale item:</label> <input #saleItem />
-  <label>Sale Category:</label> <input #saleCategory />
-  <label>Sale Price:</label> <input #salePrice />
+<div class="col-lg-3">
 
+<h2>Create Sales</h2>
+  <label>Sale item:</label> <input #saleItem class="form-control"/>
+<br>
+  <label>Sale Category:</label> <input #saleCategory class="form-control"/>
+<br>
+  <label>Sale Price:</label> <input #salePrice class="form-control"/>
+<br>
   <label for="saleQuality">Quality</label>
-  <select name="quality" #saleQuality>
+  <br>
+  <select name="quality" #saleQuality class="btn btn-secondary dropdown-toggle">
     <option *ngFor="let each of quality" [value]="each">{{each}}</option>
   </select>
-
+<br>
   <label for="saleMan">Manufacturer</label>
-  <select name="manufacturer" #saleMan>
+  <br>
+  <select name="manufacturer" #saleMan class="btn btn-secondary dropdown-toggle">
     <option *ngFor="let each of manufacturers" [value]="each">{{each}}</option>
   </select>
+<br>
+  <br>
+
   <button (click)="add(saleItem.value, saleCategory.value,
-  salePrice.value, saleQuality.value, saleMan.value)">
+  salePrice.value, saleQuality.value, saleMan.value)" class="btn btn-primary">
     Add
   </button>
-</div>
+
+
 <ul class="sales">
   <li *ngFor="let sale of sales">
     <span class="badge">{{sale.id}}</span> {{sale.manufacturer}} {{sale.item}}
   </li>
 </ul>
+</div>

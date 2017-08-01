@@ -2,16 +2,27 @@
   <div class="col-md-4">
   </div>
   <div class="col-md-8">
-    <h1>All the Sales</h1>
-
-
 
     <form (keyup.enter)="search(saleItem.value)">
-      <input #saleItem />
-      <button (click)="search(saleItem.value)">
+
+      <div class="col-lg-3">
+
+      <label for="saleItem">Search:</label>
+        <input #saleItem type="text" class="form-control" id="saleItem">
+
+      <button (click)="search(saleItem.value)" class="btn btn-primary">
         Search
       </button>
+      </div>
+
     </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>All the Sales</h1>
 
     <div class="grid grid-pad">
 
