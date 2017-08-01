@@ -67,4 +67,9 @@ h4 {
 .loopDisplay{
   margin: 20px;
 }
-
+.col-md-8 {
+  background: lightblue;
+}
+.col-md-4 {
+  background: lightblue;
+}
