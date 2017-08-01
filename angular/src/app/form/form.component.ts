@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
   }
 
   add(title: string, item: string, category: string,
-        quality: string, price: number): void {
+      quality: string, price: number): void {
   title = title.trim();
   this.saleService.create(title, item, category, quality, price)
     .then(sale => {

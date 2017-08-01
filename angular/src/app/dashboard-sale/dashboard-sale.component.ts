@@ -14,6 +14,6 @@ export class DashboardSaleComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleService.getSales()
-      .then(sales => this.sales = sales.slice(0));
+      .then(sales => this.sales = sales);
   }
 }

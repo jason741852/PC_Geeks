@@ -13,6 +13,7 @@ urlpatterns = {
     url(r'^messaging/$', CreateViewMessaging.as_view(), name="create"),
     url(r'^messaging/(?P<pk>[0-9]+)/$', DetailsViewMessaging.as_view(), name="details"),
     url(r'^users/', UserView.as_view({'get': 'list', 'post': 'create'}), name="name"),
+    url(r'^users/(?P<pk>[0-9]+)/$', UserView.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}))
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

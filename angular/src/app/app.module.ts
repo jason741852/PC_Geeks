@@ -6,9 +6,10 @@ import { SaleService } from './_services/sale.service';
 import { BaseRequestOptions, HttpModule, JsonpModule } from '@angular/http';
 import { RatingModule } from 'ngx-rating'
 import { fakeBackendProvider } from './_helpers/fake-backend';
-import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { AlertService} from './_services/alert.service';
+// import { MockBackend, MockConnection } from '@angular/http/testing';
+
+import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
 
@@ -23,6 +24,7 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 
 import { AppRoutingModule } from './app-routing.module';
+
 // import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 // import { InMemoryDataService } from './in-memory-data.service';
 import { ProfileComponent } from "./profile/profile.component";
@@ -49,18 +51,14 @@ import { ProfileComponent } from "./profile/profile.component";
     JsonpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    //InMemoryWebApiModule.forRoot(InMemoryDataService),
-
   ],
   providers: [
     SaleService,
     AlertService,
     AuthenticationService,
     UserService,
-    fakeBackendProvider,
-    MockBackend,
+    //MockBackend,
     BaseRequestOptions
-
   ],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,7 @@ import { Sale } from '../_models/sale';
 export class SaleService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private salesUrl = 'api/sales';  // URL to web api
+  private salesUrl = 'localhost:4200/api/all-posts/';  // URL to web api
 
   constructor(private http: Http) { }
 
