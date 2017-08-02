@@ -82,3 +82,20 @@ class  CreateBuyerRatingView(generics.ListCreateAPIView):
             comment=self.request.data.get('comment'),
             rating=self.request.data.get('rating')
         )
+
+class  CreateSellerRatingView(generics.ListCreateAPIView):
+    serializer_class = SellerratingSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Seller_rating.objects.filter(rater_id=self.request.user)
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        serializer.save(
+            rater_id=self.request.user,
+            seller_id=User.objects.get(id=self.request.data.get('seller_id', 0)),
+            post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
+            comment=self.request.data.get('comment'),
+            rating=self.request.data.get('rating')
+        )
