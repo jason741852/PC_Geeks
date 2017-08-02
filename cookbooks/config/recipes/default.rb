@@ -30,7 +30,7 @@ ENV['PATH']                   = "/opt/chef/embedded/bin:$NPM_PACKAGES/bin:$HOME/
 
 # Setup pip
 execute 'install_django' do
-	command 'pip3 install django djangorestframework django-filters psycopg2 uwsgi'
+	command 'pip3 install django djangorestframework django-filter psycopg2 uwsgi'
 end
 
 # Setup Postgres
