@@ -85,14 +85,14 @@ execute 'npm_install' do
 	command 'npm install --no-bin-links'
 	cwd '/home/ubuntu/angular'
 end
+execute 'npm_install_node-sass' do
+	command 'npm install --no-bin-links node-sass'
+	cwd '/home/ubuntu/angular'
+end
 execute 'build_angular_app' do
 	command 'ng build'
 	cwd '/home/ubuntu/angular'
 end
-# execute 'run_angular_server' do
-# 	command 'ng serve >> /var/log/ng.log &'
-# 	cwd '/home/ubuntu/angular'
-# end
 
 # Setup nginx
 cookbook_file "nginx-default" do
