@@ -66,6 +66,19 @@ class DetailsViewMessaging(generics.RetrieveUpdateDestroyAPIView):
         permissions.IsAuthenticated,
         IsOwner)
 
+class CreatePotentialBuyerView(generics.ListCreateAPIView):
+    serializer_class = PotentialbuyerSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Potential_buyer.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(
+            user_id=self.request.user,
+            post_id=Post.objects.get(id=self.request.data.get('post_id', 0))
+        )
+
 class  CreateBuyerRatingView(generics.ListCreateAPIView):
     serializer_class = BuyerratingSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)

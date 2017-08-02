@@ -14,6 +14,7 @@ urlpatterns = {
     url(r'^users/', UserView.as_view({'get': 'list', 'post': 'create'}), name="name"),
     url(r'^buyer_ratings/$', CreateBuyerRatingView.as_view()),
     url(r'^seller_ratings/$', CreateSellerRatingView.as_view()),
+    url(r'^potential_buyer/$', CreatePotentialBuyerView.as_view()),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)
