@@ -83,7 +83,7 @@ class PotentialbuyerSerializer(serializers.ModelSerializer):
 class BuyerratingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Buyer_rating
-        fields = '__all__'
+        fields = ('rater_id', 'buyer_id', 'post_id','rating','comment')
         read_only_fields = (
             'rater_id',
             'buyer_id',
