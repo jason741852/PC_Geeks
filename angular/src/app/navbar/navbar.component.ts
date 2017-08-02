@@ -4,7 +4,11 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthenticationService } from '../_services/authentication.service';
+
+
 @Component({
+  moduleId: module.id,
   selector: 'app-navbar',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [

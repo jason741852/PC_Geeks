@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Sale } from '../sale';
-import { SaleService } from '../sale.service';
+import { Sale } from '../_models/sale';
+import { SaleService } from '../_services/sale.service';
+
 @Component({
   selector: 'app-sale-detail',
   templateUrl: './sale-detail.component.html',
@@ -13,7 +14,6 @@ import { SaleService } from '../sale.service';
 export class SaleDetailComponent implements OnInit {
     sale: Sale;
     params: ParamMap;
-
 
     constructor(
       private saleService: SaleService,

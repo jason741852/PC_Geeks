@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Sale } from '../sale';
 import { SaleService } from '../sale.service';
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
