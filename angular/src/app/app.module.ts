@@ -9,7 +9,7 @@ import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SaleService } from './sale.service';
+import { SaleService } from './_services/sale.service';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
-
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
