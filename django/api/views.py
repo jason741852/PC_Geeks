@@ -28,13 +28,6 @@ class PostPublicListView(generics.ListAPIView):
     serializer_class = PostSerializer
 
 
-    def get_queryset(self):
-        # quality may be None
-        return self.queryset \
-            .filter(quality=self.kwargs.get('quality')) \
-            .filter(author=self.request.user)
-
-
 # Obtains a list of Posts belonging to a user
 class PostPrivateListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
