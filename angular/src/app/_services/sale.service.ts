@@ -10,14 +10,14 @@ import { Sale } from '../_models/sale';
 export class SaleService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private salesUrl = 'localhost:4200/api/all-posts/';  // URL to web api
+  private salesUrl = 'http://localhost:4200/api/all-posts/';  // URL to web api
 
   constructor(private http: Http) { }
 
   getSales(): Promise<Sale[]> {
     return this.http.get(this.salesUrl)
       .toPromise()
-      .then(response => response.json().data as Sale[])
+      .then(response => response.json() as Sale[])
       .catch(this.handleError);
     // return Promise.resolve(SALES);
   }

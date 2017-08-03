@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { Sale } from './_models/sale';
 import { SaleService } from './_services/sale.service';
 import { HttpModule } from '@angular/http';
 

@@ -8,7 +8,6 @@ import { SaleService } from '../_services/sale.service';
   selector: 'app-dashboard-sale',
   templateUrl: './dashboard-sale.component.html',
   styleUrls: ['./dashboard-sale.component.css'],
-
 })
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];
@@ -17,7 +16,7 @@ export class DashboardSaleComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleService.getSales()
-      .then(sales => this.sales = sales.slice(0));
+      .then(sales => this.sales = sales);
 
   }
   search(saleItem: string) {

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Sale } from '../sale';
-import { SaleService } from '../sale.service';
-
+import { Sale } from '../_models/sale';
+import { SaleService } from '../_services/sale.service';
 
 @Component({
   selector: 'app-form',
@@ -33,9 +32,10 @@ export class FormComponent implements OnInit {
     this.getSales();
   }
 
-  add(item: string, category: string,
-        quality: string, price: number, manufacturer: string): void {
-  this.saleService.create(item.toUpperCase(), category, quality, price, manufacturer)
+  add(title: string, item: string, category: string,
+      quality: string, price: number): void {
+  item.toUpperCase();
+  this.saleService.create(title, item, category, quality, price)
     .then(sale => {
       this.sales.push(sale);
       this.selectedSale = null;
