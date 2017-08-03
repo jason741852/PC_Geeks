@@ -79,6 +79,18 @@ class PotentialbuyerSerializer(serializers.ModelSerializer):
             'date_modified',
         )
 
+    def validate(self, data):
+        user_id = data.get('user_id')
+        post_id = data.get('post_id')
+
+        potential_buyer_list = Potential_buyer.objects.filter(post_id = post_id)
+
+        for p in potential_buyer_list:
+            if p.user_id == user_id:
+                raise ValidationError('You are on the list already')
+
+        return data
+
 
 class BuyerratingSerializer(serializers.ModelSerializer):
     class Meta:

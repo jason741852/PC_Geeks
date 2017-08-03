@@ -36,7 +36,6 @@ class PostPrivateListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner_id=self.request.user)
 
-
 # Retrieves, modifies, and deletes Post instances
 class PostInstanceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer

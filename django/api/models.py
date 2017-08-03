@@ -16,6 +16,7 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
+    title = models.TextField(blank=False,default='title')
     body = models.TextField(blank=True, null=True)
     item = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
