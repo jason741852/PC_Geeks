@@ -11,7 +11,7 @@ export class SaleService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private salesUrl = 'http://localhost:4200/api/all-posts/';  // URL to web api
-
+  private eachUrl = 'http://localhost:4200/api/posts/';
   constructor(private http: Http) { }
 
   getSales(): Promise<Sale[]> {
@@ -25,7 +25,7 @@ export class SaleService {
   getSale(id: number): Promise<Sale> {
     // return this.getSales()
     // .then(sales => sales.find(sale => sale.id === id));
-    const url = `${this.salesUrl}/${id}`;
+    const url = `${this.eachUrl}${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as Sale)
