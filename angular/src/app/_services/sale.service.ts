@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,7 +9,6 @@ import { Sale } from '../_models/sale';
 @Injectable()
 export class SaleService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
   private salesUrl = 'http://localhost:4200/api/all-posts/';  // URL to web api
   private eachUrl = 'http://localhost:4200/api/posts/';
   constructor(private http: Http) { }
@@ -26,9 +25,9 @@ export class SaleService {
     // return this.getSales()
     // .then(sales => sales.find(sale => sale.id === id));
     const url = `${this.eachUrl}${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.createHeader())
       .toPromise()
-      .then(response => response.json().data as Sale)
+      .then(response => response.json() as Sale)
       .catch(this.handleError);
   }
   // ------
@@ -36,7 +35,7 @@ export class SaleService {
          quality: string, price: number): Promise<Sale> {
     return this.http
       .post(this.salesUrl, JSON.stringify({title: title, item: item,
-        category: category, quality: quality, price: price }), {headers: this.headers})
+        category: category, quality: quality, price: price }), this.createHeader())
       .toPromise()
       .then(res => res.json().data as Sale)
       .catch(this.handleError);
@@ -46,4 +45,14 @@ export class SaleService {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+  // Creates Authorization header
+  private createHeader() {
+    let token = sessionStorage.getItem('token');
+    if (token) {
+      let headers = new Headers({ 'Authorization': 'Token ' + token });
+      return new RequestOptions({ headers: headers });
+    }
+  }
+
 }
