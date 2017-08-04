@@ -51,7 +51,7 @@ class PostPrivateListCreateView(generics.ListCreateAPIView):
 # Retrieves, modifies, and deletes Post instances
 class PostInstanceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return Post.objects.filter(owner_id=self.request.user)
