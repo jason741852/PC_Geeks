@@ -41,8 +41,9 @@ class Post(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Owner: " + self.owner_id +\
-               " Title: " + self.title
+        return "Item:" + self.item
+        #return "Owner: " + self.owner_id.id +\
+        #       " Title: " + self.title
 
 
 class Messaging(models.Model):
