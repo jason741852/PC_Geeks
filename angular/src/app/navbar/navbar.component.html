@@ -1,35 +1,34 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" routerLink="/main">MainPage</a>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <div class="container">
+        <div class="navbar-header">
+          <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
+        </div>
+      </div>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" routerLink="/main">PCPart</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul *ngIf="!auth.isLoggedIn()" class="nav navbar-nav navbar-right">
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
+       <a class="nav-link" routerLink="/login">Login</a>
+       <a class="nav-link" routerLink="/register">Register</a>
       </ul>
       <ul *ngIf="auth.isLoggedIn()" class="nav navbar-nav navbar-right">
-        <li><a routerLink="/profile">Profile</a></li>
-        <p><a [routerLink]="['/login']">Logout</a></p>
-      </ul>
-      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">Profile</a>
+        <a class="nav-link" [routerLink]="['/login']">Logout</a>
         <a class="nav-link" routerLink="/form">Create Sale</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">All Sales</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">All Sales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list">List</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-  </div>
-</nav>
+
+

@@ -1,26 +1,34 @@
-import { NgModule} from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import { SaleService } from './sale.service';
-import { HttpModule } from '@angular/http';
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
+import { ListSaleComponent } from './list-sale/list-sale.component';
+
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
-import { RegisterComponent} from './register/register.component';
-import { ProfileComponent} from './profile/profile.component';
+import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { Sale } from './_models/sale';
+import { SaleService } from './_services/sale.service';
+import { HttpModule } from '@angular/http';
+
 
 const routes: Routes = [
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: '/dashboard',
       pathMatch: 'full'
     },
     {
       path: 'main',
-      component: MainPageComponent
+      component: MainPageComponent,
     },
     {
       path: 'login',
@@ -42,9 +50,18 @@ const routes: Routes = [
       path: 'dashboard',
       component: DashboardSaleComponent
     },
-    { path: 'detail/:id',
-        component: SaleDetailComponent },
-
+    {
+      path: 'list',
+      component: ListSaleComponent
+    },
+    {
+      path:'dashboard/:make',
+      component: DashboardFilterComponent
+    },
+    {
+      path: 'detail/:id',
+      component: SaleDetailComponent
+    },
 ];
 
 @NgModule({
@@ -52,7 +69,6 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
-
 
 /*
 Copyright 2017 Google Inc. All Rights Reserved.

@@ -42,6 +42,7 @@ class Post(models.Model):
                " Title: " + self.title
 
 
+
 class Messaging(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='messaging',

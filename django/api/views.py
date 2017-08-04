@@ -1,10 +1,13 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .serializers import UserSerializer, PostSerializer, MessagingSerializer
 from .models import User, Post, Messaging
 from .permissions import IsOwner, IsStaffOrTargetUser
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+import django_filters
+
 
 
 class UserView(viewsets.ModelViewSet):
@@ -18,6 +21,7 @@ class UserView(viewsets.ModelViewSet):
                 else IsStaffOrTargetUser()),
 
 
+
 # Obtains a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
@@ -29,6 +33,13 @@ class PostPrivateListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
 
+    
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filter_fields = ('manufacturer', 'quality', 'price')
+    
+    ordering_fields = '__all__'
+
+   
     def get_queryset(self):
         return Post.objects.filter(owner_id=self.request.user)
 
@@ -40,10 +51,8 @@ class PostPrivateListCreateView(generics.ListCreateAPIView):
 # Retrieves, modifies, and deletes Post instances
 class PostInstanceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
-
-    def get_queryset(self):
-        return Post.objects.filter(owner_id=self.request.user)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Post.objects.all()
 
 
 class CreateViewMessaging(generics.ListCreateAPIView):
@@ -65,3 +74,4 @@ class DetailsViewMessaging(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         permissions.IsAuthenticated,
         IsOwner)
+

@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import Post
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient, force_authenticate
 from django.core.urlresolvers import reverse
 from rest_framework import status
@@ -12,7 +12,7 @@ class ModelTestCase(TestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.post_name = "MSI GTX 1080"
-        user = User.objects.create(username="Johnny")
+        user = get_user_model().objects.create(username="Johnny")
         self.post = Post(post_name=self.post_name, owner=user)
 
     def test_model_can_create_a_post(self):
@@ -27,7 +27,7 @@ class ViewTestCase(TestCase):
 
     def setUp(self):
         """Define the test client and other test variables."""
-        user = User.objects.create(username="John")
+        user = get_user_model().objects.create(username="John")
 
         # Initialize client and forece it to use authentication
         self.client = APIClient()

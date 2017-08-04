@@ -28,7 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
-
+   
 
 class MessagingSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

@@ -1,14 +1,22 @@
-    <div *ngIf="sale" class="col-sm-6 col-md-4">
-      <div class="panel panel-deafult panel-heading">
-        <h2 class="panel-title">{{sale.item}}</h2>
-      </div>
-      <div class="panel-body row col-md-7">
-          <ul class="list-group description">
-            <li class="list-group-item">Item Name: {{sale.item}}</li>
-            <li class="list-group-item">Category: {{sale.category}}</li>
-            <li class="list-group-item">Quality: {{sale.quality}}</li>
-            <li class="list-group-item">Price: {{sale.price}}.00</li>
-          </ul>
-      </div>
-    </div>
-        <button (click)="goBack()">Back</button>
+<div *ngIf="sale" class="col-sm-6 col-md-4">
+  <div class="panel panel-deafult panel-heading">
+    <h2 class="panel-title">{{sale.item}} {{test}}</h2>
+  </div>
+  <div class="panel-body row col-md-7">
+      <ul class="list-group description">
+        <li class="list-group-item">Item Name: {{sale.item}}</li>
+        <li class="list-group-item">Description: {{sale.body}}</li>
+        <li class="list-group-item">Category: {{sale.category}}</li>
+        <li class="list-group-item">Manufacturer: {{sale.manufacturer}}</li>
+        <li class="list-group-item">Quality: {{sale.quality}}</li>
+        <li class="list-group-item">Price: {{sale.price}}.00</li>
+      </ul>
+  </div>
+  <h2>Seller's contact information</h2>
+  <div class="panel-body row col-md-7">
+    <li class="list-group-item">Location: {{sale.location}}</li>
+  </div>
+</div>
+<br>
+    <button (click)="goBack()" class="btn btn-primary">Back</button>
+
