@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
+import { ListSaleComponent } from './list-sale/list-sale.component';
+
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
@@ -47,6 +49,10 @@ const routes: Routes = [
     {
       path: 'dashboard',
       component: DashboardSaleComponent
+    },
+    {
+      path: 'list',
+      component: ListSaleComponent
     },
     {
       path:'dashboard/:make',

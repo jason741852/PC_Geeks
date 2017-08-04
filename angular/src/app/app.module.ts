@@ -23,6 +23,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormComponent } from './form/form.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
+import { ListSaleComponent } from './list-sale/list-sale.component';
+
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 
 
@@ -37,6 +39,7 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     FormComponent,
     SaleDetailComponent,
     DashboardSaleComponent,
+    ListSaleComponent,
     DashboardFilterComponent,
     ProfileComponent
   ],
