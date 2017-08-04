@@ -31,4 +31,7 @@ export class SaleDetailComponent implements OnInit {
       this.location.back();
     }
 
+    lat: number = 51.678418;
+    lng: number = 7.809007;
+
 }

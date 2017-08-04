@@ -7,6 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { CommonModule } from '@angular/common';
 
 import { SaleService } from './_services/sale.service';
 import { AlertService } from './_services/alert.service';
@@ -47,7 +49,10 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     HttpModule,
     JsonpModule,
     SlideMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+    })
   ],
   providers: [
     SaleService,
