@@ -31,11 +31,14 @@ export class SaleService {
       .catch(this.handleError);
   }
   // ------
-  create(title: string, item: string, category: string,
-         quality: string, price: number): Promise<Sale> {
+  create(item: string,
+         category: string,
+         quality: string,
+         manufacturer: string,
+         price: number): Promise<Sale> {
     return this.http
-      .post(this.salesUrl, JSON.stringify({title: title, item: item,
-        category: category, quality: quality, price: price }), this.createHeader())
+      .post(this.eachUrl, JSON.stringify({item: item,
+        category: category, quality: quality, manufacturer: manufacturer, price: price }), this.createHeader())
       .toPromise()
       .then(res => res.json().data as Sale)
       .catch(this.handleError);
