@@ -52,9 +52,7 @@ class PostPrivateListCreateView(generics.ListCreateAPIView):
 class PostInstanceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticated,)
-
-    def get_queryset(self):
-        return Post.objects.filter(owner_id=self.request.user)
+    queryset = Post.objects.all()
 
 
 class CreateViewMessaging(generics.ListCreateAPIView):
