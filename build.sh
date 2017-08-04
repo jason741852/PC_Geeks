@@ -11,6 +11,7 @@ sudo touch reload.ini;'
 
 print-help() {
 	echo "Use '-a' to only refresh Angular or '-d' to only refresh Django."
+	echo "Use --a-install to run 'npm install' in your vagrant box."
 	echo "Use '--d-migrate' to perform a database migration on Django."
 	echo "No arguments or '-ad' will refresh both."
 }
@@ -21,6 +22,11 @@ if [ $# -eq 1 ]; then
 		vagrant ssh -c '
 cd /home/ubuntu/angular;
 ng build;'
+	elif [ $1 = '--a-install' ]; then
+		echo "Installing Angular dependencies..."
+		vagrant ssh -c '
+cd /home/ubuntu/angular;
+npm install --no-bin-links;'
 	elif [ $1 = '-d' ]; then
 		echo "Refreshing uWSGI (Django)..."
 		vagrant ssh -c '
@@ -36,7 +42,7 @@ cd /home/ubuntu;
 sudo touch reload.ini;'
 	elif [ $1 = '-ad' ] || [ $1 = '-da' ]; then
 		refresh-both
-	elif [ $1 = '-help' ] || [ $1 = '--help' ]; then
+	elif [ $1 = '-h' ] || [ $1 = '-help' ] || [ $1 = '--help' ]; then
 		print-help
 	else
 		echo "Invalid arguments!"
