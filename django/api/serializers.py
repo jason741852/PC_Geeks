@@ -71,22 +71,21 @@ class UserSerializer(serializers.ModelSerializer):
 class PotentialbuyerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Potential_buyer
-        fields = '__all__'
+        fields = ('user_id','post_id','date_created','date_modified')
         read_only_fields = (
             'user_id',
-            'post_id',
             'date_created',
             'date_modified',
         )
 
     def validate(self, data):
-        user_id = data.get('user_id')
-        post_id = data.get('post_id')
+        post_id = (data.get('post_id').id)
+        user_id = self.context['request'].user.id
 
-        potential_buyer_list = Potential_buyer.objects.filter(post_id = post_id)
+        potential_buyer_list = Post.objects.get(id=post_id).potential_buyer.all()
 
         for p in potential_buyer_list:
-            if p.user_id == user_id:
+            if p.user_id.id == user_id:
                 raise ValidationError('You are on the list already')
 
         return data

@@ -116,7 +116,7 @@ class ViewTestCase(TestCase):
         self.client = APIClient()
         self.client.force_authenticate(user=user)
 
-        login = self.client.login(username="Peter", password="123")
+        login = self.client.login(username="Mary", password="123")
 
         # Assert user Mary is logged in
         self.assertTrue(login)
@@ -129,5 +129,15 @@ class ViewTestCase(TestCase):
         )
         self.assertEqual(self.pbPOSTresponse.status_code, status.HTTP_201_CREATED)
         potential_buyer = Potential_buyer.objects.get(id=1)
+        # print(potential_buyer.post_id.id)
+        potential_buyer_list = Post.objects.get(id=potential_buyer.post_id.id).potential_buyer.all()
+
         potential_buyer_from_related_name=Post.objects.get(id=1).potential_buyer.get(id=1)
+
         self.assertEqual(potential_buyer_from_related_name.user_id, potential_buyer.user_id)
+        """Test same user cannot POST to potential_buyer on same post more than once"""
+        self.pbPOSTresponse = self.client.post(
+            '/potential_buyer/',
+            potential_buyer_data
+        )
+        self.assertEqual(self.pbPOSTresponse.status_code, status.HTTP_400_BAD_REQUEST)
