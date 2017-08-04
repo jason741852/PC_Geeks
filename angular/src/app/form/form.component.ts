@@ -20,6 +20,8 @@ export class FormComponent implements OnInit {
 
   quality = [' ', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor']
 
+  category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'Video Card', 'Power Supply', 'Case']
+
   constructor(
         private router: Router,
         private saleService: SaleService) { }

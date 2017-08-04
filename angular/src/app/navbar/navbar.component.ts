@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../_services/authentication.service';
 
-
 @Component({
   moduleId: module.id,
   selector: 'app-navbar',
@@ -22,6 +21,13 @@ export class NavbarComponent implements OnInit {
       'subItems': [
         {'title': 'CPU', 'link': '#'},
         {'title': 'Video Card', 'link': '#' },
+        {'title': 'CPU Cooler', 'link': '#' },
+        {'title': 'Motherboard', 'link': '#' },
+        {'title': 'Memory', 'link': '#' },
+        {'title': 'Storage', 'link': '#' },
+        {'title': 'Video Card', 'link': '#' },
+        {'title': 'Power Supply', 'link': '#' },
+        {'title': 'Case', 'link': '#' },
       ]
     },
     {'title': 'Manufacturers', 'link': '#',
@@ -64,7 +70,7 @@ export class NavbarComponent implements OnInit {
   ];
   public filter: string;
 
-  constructor(private router: Router,
+  constructor(private router: Router, public auth: AuthenticationService
 
   ) {}
   public onMenuClose() {
@@ -91,6 +97,9 @@ export class NavbarComponent implements OnInit {
     }
   }
   public ngOnInit() {
+  }
+  logout() {
+    this.auth.logout();
   }
 
 }
