@@ -32,13 +32,12 @@ export class FormComponent implements OnInit {
     this.getSales();
   }
 
-  add(title: string, item: string, category: string,
-      quality: string, price: number): void {
-  item.toUpperCase();
-  this.saleService.create(title, item, category, quality, price)
-    .then(sale => {
-      this.sales.push(sale);
-      this.selectedSale = null;
-    });
+  add(item: string, category: string,
+      quality: string, manufacturer: string, price: number): void {
+    this.saleService.create(item.toUpperCase(), category.toUpperCase(), quality, manufacturer.toUpperCase(), price, )
+      .then(sale => {
+        this.sales.push(sale);
+        this.selectedSale = null;
+      });
   }
 }
