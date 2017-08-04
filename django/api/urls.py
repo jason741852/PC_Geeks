@@ -15,6 +15,7 @@ urlpatterns = {
     url(r'^buyer_ratings/$', CreateBuyerRatingView.as_view()),
     url(r'^seller_ratings/$', CreateSellerRatingView.as_view()),
     url(r'^potential_buyer/$', CreatePotentialBuyerView.as_view()),
+    url(r'^potential_buyer/(?P<pk>[0-9]+)/$', PotentialBuyerInstanceView.as_view()),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

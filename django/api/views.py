@@ -78,6 +78,13 @@ class CreatePotentialBuyerView(generics.ListCreateAPIView):
             post_id=Post.objects.get(id=self.request.data.get('post_id', 0))
         )
 
+class PotentialBuyerInstanceView(generics.RetrieveDestroyAPIView):
+    serializer_class = PotentialbuyerSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Potential_buyer.objects.filter(user_id=self.request.user)
+
 class  CreateBuyerRatingView(generics.ListCreateAPIView):
     serializer_class = BuyerratingSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)

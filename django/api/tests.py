@@ -108,6 +108,16 @@ class ViewTestCase(TestCase):
 
 
         """Test Potential_buyer"""
+        # Assert post owner not on potential_buyer list
+        potential_buyer_data = {"post_id":1}
+        self.pbPOSTresponse = self.client.post(
+            '/potential_buyer/',
+            potential_buyer_data
+        )
+        self.assertEqual(self.pbPOSTresponse.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+
         self.client.logout()
         user = get_user_model().objects.create(username="Mary")
         user.set_password('123')
@@ -135,6 +145,16 @@ class ViewTestCase(TestCase):
         potential_buyer_from_related_name=Post.objects.get(id=1).potential_buyer.get(id=1)
 
         self.assertEqual(potential_buyer_from_related_name.user_id, potential_buyer.user_id)
+
+
+        """Test GET in potential_buyer"""
+        self.pbGETresponse = self.client.get(
+            '/potential_buyer/1/?format=json'
+        )
+        # Assert GET request succeed
+        self.assertEqual(self.pbPOSTresponse.content, self.pbGETresponse.content)
+
+
         """Test same user cannot POST to potential_buyer on same post more than once"""
         self.pbPOSTresponse = self.client.post(
             '/potential_buyer/',

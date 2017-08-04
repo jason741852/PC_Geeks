@@ -80,7 +80,11 @@ class PotentialbuyerSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         post_id = (data.get('post_id').id)
+        post_owner_id = (data.get('post_id').owner_id.id)
         user_id = self.context['request'].user.id
+
+        if user_id == post_owner_id:
+            raise ValidationError("Post owner should not be on the potential buyer list")
 
         potential_buyer_list = Post.objects.get(id=post_id).potential_buyer.all()
 
