@@ -1,10 +1,14 @@
 # PC Part Sale Website
 
+Admin Email info:
+Email: pcgeeks470@gmail.com
+Password: ytrewq123
+
+
 ### To run the web app:
 1. Use `vagrant up` to launch the VM.
 2. Access `localhost:4200` on your host machine.
 3. Refresh the server using the `build.sh` script.
-
 
 
 #PLEASE LOOK AT THE BRANCHES and NETWORK, WE ARE WORKING ON SEPERATE BRANCHES AND CAN'T MERGE IT INTO ONE BRANCH YET
