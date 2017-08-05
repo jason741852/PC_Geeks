@@ -5,42 +5,34 @@
   </button>
   <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
 
-  <div class="w3-container w3-display-container w3-padding-16 collapse navbar-collapse" id="navbarNavDropdown">
+  <!-- <div class="w3-container w3-display-container w3-padding-16 collapse navbar-collapse" id="navbarNavDropdown">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <h3 class="w3-wide"><b>PC Geeks</b></h3>
-  </div>
+  </div> -->
 
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
-      </li>
+    <ul class="w3-bar-item w3-button">
+      <a class="w3-bar-item w3-button" routerLink="/">PC Geeks</a>
     </ul>
     <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
-      </li>
+      <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
+    </ul>
+    <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
+      <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
     </ul>
     <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
-      </li>
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
-      </li>
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
-      </li>
+      <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
+    </ul>
+    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
+      <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
+    </ul>
+    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
+      <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
     </ul>
     <ul class="w3-bar-item w3-button">
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sales</a>
-      </li>
+      <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sales</a>
     </ul>
     <ul class="w3-bar-item w3-button">
-      <li class="w3-bar-item w3-button">
-        <a class="w3-bar-item w3-button" routerLink="/list">List</a>
-      </li>
+      <a class="w3-bar-item w3-button" routerLink="/list">List</a>
     </ul>
   </div>
 </nav>
