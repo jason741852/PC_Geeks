@@ -2,10 +2,10 @@
 <div class="col-md-4">
 </div>
   <div class="col-md-8">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
     <form (keyup.enter)="search(saleItem.value)">
 
       <div class="col-lg-3">
-
         <label for="saleItem">Search:</label>
         <input #saleItem type="text" class="form-control" id="saleItem">
 
@@ -18,7 +18,7 @@
     <h1>All the Sales</h1>
 
     <div class="grid grid-pad">
-      <span *ngFor="let sale of sales">
+      <span *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
       <a class="col-1-4 loopDisplay">
         <div class="module sale">
           <h4>Selling {{sale.category}} {{sale.item}} for {{sale.price}}.00</h4>
