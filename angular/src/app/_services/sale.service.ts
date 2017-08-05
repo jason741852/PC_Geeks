@@ -9,8 +9,8 @@ import { Sale } from '../_models/sale';
 @Injectable()
 export class SaleService {
 
-  private salesUrl = 'http://localhost:4200/api/all-posts/';  // URL to web api
-  private eachUrl = 'http://localhost:4200/api/posts/';
+  private salesUrl = 'http://localhost:4200/api/posts/';  // URL to web api
+  private privateSaleUrl = 'http://localhost:4200/api/users/posts/';
   constructor(private http: Http) { }
 
   getSales(): Promise<Sale[]> {
@@ -24,7 +24,7 @@ export class SaleService {
   getSale(id: number): Promise<Sale> {
     // return this.getSales()
     // .then(sales => sales.find(sale => sale.id === id));
-    const url = `${this.eachUrl}${id}`;
+    const url = `${this.salesUrl}${id}/`;
     return this.http.get(url, this.createHeader())
       .toPromise()
       .then(response => response.json() as Sale)
@@ -38,7 +38,7 @@ export class SaleService {
          manufacturer: string,
          price: number): Promise<Sale> {
     return this.http
-      .post(this.eachUrl, JSON.stringify({item: item, image: image,
+      .post(this.salesUrl + "new/", JSON.stringify({item: item, image: image,
         category: category, quality: quality, manufacturer: manufacturer, price: price }), this.createHeader())
       .toPromise()
       .then(res => res.json().data as Sale)

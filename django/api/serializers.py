@@ -38,11 +38,21 @@ class ImageSerializer(serializers.ModelSerializer):
    
 
 class MessagingSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Messaging
         fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
-        read_only_fields = ('date_created', 'send_userid', 'receive_userid')
+        read_only_fields = ('date_created',)
+
+    def validate(self, data):
+        receiver = data.get('receive_userid')
+        sender = data.get('send_userid')
+
+        if not User.objects.filter(id=receiver).exists():
+            raise ValidationError('Receiving user (id = ' + receiver + ') does not exist')
+        if sender == receiver:
+            raise ValidationError("You cannot send a message to yourself")
+
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
