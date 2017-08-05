@@ -21,17 +21,22 @@ export class SaleDetailComponent implements OnInit {
       private location: Location
     ) {}
 
+    lat: number;
+    lng: number;
+
     ngOnInit(): any {
       this.route.paramMap
         .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
         .subscribe(sale => this.sale = sale);
-      }
+      this.route.paramMap
+        .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
+        .subscribe(sale => this.lat = sale.latitude);
+      this.route.paramMap
+        .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
+        .subscribe(sale => this.lng = sale.longitude);
+     }
 
     goBack(): void {
       this.location.back();
     }
-
-    lat: number = 51.678418;
-    lng: number = 7.809007;
-
 }
