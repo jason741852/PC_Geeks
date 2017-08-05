@@ -37,6 +37,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class PostListSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     item = serializers.CharField(max_length=255)
     category = serializers.CharField(max_length=255)
     quality = serializers.CharField(max_length=255)
