@@ -42,6 +42,14 @@ class Post(models.Model):
                " Title: " + self.title
 
 
+class Image(models.model):
+    post_id = models.ForeignKey(
+        Post,
+        related_name='images',
+        on_delete=models.CASCADE()
+    )
+    url = models.URLField()
+
 
 class Messaging(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import User, Post, Messaging
+from .models import *
 from decimal import *
 
 
@@ -28,6 +28,13 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+        read_only_fields = ('post_id',)
    
 
 class MessagingSerializer(serializers.ModelSerializer):
