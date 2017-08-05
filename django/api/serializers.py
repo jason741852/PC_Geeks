@@ -44,7 +44,19 @@ class PostListSerializer(serializers.Serializer):
     manufacturer = serializers.CharField(max_length=255)
     price = serializers.IntegerField()
     date_created = serializers.DateTimeField()
-    image = serializers.URLField()
+
+    def to_representation(self, instance):
+        images = ImageSerializer(Image.objects.filter(post_id=instance.id), many=True)
+        return {
+            'id': instance.id,
+            'item': instance.item,
+            'category': instance.category,
+            'quality': instance.quality,
+            'manufacturer': instance.manufacturer,
+            'price': instance.price,
+            'date_created': instance.date_created,
+            'images': images.data,
+        }
    
 
 class MessagingSerializer(serializers.ModelSerializer):
