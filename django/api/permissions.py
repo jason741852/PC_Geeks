@@ -15,7 +15,7 @@ class IsOwner(BasePermission):
     # Return True if permission is granted to the post owner.
     def has_object_permission(self, request, view, obj):
         if isinstance(obj, Buyer_rating):
-            return obj.owner == request.user
+            return obj.rater_id == request.user
         if isinstance(obj, Potential_buyer):
             return obj.user_id == request.user
         if isinstance(obj, Post):

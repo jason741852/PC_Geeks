@@ -13,7 +13,9 @@ urlpatterns = {
     url(r'^messaging/(?P<pk>[0-9]+)/$', DetailsViewMessaging.as_view(), name="details"),
     url(r'^users/', UserView.as_view({'get': 'list', 'post': 'create'}), name="name"),
     url(r'^buyer_ratings/$', CreateBuyerRatingView.as_view()),
+    url(r'^buyer_ratings/(?P<pk>[0-9]+)/$', BuyerRatingInstanceView.as_view()),
     url(r'^seller_ratings/$', CreateSellerRatingView.as_view()),
+    url(r'^seller_ratings/(?P<pk>[0-9]+)/$', SellerRatingInstanceView.as_view()),
     url(r'^potential_buyer/$', CreatePotentialBuyerView.as_view()),
     url(r'^potential_buyer/(?P<pk>[0-9]+)/$', PotentialBuyerInstanceView.as_view()),
 }

@@ -102,6 +102,14 @@ class  CreateBuyerRatingView(generics.ListCreateAPIView):
             rating=self.request.data.get('rating')
         )
 
+# Retrieves, modifies, and deletes Buyer_rating instances
+class BuyerRatingInstanceView(generics.RetrieveAPIView):
+    serializer_class = BuyerratingSerializer
+    # Don't need permission to GET
+
+    def get_queryset(self):
+        return Buyer_rating.objects.filter(rater_id=self.request.user)
+
 class  CreateSellerRatingView(generics.ListCreateAPIView):
     serializer_class = SellerratingSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
@@ -118,3 +126,10 @@ class  CreateSellerRatingView(generics.ListCreateAPIView):
             comment=self.request.data.get('comment'),
             rating=self.request.data.get('rating')
         )
+
+class SellerRatingInstanceView(generics.RetrieveAPIView):
+    serializer_class = SellerratingSerializer
+    # Don't need permission to GET
+
+    def get_queryset(self):
+        return Seller_rating.objects.filter(rater_id=self.request.user)
