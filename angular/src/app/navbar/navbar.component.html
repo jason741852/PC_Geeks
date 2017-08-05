@@ -6,7 +6,7 @@
     </button>
     <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
 
-    <a class="navbar-brand" routerLink="/main">PCPart</a>
+    <a class="navbar-brand" routerLink="/main">PC Geeks</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul *ngIf="!auth.isLoggedIn()" class="nav navbar-nav navbar-right">
        <a class="nav-link" routerLink="/login">Login</a>
@@ -27,6 +27,3 @@
       </ul>
     </div>
   </nav>
-
-
-
