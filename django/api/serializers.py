@@ -1,8 +1,12 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import User, Post, Messaging
+from .models import User, Post, Messaging, Report
 from decimal import *
 
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:

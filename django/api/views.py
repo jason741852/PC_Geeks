@@ -1,14 +1,31 @@
 from rest_framework import generics, permissions, filters
-from .serializers import UserSerializer, PostSerializer, MessagingSerializer
-from .models import User, Post, Messaging
+from .serializers import UserSerializer, PostSerializer, MessagingSerializer, ReportSerializer
+from .models import User, Post, Messaging, Report
 from .permissions import IsOwner, IsStaffOrTargetUser
 from django_filters.rest_framework import DjangoFilterBackend
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 import django_filters
 
+class ReportViewSet(generics.CreateAPIView):
+    serializer_class = ReportSerializer
 
+    def get_queryset(self):
+        return []
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        #nstance = serializer.save()
+        send_mail(
+            'Subject here',
+            'foo bar',
+            'pcgeeks470@gmail.com',
+            ['pcgeeks470@gmail.com'],
+            fail_silently=False)   
 
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()

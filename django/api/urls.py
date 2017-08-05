@@ -6,6 +6,7 @@ from rest_framework.authtoken import views as auth_view
 
 
 urlpatterns = {
+	url(r'^report/', ReportViewSet.as_view()),
     url(r'^login/', auth_view.obtain_auth_token),
     url(r'^all-posts/$', PostPublicListView.as_view()),
     url(r'^posts/$', PostPrivateListCreateView.as_view()),

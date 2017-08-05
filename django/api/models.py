@@ -7,6 +7,9 @@ from django.db import models
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
+class Report(models.Model):
+    message = models.TextField(blank=False, null=False)
+    post_id = models.IntegerField(default=-1)
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
