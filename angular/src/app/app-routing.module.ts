@@ -23,7 +23,7 @@ import { HttpModule } from '@angular/http';
 const routes: Routes = [
     {
       path: '',
-      redirectTo: '/dashboard',
+      redirectTo: '/main',
       pathMatch: 'full'
     },
     {
