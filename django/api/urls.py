@@ -11,6 +11,7 @@ urlpatterns = {
     url(r'^posts/$', PostPublicListView.as_view()),
     url(r'^posts/(?P<pk>[0-9]+)/$', PostDetailsView.as_view()),
     url(r'^posts/new/$', PostCreateView.as_view()),
+    url(r'^posts/update/(?P<pk>[0-9]+)/$', PostUpdateView.as_view()),
     url(r'^posts/delete/(?P<pk>[0-9]+)/$', PostDeleteView.as_view()),
 
     url(r'^messages/$', MessageListView.as_view()),
@@ -21,6 +22,7 @@ urlpatterns = {
     url(r'^users/(?P<pk>[0-9]+)/$', UserDetailsView.as_view()),
     url(r'^users/self/$', UserSelfView.as_view()),
     url(r'^users/new/$', UserCreateView.as_view()),
+    url(r'^users/update/(?P<pk>[0-9]+)/$', UserUpdateView.as_view()),
     url(r'^users/delete/(?P<pk>[0-9]+)/$', UserDeleteView.as_view()),
     url(r'^users/posts/(?P<pk>[0-9]+)/$', PostPrivateListView.as_view()),
 }

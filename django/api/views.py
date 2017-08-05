@@ -36,6 +36,15 @@ class PostCreateView(generics.CreateAPIView):
         serializer.save(owner_id=self.request.user)
 
 
+# Updates a Post
+class PostUpdateView(generics.UpdateAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+
 # Deletes a post
 class PostDeleteView(generics.DestroyAPIView):
     queryset = Post.objects.all()
@@ -95,6 +104,13 @@ class UserSelfView(generics.RetrieveAPIView):
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+# Updates a User's information
+class UserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsStaffOrTargetUser)
 
 
 # Deletes a user (should be replaced with 'deactivated' status on User)
