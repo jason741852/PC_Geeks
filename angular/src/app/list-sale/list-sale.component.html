@@ -19,7 +19,7 @@
     <h1>All the Sales</h1>
 
     <div class="grid grid-pad">
-      <span *ngFor="let sale of sales | paginate: { itemsPerPage: 2, currentPage: p }">
+      <span *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
       <a class="col-1-4 loopDisplay">
         <div class="module sale">
           <h4>Selling {{sale.category}} {{sale.item}} for {{sale.price}}.00</h4>

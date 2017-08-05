@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   sales: Sale[];
   selectedSale: Sale;
   saleForm: FormGroup;
-  manufacturers = [' ', 'AMD', 'Asus', 'ATI',
+  manufacturer = [' ', 'AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
 'NVIDIA', 'OcUK', 'Palit', 'PNY', 'PowerColor', 'Sapphire', 'Sparkle', 'VisionTek', 'XFX', 'Zogis', 'Zotac'];
@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
       item: '',
       category: this.category[0],
       quality: this.quality[0],
-      manufacturer: this.manufacturers[0],
+      manufacturer: this.manufacturer[0],
       price: '',
       body: ''};
 
@@ -68,6 +68,8 @@ export class FormComponent implements OnInit {
       });
   }
   get item() { return this.saleForm.get('item'); }
+  //get category() { return this.saleForm.get('category'); }
+  //get quality() { return this.saleForm.get('quality'); }
   get price() { return this.saleForm.get('price'); }
   get body() { return this.saleForm.get('body'); } 
 }
