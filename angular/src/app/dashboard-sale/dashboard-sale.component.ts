@@ -11,10 +11,12 @@ import { SaleService } from '../_services/sale.service';
 })
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];
+  image: string
 
   constructor(private saleService: SaleService, private router: Router) { }
 
   ngOnInit(): void {
+    this.image = 'https://www.w3schools.com/images/w3schools_green.jpg'
     this.saleService.getSales()
       .then(sales => this.sales = sales);
 
