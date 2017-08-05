@@ -1,8 +1,9 @@
-from rest_framework import generics, filters
-from .serializers import UserSerializer, PostSerializer, MessagingSerializer
-from .models import *
 from .permissions import *
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, permissions, filters
+from .serializers import *
+from .models import *
+
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.exceptions import ValidationError
@@ -66,6 +67,15 @@ class PostPrivateListView(generics.ListAPIView):
     def get_queryset(self):
         user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
         return Post.objects.filter(owner_id=user)
+
+# Obtain a list of potential buyers belonging to a post
+class PotentialBuyerListView(generics.ListAPIView):
+    serializer_class = PotentialbuyerSerializer
+    permission_classes = (IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('pk'))
+        return Potential_buyer.objects.filter(post_id=post)
 
 
 
@@ -153,5 +163,76 @@ class MessageCreateView(generics.CreateAPIView):
 class MessageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
-    permission_classes = (IsAuthenticated, IsOwnerOrStaff,)
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwner)
 
+class CreatePotentialBuyerView(generics.ListCreateAPIView):
+    serializer_class = PotentialbuyerSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Potential_buyer.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(
+            user_id=self.request.user,
+            post_id=Post.objects.get(id=self.request.data.get('post_id', 0))
+        )
+
+class PotentialBuyerInstanceView(generics.RetrieveDestroyAPIView):
+    serializer_class = PotentialbuyerSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Potential_buyer.objects.filter(user_id=self.request.user)
+
+
+class  CreateBuyerRatingView(generics.ListCreateAPIView):
+    serializer_class = BuyerratingSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Buyer_rating.objects.filter(rater_id=self.request.user)
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        serializer.save(
+            rater_id=self.request.user,
+            buyer_id=User.objects.get(id=self.request.data.get('buyer_id', 0)),
+            post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
+            comment=self.request.data.get('comment'),
+            rating=self.request.data.get('rating')
+        )
+
+# Retrieves, modifies, and deletes Buyer_rating instances
+class BuyerRatingInstanceView(generics.RetrieveAPIView):
+    serializer_class = BuyerratingSerializer
+    # Don't need permission to GET
+
+    def get_queryset(self):
+        return Buyer_rating.objects.filter(rater_id=self.request.user)
+
+class  CreateSellerRatingView(generics.ListCreateAPIView):
+    serializer_class = SellerratingSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return Seller_rating.objects.filter(rater_id=self.request.user)
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        serializer.save(
+            rater_id=self.request.user,
+            seller_id=User.objects.get(id=self.request.data.get('seller_id', 0)),
+            post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
+            comment=self.request.data.get('comment'),
+            rating=self.request.data.get('rating')
+        )
+
+class SellerRatingInstanceView(generics.RetrieveAPIView):
+    serializer_class = SellerratingSerializer
+    # Don't need permission to GET
+
+    def get_queryset(self):
+        return Seller_rating.objects.filter(rater_id=self.request.user)

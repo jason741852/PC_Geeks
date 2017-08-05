@@ -6,6 +6,7 @@ from rest_framework.authtoken import views as auth_view
 
 
 urlpatterns = {
+
     url(r'^login/', auth_view.obtain_auth_token),
 
     url(r'^posts/$', PostPublicListView.as_view()),
@@ -25,6 +26,15 @@ urlpatterns = {
     url(r'^users/update/(?P<pk>[0-9]+)/$', UserUpdateView.as_view()),
     url(r'^users/delete/(?P<pk>[0-9]+)/$', UserDeleteView.as_view()),
     url(r'^users/posts/(?P<pk>[0-9]+)/$', PostPrivateListView.as_view()),
+
+    url(r'^buyer_ratings/new/$', CreateBuyerRatingView.as_view()),
+    url(r'^buyer_ratings/(?P<pk>[0-9]+)/$', BuyerRatingInstanceView.as_view()),
+    url(r'^seller_ratings/new/$', CreateSellerRatingView.as_view()),
+    url(r'^seller_ratings/(?P<pk>[0-9]+)/$', SellerRatingInstanceView.as_view()),
+    url(r'^potential_buyer/new/$', CreatePotentialBuyerView.as_view()),
+    url(r'^potential_buyer/(?P<pk>[0-9]+)/$', PotentialBuyerInstanceView.as_view()),
+    url(r'^potential_buyer/post/(?P<pk>[0-9]+)/$', PotentialBuyerListView.as_view()),
+
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)
