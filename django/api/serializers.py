@@ -101,11 +101,21 @@ class BuyerratingSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = (
             'rater_id',
-            'buyer_id',
-            'post_id',
             'date_created',
             'date_modified'
         )
+
+    def validate(self, data):
+        buyer_id = data.get('buyer_id').id
+        rater_id = self.context['request'].user.id #rater_id
+        # print("buyer_id: {}".format(buyer_id))
+        # print("rater_id: {}".format(rater_id))
+
+        if buyer_id == rater_id:
+            raise ValidationError('Cannot rate yourself')
+
+        return data
+
 
 
 class SellerratingSerializer(serializers.ModelSerializer):
@@ -114,8 +124,17 @@ class SellerratingSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = (
             'rater_id',
-            'seller_id',
-            'post_id',
             'date_created',
             'date_modified'
         )
+
+    def validate(self, data):
+        seller_id = data.get('seller_id').id
+        rater_id = self.context['request'].user.id #rater_id
+        # print("buyer_id: {}".format(seller_id))
+        # print("rater_id: {}".format(rater_id))
+
+        if seller_id == rater_id:
+            raise ValidationError('Cannot rate yourself')
+
+        return data

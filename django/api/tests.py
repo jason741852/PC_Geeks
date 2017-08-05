@@ -33,17 +33,22 @@ class ViewTestCase(TestCase):
         user.set_password('123')
         user.save()
 
+        user = get_user_model().objects.create(username="Mary")
+        user.set_password('123')
+        user.save()
+
         self.client = APIClient()
         self.client.force_authenticate(user=user)
 
 
     def test_api_can_create_a_post(self):
         """Test the api has post creation capability"""
+        self.client.logout()
         login = self.client.login(username="Peter", password="123")
 
         # Assert user is logged in
         self.assertTrue(login)
-        self.assertEqual(get_user_model().objects.count(),1)
+        self.assertEqual(get_user_model().objects.count(),2)
         post_data = {"item":"GTX1080", "category":"video card", "quality":"good", "manufacturer":"MSI"}
 
 
@@ -85,13 +90,8 @@ class ViewTestCase(TestCase):
             '/buyer_ratings/',
             buyer_rating_data
         )
-        self.assertEqual(self.brPOSTresponse.status_code, status.HTTP_201_CREATED)
-
-        # Assert related name works
-        buyer_rating = Buyer_rating.objects.get(id=1)
-        rating_get_from_related_name=Post.objects.get(id=1).buyer_rating.get(id=1)
-        self.assertEqual(rating_get_from_related_name.comment, buyer_rating.comment)
-
+        # 400 because Peter is rating himself
+        self.assertEqual(self.brPOSTresponse.status_code, status.HTTP_400_BAD_REQUEST)
 
         """Test Seller_rating"""
         seller_rating_data = {"rating":1, "comment":"he did not show up on time", "seller_id":1, "post_id":1}
@@ -99,7 +99,45 @@ class ViewTestCase(TestCase):
             '/seller_ratings/',
             seller_rating_data
         )
+        # 400 because Peter is rating himself
+        self.assertEqual(self.srPOSTresponse.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+        """Switch account and try that again"""
+        self.client.logout()
+        login = self.client.login(username="Mary", password="123")
+
+        self.assertTrue(login)
+
+        buyer_rating_data = {"rating":2, "comment":"this item sucks", "buyer_id":1, "post_id":1}
+        self.brPOSTresponse = self.client.post(
+            '/buyer_ratings/',
+            buyer_rating_data
+        )
+        self.assertEqual(self.brPOSTresponse.status_code, status.HTTP_201_CREATED)
+
+        seller_rating_data = {"rating":1, "comment":"he did not show up on time", "seller_id":1, "post_id":1}
+        self.srPOSTresponse = self.client.post(
+            '/seller_ratings/',
+            seller_rating_data
+        )
+        # 400 because Peter is rating himself
         self.assertEqual(self.srPOSTresponse.status_code, status.HTTP_201_CREATED)
+
+        """"""""""""""""""
+        # Log back in to the first account
+        self.client.logout()
+
+        login = self.client.login(username="Peter", password="123")
+
+        # Assert user is logged in
+        self.assertTrue(login)
+
+        # Assert related name works
+        buyer_rating = Buyer_rating.objects.get(id=1)
+        rating_get_from_related_name=Post.objects.get(id=1).buyer_rating.get(id=1)
+        self.assertEqual(rating_get_from_related_name.comment, buyer_rating.comment)
+
 
         # Assert related name works
         seller_rating = Seller_rating.objects.get(id=1)
@@ -119,14 +157,10 @@ class ViewTestCase(TestCase):
 
 
         self.client.logout()
-        user = get_user_model().objects.create(username="Mary")
-        user.set_password('123')
-        user.save()
-
         self.client = APIClient()
-        self.client.force_authenticate(user=user)
 
         login = self.client.login(username="Mary", password="123")
+
 
         # Assert user Mary is logged in
         self.assertTrue(login)
