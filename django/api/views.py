@@ -1,4 +1,6 @@
+from django.http import JsonResponse
 from rest_framework import generics, filters
+from rest_framework.decorators import api_view
 from .serializers import *
 from .models import *
 from .permissions import *
@@ -27,9 +29,17 @@ class PostPublicListView(generics.ListAPIView):
 
 
 # Returns the details of a single Post
-class PostDetailsView(generics.RetrieveAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+# class PostDetailsView(generics.RetrieveAPIView):
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+
+@api_view(['GET'])
+def PostDetailsView(request, pk):
+    post = generics.get_object_or_404(Post, pk=pk)
+    post = PostSerializer(post)
+    images = Image.objects.filter(post_id=pk)
+    images = ImageSerializer(images, many=True)
+    return JsonResponse({'post': post.data, 'images': images.data})
 
 
 # Creates a new Post

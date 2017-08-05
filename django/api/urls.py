@@ -9,7 +9,7 @@ urlpatterns = {
     url(r'^login/', auth_view.obtain_auth_token),
 
     url(r'^posts/$', PostPublicListView.as_view()),
-    url(r'^posts/(?P<pk>[0-9]+)/$', PostDetailsView.as_view()),
+    url(r'^posts/(?P<pk>[0-9]+)/$', PostDetailsView),
     url(r'^posts/new/$', PostCreateView.as_view()),
     url(r'^posts/update/(?P<pk>[0-9]+)/$', PostUpdateView.as_view()),
     url(r'^posts/delete/(?P<pk>[0-9]+)/$', PostDeleteView.as_view()),
