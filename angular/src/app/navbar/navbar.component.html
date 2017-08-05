@@ -1,29 +1,47 @@
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
 
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
 
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
+  <!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-    <a class="navbar-brand" routerLink="/main">PC Geeks</a>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul *ngIf="!auth.isLoggedIn()" class="nav navbar-nav navbar-right">
-       <a class="nav-link" routerLink="/login">Login</a>
-       <a class="nav-link" routerLink="/register">Register</a>
-      </ul>
-      <ul *ngIf="auth.isLoggedIn()" class="nav navbar-nav navbar-right">
-        <a class="nav-link" routerLink="/profile">Profile</a>
-        <a class="nav-link" [routerLink]="['/login']">Logout</a>
-        <a class="nav-link" routerLink="/form">Create Sale</a>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard">All Sales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/list">List</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  </div> -->
+
+  <!-- <a class="navbar-brand" routerLink="/main">PC Geeks</a> -->
+  <div class="w3-container w3-display-container w3-padding-16 collapse navbar-collapse" id="navbarNavDropdown">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+    <h3 class="w3-wide"><b>PC Geeks</b></h3>
+  </div>
+
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
+      </li>
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
+      </li>
+    </ul>
+    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
+      </li>
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
+      </li>
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
+      </li>
+    </ul>
+    <ul class="w3-bar-item w3-button">
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sales</a>
+      </li>
+      <li class="w3-bar-item w3-button">
+        <a class="w3-bar-item w3-button" routerLink="/list">List</a>
+      </li>
+    </ul>
+  </div>
+</nav>
