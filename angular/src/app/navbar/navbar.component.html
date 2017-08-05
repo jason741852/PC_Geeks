@@ -1,13 +1,11 @@
 
   <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-      <div class="container">
-        <div class="navbar-header">
-          <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
-        </div>
-      </div>
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
+
     <a class="navbar-brand" routerLink="/main">PCPart</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul *ngIf="!auth.isLoggedIn()" class="nav navbar-nav navbar-right">

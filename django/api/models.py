@@ -47,7 +47,7 @@ class Messaging(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='messaging',
         on_delete=models.CASCADE)
-    body = models.TextField(blank=False, unique=True)
+    body = models.TextField(blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
     send_userid = models.IntegerField(default=0)
     receive_userid = models.IntegerField(default=0)

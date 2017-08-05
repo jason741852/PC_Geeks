@@ -17,12 +17,12 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # npm configuration
-NPM_PACKAGES="${HOME}/.npm-packages"
+export NPM_PACKAGES="${HOME}/.npm-packages"
 unset MANPATH
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # set PATH so it includes user's private bin directories
-PATH="$NPM_PACKAGES/bin:$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$NPM_PACKAGES/bin:$HOME/bin:$HOME/.local/bin:$PATH"
 
 # django configuration
-DJANGO_SETTINGS_MODULE="final.settings_production"
+export DJANGO_SETTINGS_MODULE="final.settings_production"

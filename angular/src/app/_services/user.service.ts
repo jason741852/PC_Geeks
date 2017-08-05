@@ -5,11 +5,13 @@ import { User } from '../_models/user';
 
 @Injectable()
 export class UserService {
+    private baseUrl = 'http://localhost:4200/api/users/';
+
     constructor(private http: Http) { }
 
     getAll() {
         return this.http.get(
-            'http://localhost:4200/api/users',
+            this.baseUrl,
             this.createHeader()
         ).map(
             (response: Response) => response.json()
@@ -18,7 +20,7 @@ export class UserService {
 
     getById(id: number) {
         return this.http.get(
-            'http://localhost:4200/api/users/' + id
+            this.baseUrl + id
         ).map(
             (response: Response) => response.json()
         );
@@ -26,7 +28,7 @@ export class UserService {
 
     create(user: User) {
         return this.http.post(
-            'http://localhost:4200/api/users/',
+          this.baseUrl + "new/",
             user
         ).map(
             (response: Response) => response.json()
@@ -35,7 +37,7 @@ export class UserService {
 
     update(user: User) {
         return this.http.put(
-            'http://localhost:4200/api/users/' + user.id,
+          this.baseUrl + "update/" + user.id,
             user,
             this.createHeader()
         ).map(
@@ -45,7 +47,7 @@ export class UserService {
 
     delete(id: number) {
         return this.http.delete(
-            'http://localhost:4200/api/users/' + id,
+            this.baseUrl + "delete/" + id,
             this.createHeader()
         ).map(
             (response: Response) => response.json()
