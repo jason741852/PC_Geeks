@@ -20,10 +20,10 @@
       <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
     </ul>
     <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
-      <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
+      <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
     </ul>
     <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
-      <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
+      <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
     </ul>
     <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
       <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
