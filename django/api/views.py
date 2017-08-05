@@ -1,5 +1,5 @@
 from rest_framework import generics, filters
-from .serializers import UserSerializer, PostSerializer, MessagingSerializer
+from .serializers import *
 from .models import *
 from .permissions import *
 from django_filters.rest_framework import DjangoFilterBackend
@@ -13,6 +13,7 @@ import django_filters
 """
     Posts Views
 """
+
 # Returns a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
@@ -66,6 +67,41 @@ class PostPrivateListView(generics.ListAPIView):
     def get_queryset(self):
         user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
         return Post.objects.filter(owner_id=user)
+
+
+
+"""
+    Image Views
+"""
+
+# Returns a list of Images for a given Post
+class ImageListView(generics.ListAPIView):
+    serializer_class = ImageSerializer
+
+    def get_queryset(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        return Image.objects.filter(post_id=post)
+
+
+# Creates a new Image
+class ImageCreateView(generics.CreateAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_serializer(self, *args, **kwargs):
+        self.request.data[u'post_id'] = str(self.kwargs.get('post_id'))
+
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)
+
+
+# Deletes a user (should be replaced with 'deactivated' status on User)
+class ImageDeleteView(generics.DestroyAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsOwnerOrStaff,)
 
 
 

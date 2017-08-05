@@ -34,7 +34,6 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = '__all__'
-        read_only_fields = ('post_id',)
    
 
 class MessagingSerializer(serializers.ModelSerializer):

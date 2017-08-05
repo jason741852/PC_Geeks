@@ -42,11 +42,11 @@ class Post(models.Model):
                " Title: " + self.title
 
 
-class Image(models.model):
+class Image(models.Model):
     post_id = models.ForeignKey(
         Post,
         related_name='images',
-        on_delete=models.CASCADE()
+        on_delete=models.CASCADE
     )
     url = models.URLField()
 

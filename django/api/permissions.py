@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission
 from rest_framework.exceptions import APIException
-from .models import Post, Messaging
+from .models import *
 
 
 
@@ -27,5 +27,7 @@ class IsOwnerOrStaff(BasePermission):
             return obj.owner_id == request.user or request.user.is_staff
         elif isinstance(obj, Messaging):
             return obj.send_userid == request.user or obj.receive_userid == request.user or request.user.is_staff
+        elif isinstance(obj, Image):
+            return obj.post_id.owner_id == request.user or request.user.is_staff
         else:
             raise APIException("IsOwnerOrStaff received an object that it cannot handle.")
