@@ -17,8 +17,13 @@ import django_filters
 # Returns a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = PostListSerializer
     ordering = 'date_created'
+
+    def get_queryset(self):
+        return Post.objects.all().extra(
+            select={'image': "select api_image.url from api_image where api_image.post_id_id = api_post.id order by api_image.id limit 1"}
+        )
 
 
 # Returns the details of a single Post

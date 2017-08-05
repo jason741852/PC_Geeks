@@ -34,6 +34,16 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = '__all__'
+
+
+class PostListSerializer(serializers.Serializer):
+    item = serializers.CharField(max_length=255)
+    category = serializers.CharField(max_length=255)
+    quality = serializers.CharField(max_length=255)
+    manufacturer = serializers.CharField(max_length=255)
+    price = serializers.IntegerField()
+    date_created = serializers.DateTimeField()
+    image = serializers.URLField()
    
 
 class MessagingSerializer(serializers.ModelSerializer):
