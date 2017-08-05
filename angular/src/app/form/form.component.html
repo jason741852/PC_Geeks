@@ -3,6 +3,7 @@
 <h2>Create Sales</h2>
   <label>Sale item:</label> <input #saleItem class="form-control"/>
 <br>
+  <label>Image URL:</label> <input #saleImg class="form-control"/>
 
   <label for="saleCat">Category: </label>
   <br>
@@ -26,7 +27,7 @@
 <br>
   <br>
 
-  <button (click)="add(saleItem.value, saleCat.value,
+  <button (click)="add(saleItem.value, saleImg.value, saleCat.value,
   saleQuality.value, saleMan.value, salePrice.value)" class="btn btn-primary" routerLink="/dashboard">
     Add
   </button>

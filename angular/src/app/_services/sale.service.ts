@@ -32,12 +32,13 @@ export class SaleService {
   }
   // ------
   create(item: string,
+         image: string,
          category: string,
          quality: string,
          manufacturer: string,
          price: number): Promise<Sale> {
     return this.http
-      .post(this.eachUrl, JSON.stringify({item: item,
+      .post(this.eachUrl, JSON.stringify({item: item, image: image,
         category: category, quality: quality, manufacturer: manufacturer, price: price }), this.createHeader())
       .toPromise()
       .then(res => res.json().data as Sale)
