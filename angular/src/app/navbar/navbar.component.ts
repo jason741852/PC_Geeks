@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     {'title': 'Categories', 'link': '#',
       'subItems': [
         {'title': 'CPU', 'link': '#'},
-        {'title': 'Video Card', 'link': '#' },
+        {'title': 'VideoCard', 'link': '#' },
         {'title': 'CPU Cooler', 'link': '#' },
         {'title': 'Motherboard', 'link': '#' },
         {'title': 'Memory', 'link': '#' },

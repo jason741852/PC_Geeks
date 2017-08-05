@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
 
   quality = [' ', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor'];
 
-  category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'Video Card', 'Power Supply', 'Case'];
+  category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
   createRequest = { 
       item: '',
