@@ -74,8 +74,15 @@ class PostPrivateListView(generics.ListAPIView):
     Image Views
 """
 
-# Returns a list of Images for a given Post
+# Returns a list of all Images
 class ImageListView(generics.ListAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsAdminUser,)
+
+
+# Returns a list of Images for a given Post
+class PostImageListView(generics.ListAPIView):
     serializer_class = ImageSerializer
 
     def get_queryset(self):

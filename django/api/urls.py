@@ -13,9 +13,10 @@ urlpatterns = {
     url(r'^posts/new/$', PostCreateView.as_view()),
     url(r'^posts/update/(?P<pk>[0-9]+)/$', PostUpdateView.as_view()),
     url(r'^posts/delete/(?P<pk>[0-9]+)/$', PostDeleteView.as_view()),
-    url(r'^posts/(?P<post_id>[0-9]+)/images/$', ImageListView.as_view()),
+    url(r'^posts/(?P<post_id>[0-9]+)/images/$', PostImageListView.as_view()),
     url(r'^posts/(?P<post_id>[0-9]+)/images/new/$', ImageCreateView.as_view()),
 
+    url(r'^images/', ImageListView.as_view()),
     url(r'^images/delete/(?P<pk>[0-9]+)/$', ImageDeleteView.as_view()),
 
     url(r'^messages/$', MessageListView.as_view()),
