@@ -30,7 +30,8 @@ export class FormComponent implements OnInit {
       category: this.category[0],
       quality: this.quality[0],
       manufacturer: this.manufacturers[0],
-      price: ''};
+      price: '',
+      body: ''};
 
   constructor(
         private router: Router,
@@ -48,7 +49,8 @@ export class FormComponent implements OnInit {
     'quality': new FormControl(this.createRequest.quality),
     'manufacturer': new FormControl(this.createRequest.manufacturer),
     'price': new FormControl(this.createRequest.price, [Validators.required, Validators.min(0),
-    Validators.pattern('0-9')])
+    Validators.pattern('[0-9]+')]),
+    'body': new FormControl(this.createRequest.body)
   });
   }
 
@@ -58,12 +60,14 @@ export class FormComponent implements OnInit {
     this.saleForm.get('category').value, 
     this.saleForm.get('quality').value,
     this.saleForm.get('manufacturer').value,
-    this.saleForm.get('price').value)
+    this.saleForm.get('price').value,
+    this.saleForm.get('body').value)
       .then(sale => {
         this.sales.push(sale);
         this.selectedSale = null;
       });
   }
   get item() { return this.saleForm.get('item'); }
-  get price() { return this.saleForm.get('price'); } 
+  get price() { return this.saleForm.get('price'); }
+  get body() { return this.saleForm.get('body'); } 
 }
