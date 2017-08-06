@@ -115,8 +115,7 @@ class SelfPostListView(generics.ListAPIView):
     ordering = 'date_created'
 
     def get_queryset(self):
-        user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
-        return Post.objects.filter(owner_id=user)
+        return Post.objects.filter(owner_id=self.request.user)
 
 
 # Obtains the details of a user's Post
