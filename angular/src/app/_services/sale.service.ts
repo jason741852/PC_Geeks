@@ -11,7 +11,7 @@ export class SaleService {
 
   private salesUrl = 'http://localhost:4200/api/all-posts/';  // URL to web api
   private eachUrl = 'http://localhost:4200/api/posts/';
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getSales(): Promise<Sale[]> {
     return this.http.get(this.salesUrl)
@@ -22,8 +22,6 @@ export class SaleService {
   }
 
   getSale(id: number): Promise<Sale> {
-    // return this.getSales()
-    // .then(sales => sales.find(sale => sale.id === id));
     const url = `${this.eachUrl}${id}`;
     return this.http.get(url, this.createHeader())
       .toPromise()
@@ -54,5 +52,4 @@ export class SaleService {
       return new RequestOptions({ headers: headers });
     }
   }
-
 }
