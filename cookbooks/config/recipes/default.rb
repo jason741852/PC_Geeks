@@ -42,6 +42,9 @@ end
 cookbook_file "recreate-database.sh" do
 	path "/home/ubuntu/recreate-database.sh"
 end
+directory '/home/ubuntu/django/api/migrations' do
+	action :delete
+end
 execute 'django_makemigrations' do
 	command 'python3 manage.py makemigrations api'
 	cwd '/home/ubuntu/django'
