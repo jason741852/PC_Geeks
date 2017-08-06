@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.core.mail import send_mail
 
 from rest_framework.decorators import api_view
 from rest_framework import generics, permissions, filters
@@ -13,10 +13,26 @@ from .serializers import *
 from .permissions import *
 
 
+class ReportViewSet(generics.CreateAPIView):
+    serializer_class = ReportSerializer
+
+    def get_queryset(self):
+        return []
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        #nstance = serializer.save()
+        send_mail(
+            self.request.data.get("id"),
+            self.request.data.get("message"),
+            'pcgeeks470@gmail.com',
+            ['pcgeeks470@gmail.com'],
+            fail_silently=False)   
 
 """
     Posts Views
 """
+
 # Returns a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()

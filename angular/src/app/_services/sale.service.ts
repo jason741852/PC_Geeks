@@ -36,10 +36,12 @@ export class SaleService {
          quality: string,
          manufacturer: string,
          price: number,
+         location: string,
         body: string): Promise<Sale> {
     return this.http
       .post(this.salesUrl + "new/", JSON.stringify({item: item,
-        category: category, quality: quality, manufacturer: manufacturer, price: price, body: body }), this.createHeader())
+        category: category, quality: quality, manufacturer: manufacturer, 
+        price: price, location:location, body: body }), this.createHeader())
       .toPromise()
       .then(res => res.json().data as Sale)
       .catch(this.handleError);

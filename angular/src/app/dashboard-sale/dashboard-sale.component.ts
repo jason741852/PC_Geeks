@@ -7,7 +7,7 @@ import { SaleService } from '../_services/sale.service';
 @Component({
   selector: 'app-dashboard-sale',
   templateUrl: './dashboard-sale.component.html',
-  styleUrls: ['./dashboard-sale.component.css'],
+  styleUrls: ['./dashboard-sale.component.css','./list.component.css'],
 })
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];

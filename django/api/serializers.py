@@ -6,6 +6,10 @@ from .models import *
 from collections import OrderedDict
 from decimal import *
 
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:

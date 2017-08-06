@@ -1,5 +1,5 @@
-<div class="col-lg-3">
 
+<div class="col-lg-5 col-centered">
   <form [formGroup]="saleForm" #formDir="ngForm">
 
     <h2>Create Sales</h2>
@@ -58,9 +58,21 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <label for="location">Location for transaction:</label>
+      <input id="location" class="form-control" formControlName="location" required/>
+      <div *ngIf="location.invalid && (location.dirty || location.touched)"
+      class="alert alert-danger">
+        <div *ngIf="location.errors.required">
+          Location is required.
+        </div>
+      </div>
+    </div>
+
     <div class="form-group descriptionBody">
       <label for="body">Description</label>
-      <input class="form-control" formControlName="body" required/>
+      <textarea class="descriptionBox form-control" formControlName="body" required
+      rows="5" id="comment"></textarea>
       <div *ngIf="body.invalid && (body.dirty || body.touched)"
       class="alert alert-danger">
         <div *ngIf="body.errors.required">
@@ -72,5 +84,7 @@
     <button (click)="add()" class="btn btn-primary">
       Add
     </button>
+
+
   </form>
 </div>
