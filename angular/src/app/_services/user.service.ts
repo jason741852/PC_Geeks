@@ -26,6 +26,15 @@ export class UserService {
         );
     }
 
+  getSelf() {
+    return this.http.get(
+      this.baseUrl + "self",
+          this.createHeader()
+    ).map(
+      (response: Response) => response.json() as User
+    );
+  }
+
     create(user: User) {
         return this.http.post(
           this.baseUrl + "new/",

@@ -1,14 +1,14 @@
-<div *ngIf="auth" class="col-sm-6 col-md-4">
+<div *ngIf="currentUser" class="col-sm-6 col-md-4">
   <div class="panel panel-deafult panel-heading">
     <h2 class="panel-title">User profile</h2>
   </div>
   <div class="panel-body row col-md-7">
     <ul class="list-group description">
-      <li class="list-group-item">ID: {{auth.getID()}}</li>
-      <li class="list-group-item">First Name: {{auth.getFirstName()}}</li>
-      <li class="list-group-item">Last Name: {{auth.getLastName()}}</li>
-      <li class="list-group-item">Email: {{auth.getEmail()}}</li>
-      <li class="list-group-item">Username: {{auth.getUsername()}}</li>
+      <li class="list-group-item">ID: {{currentUser.id}}</li>
+      <li class="list-group-item">First Name: {{currentUser.firstName}}</li>
+      <li class="list-group-item">Last Name: {{currentUser.lastName}}</li>
+      <li class="list-group-item">Email: {{currentUser.email}}</li>
+      <li class="list-group-item">Username: {{currentUser.username}}</li>
     </ul>
   </div>
 

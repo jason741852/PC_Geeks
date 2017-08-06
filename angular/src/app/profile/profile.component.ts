@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllUsers();
+    this.loadSelf();
   }
 
   deleteUser(id: number) {
@@ -43,6 +44,9 @@ export class ProfileComponent implements OnInit {
 
   private loadAllUsers() {
     this.userService.getAll().subscribe(users => { this.users = users; });
+  }
+  private loadSelf() {
+    this.userService.getSelf().subscribe(currentUser => { this.currentUser = currentUser; });
   }
 
   goBack(): void {
