@@ -12,6 +12,7 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ReportComponent } from './report/report.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
@@ -61,6 +62,10 @@ const routes: Routes = [
     {
       path: 'detail/:id',
       component: SaleDetailComponent
+    },
+    {
+      path: 'report/:id',
+      component: ReportComponent
     },
 ];
 

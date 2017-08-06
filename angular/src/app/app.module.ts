@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { BaseRequestOptions, HttpModule, JsonpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
@@ -28,6 +29,7 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -43,13 +45,15 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     DashboardSaleComponent,
     ListSaleComponent,
     DashboardFilterComponent,
-    ProfileComponent
+    ProfileComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     JsonpModule,
     SlideMenuModule,
     ReactiveFormsModule,

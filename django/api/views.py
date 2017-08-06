@@ -21,8 +21,8 @@ class ReportViewSet(generics.CreateAPIView):
     def perform_create(self, serializer):
         #nstance = serializer.save()
         send_mail(
-            'Subject here',
-            'foo bar',
+            self.request.data.get("id"),
+            self.request.data.get("message"),
             'pcgeeks470@gmail.com',
             ['pcgeeks470@gmail.com'],
             fail_silently=False)   
