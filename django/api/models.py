@@ -9,6 +9,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
+class Report(models.Model):
+    message = models.TextField(blank=False, null=False)
+    post_id = models.IntegerField(default=-1)
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
@@ -112,3 +115,4 @@ class Seller_rating(models.Model):
     comment = models.TextField(blank=False,max_length=1000)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+

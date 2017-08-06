@@ -1,0 +1,8 @@
+<h1> Report Reason </h1>
+	<form action="">
+        <input type="radio" [(ngModel)]="reason"  name="reason" value="InappropriateContent">Inappropriate Content<br>
+        <input type="radio" [(ngModel)]="reason"  name="reason" value="ItemSold">Item Already Sold<br>
+        <input type="radio" [(ngModel)]="reason"  name="reason" value="MisleadingPost">Misleading Post<br>
+        <input type="radio" [(ngModel)]="reason"  name="reason" value="Other">Other<br>
+ 		<button (click)="submit()">Submit</button>
+	</form>
