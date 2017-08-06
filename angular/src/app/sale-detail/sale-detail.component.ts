@@ -23,7 +23,7 @@ export class SaleDetailComponent implements OnInit {
 
     ngOnInit(): any {
       this.route.paramMap
-        .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
+        .switchMap((params: ParamMap) => this.saleService.getPublicSaleDetails(+params.get('id')))
         .subscribe(sale => this.sale = sale);
       }
 
