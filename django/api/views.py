@@ -141,20 +141,6 @@ class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 
-# Updates a User's information
-class UserUpdateView(generics.UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated, IsStaffOrTargetUser)
-
-
-# Deletes a user (should be replaced with 'deactivated' status on User)
-class UserDeleteView(generics.DestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsStaffOrTargetUser,)
-
-
 
 """
     Self Views
@@ -167,10 +153,28 @@ class SelfUserDetailsView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-        queryset = self.get_queryset()
-        user = queryset.get(id=self.request.user.id)
-        self.check_object_permissions(self.request, user)
-        return user
+        return self.request.user
+
+
+# Updates the current user's information
+class SelfUserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user
+
+
+# Deletes the current user
+# TODO: should be replaced with 'deactivated' status on User
+class SelfUserDeleteView(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user
 
 
 # Obtains a list of Posts belonging to a user
@@ -383,6 +387,29 @@ class StaffUserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = StaffUserSerializer
     permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+# Updates a User's information
+class StaffUserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        user = queryset.get(id=self.request.user.id)
+        return user
+
+
+# Deletes a User
+# TODO: should be replaced with 'deactivated' status on User
+class StaffUserDeleteView(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+    def get_object(self):
+        return self.request.user
 
 
 # Returns a list of all Messages
