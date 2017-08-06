@@ -1,33 +1,22 @@
-<div class="row">
-  <div class="col-md-4">
-  </div>
-  <div class="col-md-8">
-
+<div class="container">
+  <div class="body">
+    <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
     <form (keyup.enter)="search(saleItem.value)">
 
-      <div class="col-lg-3">
-
-      <label for="saleItem">Search:</label>
+      <div class="searchBar">
+        <label for="saleItem">Search:</label>
         <input #saleItem type="text" class="form-control" id="saleItem">
 
-      <button (click)="search(saleItem.value)" class="btn btn-primary">
-        Search
-      </button>
+        <button (click)="search(saleItem.value)" class="btn btn-primary">
+          Search
+        </button>
       </div>
 
     </form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>All the Sales</h1>
 
     <div class="grid grid-pad">
-
       <span *ngFor="let sale of sales">
-        <a *ngIf="sale.item.toUpperCase().includes(make)" class="col-1-4 loopDisplay">
+        <a *ngIf="sale.item.toUpperCase().includes(make.toUpperCase())" class="col-1-4 loopDisplay">
 
           <div class="module sale">
             <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00
@@ -65,3 +54,5 @@
     </div>
   </div>
 </div>
+
+

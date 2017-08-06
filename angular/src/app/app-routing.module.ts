@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { Sale } from './_models/sale';
 import { SaleService } from './_services/sale.service';
 import { HttpModule } from '@angular/http';
+import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
     {
       path: 'profile',
       component: ProfileComponent
+    },
+    {
+      path: 'editprofile',
+      component: EditProfileComponent
     },
     {
       path: 'form',

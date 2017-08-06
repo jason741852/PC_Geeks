@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
+import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -46,7 +48,8 @@ import { ReportComponent } from './report/report.component';
     ListSaleComponent,
     DashboardFilterComponent,
     ProfileComponent,
-    ReportComponent
+    ReportComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

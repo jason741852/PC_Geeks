@@ -29,7 +29,7 @@ export class DashboardFilterComponent implements OnInit {
       .then(sales => this.sales = sales.slice(0));
 
     //this.category = this.concat + this.route.snapshot.params['category'];
-    this.make = this.route.snapshot.params['make'].toUpperCase();
+    this.make = this.route.snapshot.params['make'];
     console.log(this.make);
   }
   search(saleItem: string) {

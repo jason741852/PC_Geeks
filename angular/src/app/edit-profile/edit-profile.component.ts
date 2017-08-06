@@ -6,17 +6,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 import { AuthenticationService } from '../_services/authentication.service';
+import { AlertService } from '../_services/alert.service';
 
 @Component({
   selector: 'app-profile-detail',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   registerForm: FormGroup;
   currentUser: User;
   users: User[] = [];
-
+  model: any = {};
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +27,7 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-
+    private alertService: AlertService
   ) {
 }
 
@@ -39,10 +41,6 @@ export class ProfileComponent implements OnInit {
     this.logout();
   }
 
-  editUser(id: number) {
-    this.router.navigate(['/editprofile'])
-
-  }
   logout(){
     this.auth.logout();
 
@@ -58,6 +56,21 @@ export class ProfileComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  update() {
+    this.loading = true;
+    this.userService.update(this.model, this.currentUser["id"])
+      .subscribe(
+        data => {
+          this.alertService.success('Registration successful', true);
+
+          this.router.navigate(['/profile']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+  }
+
 
 
 

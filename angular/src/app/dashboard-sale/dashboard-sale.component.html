@@ -1,25 +1,21 @@
-<div class="row">
-<div class="col-md-4">
-</div>
-  <div class="col-md-8">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="container">
+  <div class="body">
+    <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
     <form (keyup.enter)="search(saleItem.value)">
 
-      <div class="col-lg-3">
+      <div class="searchBar">
         <label for="saleItem">Search:</label>
         <input #saleItem type="text" class="form-control" id="saleItem">
 
         <button (click)="search(saleItem.value)" class="btn btn-primary">
-          Search
+        Search
         </button>
       </div>
 
     </form>
-    <h1>All the Sales</h1>
 
     <div class="grid grid-pad">
-      <span *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
-      <a class="col-1-4 loopDisplay">
+      <a *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }" class="col-1-4 loopDisplay">
         <div class="module sale">
           <h4>Selling {{sale.category}} {{sale.item}} for {{sale.price}}.00</h4>
           <p>
@@ -29,7 +25,7 @@
           </p>
         </div>
         </a>
-      </span>
     </div>
+
   </div>
 </div>

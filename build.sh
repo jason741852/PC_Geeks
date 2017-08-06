@@ -46,7 +46,7 @@ sudo touch /home/ubuntu/reload.ini;'
 		echo "Squashing migrations and recreating the database..."
 		vagrant ssh -c '
 source .profile;
-echo \"DROP DATABASE prod_db; CREATE DATABASE prod_db; GRANT ALL PRIVILEGES ON DATABASE prod_db TO ubuntu;\" | sudo -u postgres psql;
+bash /home/ubuntu/recreate-database.sh;
 cd /home/ubuntu/django;
 rm -r api/migrations;
 python3 manage.py makemigrations api;
