@@ -54,10 +54,15 @@ class Messaging(models.Model):
     receiver_id = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='received_messages',
         on_delete=models.CASCADE)
-    post = models.ForeignKey('Post',
+    post_id = models.ForeignKey('Post',
         related_name='messages',
         on_delete=models.CASCADE)
-    body = models.TextField(blank=False)
+    parent_message = models.ForeignKey('Messaging',
+        related_name='next_message',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
+    body = models.TextField(blank=False, max_length=1000)
     date_created = models.DateTimeField(auto_now_add=True)
 
     # Return a human readable representation of the model instance.

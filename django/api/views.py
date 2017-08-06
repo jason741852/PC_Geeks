@@ -145,27 +145,38 @@ class MessageListView(generics.ListAPIView):
         return Messaging.objects.filter(owner=self.request.user)
 
 
-class MessageCreateView(generics.CreateAPIView):
+class MessageCreateView(generics.ListCreateAPIView):
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_serializer(self, *args, **kwargs):
-        self.request.data[u'owner'] = str(self.request.user.id)
-        self.request.data[u'send_userid'] = str(self.request.user.id)
+    def perform_create(self, serializer):
+        if self.request.data.get('parent_message', 0):
+            print("hi")
+            serializer.save(
+                owner = self.request.user,
+                receiver_id = User.objects.get(id=self.request.data.get('receiver_id', 0)),
+                post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
+                parent_message=Messaging.objects.get(id=self.request.data.get('parent_message', 0)),
+                body = self.request.data.get('body')
+            )
+        else:
+            print("bye")
+            serializer.save(
+                owner = self.request.user,
+                receiver_id = User.objects.get(id=self.request.data.get('receiver_id', 0)),
+                post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
+                #parent_message=Post.objects.get(id=self.request.data.get('parent_message', 0)),
+                body = self.request.data.get('body')
+            )
 
-        serializer_class = self.get_serializer_class()
-        kwargs['context'] = self.get_serializer_context()
-        return serializer_class(*args, **kwargs)
-
-
-# Returns a message
-class MessageDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Messaging.objects.all()
+# Returns a conversation specifically to a Post and a Buyer
+class MessageDetailsView(generics.ListAPIView):
     serializer_class = MessagingSerializer
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsOwner)
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Messaging.objects.filter(post_id=self.kwargs.get('pid')).filter(owner=self.kwargs.get('bid')).prefetch_related('next_message').all()
 
 class CreatePotentialBuyerView(generics.ListCreateAPIView):
     serializer_class = PotentialbuyerSerializer

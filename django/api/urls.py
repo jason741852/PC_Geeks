@@ -15,9 +15,9 @@ urlpatterns = {
     url(r'^posts/update/(?P<pk>[0-9]+)/$', PostUpdateView.as_view()),
     url(r'^posts/delete/(?P<pk>[0-9]+)/$', PostDeleteView.as_view()),
 
-    url(r'^messages/$', MessageListView.as_view()),
-    url(r'^messages/send/$', MessageCreateView.as_view()),
-    url(r'^messages/(?P<pk>[0-9]+)/$', MessageDetailsView.as_view()),
+    url(r'^messaging/$', MessageListView.as_view()),
+    url(r'^messaging/new/$', MessageCreateView.as_view()),
+    url(r'^messaging/post/(?P<pid>[0-9]+)/buyer/(?P<bid>[0-9]+)/$', MessageDetailsView.as_view()),
 
     url(r'^users/$', UserListView.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', UserDetailsView.as_view()),

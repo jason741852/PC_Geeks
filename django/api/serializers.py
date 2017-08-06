@@ -28,24 +28,17 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
-   
+
 
 class MessagingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Messaging
-        fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
-        read_only_fields = ('date_created',)
+        fields = '__all__'
+        read_only_fields = (
+        'owner',
+        'date_created'
+        )
 
-    def validate(self, data):
-        receiver = data.get('receive_userid')
-        sender = data.get('send_userid')
-
-        if not User.objects.filter(id=receiver).exists():
-            raise ValidationError('Receiving user (id = ' + receiver + ') does not exist')
-        if sender == receiver:
-            raise ValidationError("You cannot send a message to yourself")
-
-        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
