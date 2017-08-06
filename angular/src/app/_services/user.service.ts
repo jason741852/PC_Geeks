@@ -44,9 +44,9 @@ export class UserService {
         );
     }
 
-    update(user: User) {
+    update(user: User, id:number) {
         return this.http.put(
-          this.baseUrl + "update/" + user.id,
+          this.baseUrl + "update/"+ id +"/",
             user,
             this.createHeader()
         ).map(
