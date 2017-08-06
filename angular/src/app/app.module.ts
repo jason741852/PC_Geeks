@@ -14,6 +14,7 @@ import { SaleService } from './_services/sale.service';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
+import { PotentialBuyerService } from './_services/potential_buyer.service'
 
 //Components
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.component';
 import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
+import { MessageComponent } from './message/message.component'
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     DashboardSaleComponent,
     ListSaleComponent,
     DashboardFilterComponent,
-    ProfileComponent
+    ProfileComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     AlertService,
     AuthenticationService,
     UserService,
+    PotentialBuyerService,
     BaseRequestOptions
   ],
   bootstrap: [AppComponent]

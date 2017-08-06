@@ -49,16 +49,20 @@ class Post(models.Model):
 
 class Messaging(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name='messaging',
+        related_name='sent_messages',
+        on_delete=models.CASCADE)
+    receiver_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='received_messages',
+        on_delete=models.CASCADE)
+    post = models.ForeignKey('Post',
+        related_name='messages',
         on_delete=models.CASCADE)
     body = models.TextField(blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
-    send_userid = models.IntegerField(default=0)
-    receive_userid = models.IntegerField(default=0)
 
     # Return a human readable representation of the model instance.
     def __str__(self):
-        return "{}".format(self.post_name)
+        return "{}".format(self.body)
 
 
 class Potential_buyer(models.Model):

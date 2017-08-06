@@ -6,6 +6,9 @@ import { Location } from '@angular/common';
 import { Sale } from '../_models/sale';
 import { SaleService } from '../_services/sale.service';
 
+import { Potential_buyer } from '../_models/potential_buyer';
+import { PotentialBuyerService } from '../_services/potential_buyer.service';
+
 @Component({
   selector: 'app-sale-detail',
   templateUrl: './sale-detail.component.html',
@@ -13,12 +16,15 @@ import { SaleService } from '../_services/sale.service';
 })
 export class SaleDetailComponent implements OnInit {
     sale: Sale;
+    potential_buyer_instance_array: Potential_buyer[];
+    potential_buyer_instance: Potential_buyer;
     params: ParamMap;
 
     constructor(
       private saleService: SaleService,
       private route: ActivatedRoute,
-      private location: Location
+      private location: Location,
+      private potentialBuyerService: PotentialBuyerService
     ) {}
 
     ngOnInit(): any {
@@ -26,6 +32,16 @@ export class SaleDetailComponent implements OnInit {
         .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
         .subscribe(sale => this.sale = sale);
       }
+
+    potential_buyer(): void{
+      console.log(this.sale);
+      console.log(this.sale["id"]);
+      console.log(this.sale["owner_id"]);
+
+      this.potentialBuyerService.create(this.sale["id"]);
+
+
+    }
 
     goBack(): void {
       this.location.back();
