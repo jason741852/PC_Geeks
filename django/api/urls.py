@@ -36,14 +36,6 @@ urlpatterns = {
     url(r'^self/posts/(?P<pk>[0-9]+)/$', SelfPostDetailsView.as_view()),
     url(r'^self/interested/$', SelfPotentialBuyerListView.as_view()),
 
-    # url(r'^buyer_ratings/new/$', CreateBuyerRatingView.as_view()),
-    # url(r'^buyer_ratings/(?P<pk>[0-9]+)/$', BuyerRatingInstanceView.as_view()),
-    # url(r'^seller_ratings/new/$', CreateSellerRatingView.as_view()),
-    # url(r'^seller_ratings/(?P<pk>[0-9]+)/$', SellerRatingInstanceView.as_view()),
-    # url(r'^potential_buyer/new/$', CreatePotentialBuyerView.as_view()),
-    # url(r'^potential_buyer/(?P<pk>[0-9]+)/$', PotentialBuyerInstanceView.as_view()),
-    # url(r'^potential_buyer/post/(?P<pk>[0-9]+)/$', PotentialBuyerListView.as_view()),
-
     url(r'^staff/users/$', StaffUserListView.as_view()),
     url(r'^staff/messages/$', StaffMessageListView.as_view()),
     url(r'^staff/buyer_ratings/$', StaffBuyerRatingListView.as_view()),
