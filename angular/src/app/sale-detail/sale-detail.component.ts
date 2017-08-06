@@ -25,6 +25,7 @@ export class SaleDetailComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private potentialBuyerService: PotentialBuyerService
+      
     ) {}
 
     ngOnInit(): any {
@@ -37,6 +38,7 @@ export class SaleDetailComponent implements OnInit {
       console.log(this.sale);
       console.log(this.sale["id"]);
       console.log(this.sale["owner_id"]);
+
 
       this.potentialBuyerService.create(this.sale["id"]);
 

@@ -64,7 +64,7 @@ const routes: Routes = [
       component: SaleDetailComponent
     },
     {
-      path: 'message',
+      path: 'message/all',
       component: MessageComponent
     }
 ];
