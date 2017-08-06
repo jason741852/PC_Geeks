@@ -27,7 +27,7 @@
     <div class="grid grid-pad">
 
       <span *ngFor="let sale of sales">
-        <a *ngIf="sale.item.includes(make)" class="col-1-4 loopDisplay">
+        <a *ngIf="sale.item.toUpperCase().includes(make)" class="col-1-4 loopDisplay">
 
           <div class="module sale">
             <h4>Selling {{sale.manufacturer}} {{sale.item}} for {{sale.price}}.00

@@ -11,7 +11,9 @@ sudo touch reload.ini;'
 
 print-help() {
 	echo "Use '-a' to only refresh Angular or '-d' to only refresh Django."
-	echo "Use '--d-migrate' to perform a database migration on Django."
+	echo "Use '--npm' to run 'npm install' in your vagrant box."
+	echo "Use '--migrate' to perform a database migration on Django."
+	echo "Use '--recreate-database' to squash migrations and recreates the database."
 	echo "No arguments or '-ad' will refresh both."
 }
 
@@ -21,22 +23,39 @@ if [ $# -eq 1 ]; then
 		vagrant ssh -c '
 cd /home/ubuntu/angular;
 ng build;'
+	elif [ $1 = '--npm' ]; then
+		echo "Installing Angular dependencies..."
+		vagrant ssh -c '
+source .profile;
+cd /home/ubuntu/angular;
+npm install --no-bin-links;'
 	elif [ $1 = '-d' ]; then
 		echo "Refreshing uWSGI (Django)..."
 		vagrant ssh -c '
 cd /home/ubuntu;
 sudo touch reload.ini;'
-	elif [ $1 = '--d-migrate' ]; then
+	elif [ $1 = '--migrate' ]; then
 		echo "Migrating Django database and refreshing uWSGI..."
 		vagrant ssh -c '
+source .profile;
 cd /home/ubuntu/django;
-python3 manage.py makemigrations;
+python3 manage.py makemigrations api;
 python3 manage.py migrate;
-cd /home/ubuntu;
-sudo touch reload.ini;'
+sudo touch /home/ubuntu/reload.ini;'
+	elif [ $1 = '--recreate-database' ]; then
+		echo "Squashing migrations and recreating the database..."
+		vagrant ssh -c '
+source .profile;
+echo \"DROP DATABASE prod_db; CREATE DATABASE prod_db; GRANT ALL PRIVILEGES ON DATABASE prod_db TO ubuntu;\" | sudo -u postgres psql;
+cd /home/ubuntu/django;
+rm -r api/migrations;
+python3 manage.py makemigrations api;
+python3 manage.py migrate;
+python3 manage.py loaddata test_data.json;
+sudo touch /home/ubuntu/reload.ini;'
 	elif [ $1 = '-ad' ] || [ $1 = '-da' ]; then
 		refresh-both
-	elif [ $1 = '-help' ] || [ $1 = '--help' ]; then
+	elif [ $1 = '-h' ] || [ $1 = '-help' ] || [ $1 = '--help' ]; then
 		print-help
 	else
 		echo "Invalid arguments!"

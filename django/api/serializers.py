@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import User, Post, Messaging, Report
+from .models import *
 from decimal import *
 
 class ReportSerializer(serializers.ModelSerializer):
@@ -35,11 +35,21 @@ class PostSerializer(serializers.ModelSerializer):
    
 
 class MessagingSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Messaging
         fields = ('id', 'body', 'date_created', 'send_userid', 'receive_userid', 'owner')
-        read_only_fields = ('date_created', 'send_userid', 'receive_userid')
+        read_only_fields = ('date_created',)
+
+    def validate(self, data):
+        receiver = data.get('receive_userid')
+        sender = data.get('send_userid')
+
+        if not User.objects.filter(id=receiver).exists():
+            raise ValidationError('Receiving user (id = ' + receiver + ') does not exist')
+        if sender == receiver:
+            raise ValidationError("You cannot send a message to yourself")
+
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -70,3 +80,75 @@ class UserSerializer(serializers.ModelSerializer):
 
         user.save()
         return user
+
+
+class PotentialbuyerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Potential_buyer
+        fields = ('user_id','post_id','date_created','date_modified')
+        read_only_fields = (
+            'user_id',
+            'date_created',
+            'date_modified',
+        )
+
+    def validate(self, data):
+        post_id = (data.get('post_id').id)
+        post_owner_id = (data.get('post_id').owner_id.id)
+        user_id = self.context['request'].user.id
+
+        if user_id == post_owner_id:
+            raise ValidationError("Post owner should not be on the potential buyer list")
+
+        potential_buyer_list = Post.objects.get(id=post_id).potential_buyer.all()
+
+        for p in potential_buyer_list:
+            if p.user_id.id == user_id:
+                raise ValidationError('You are on the list already')
+
+        return data
+
+
+class BuyerratingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Buyer_rating
+        fields = '__all__'
+        read_only_fields = (
+            'rater_id',
+            'date_created',
+            'date_modified'
+        )
+
+    def validate(self, data):
+        buyer_id = data.get('buyer_id').id
+        rater_id = self.context['request'].user.id #rater_id
+        # print("buyer_id: {}".format(buyer_id))
+        # print("rater_id: {}".format(rater_id))
+
+        if buyer_id == rater_id:
+            raise ValidationError('Cannot rate yourself')
+
+        return data
+
+
+
+class SellerratingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Seller_rating
+        fields = '__all__'
+        read_only_fields = (
+            'rater_id',
+            'date_created',
+            'date_modified'
+        )
+
+    def validate(self, data):
+        seller_id = data.get('seller_id').id
+        rater_id = self.context['request'].user.id #rater_id
+        # print("buyer_id: {}".format(seller_id))
+        # print("rater_id: {}".format(rater_id))
+
+        if seller_id == rater_id:
+            raise ValidationError('Cannot rate yourself')
+
+        return data
