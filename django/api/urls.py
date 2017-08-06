@@ -8,6 +8,7 @@ from rest_framework.authtoken import views as auth_view
 urlpatterns = {
 
     url(r'^login/', auth_view.obtain_auth_token),
+    url(r'^report/', ReportViewSet.as_view()),
 
     url(r'^posts/$', PostPublicListView.as_view()),
     url(r'^posts/(?P<pk>[0-9]+)/$', PostDetailsView.as_view()),
@@ -38,3 +39,4 @@ urlpatterns = {
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+

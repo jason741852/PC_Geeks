@@ -3,6 +3,10 @@ from rest_framework.exceptions import ValidationError
 from .models import *
 from decimal import *
 
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:

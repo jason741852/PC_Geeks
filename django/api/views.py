@@ -3,6 +3,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions, filters
 from .serializers import *
 from .models import *
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
 
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
@@ -10,10 +13,26 @@ from rest_framework.exceptions import ValidationError
 import django_filters
 
 
+class ReportViewSet(generics.CreateAPIView):
+    serializer_class = ReportSerializer
+
+    def get_queryset(self):
+        return []
+
+    # Assign current user as Post owner
+    def perform_create(self, serializer):
+        #nstance = serializer.save()
+        send_mail(
+            self.request.data.get("id"),
+            self.request.data.get("message"),
+            'pcgeeks470@gmail.com',
+            ['pcgeeks470@gmail.com'],
+            fail_silently=False)   
 
 """
     Posts Views
 """
+
 # Returns a list of all Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
