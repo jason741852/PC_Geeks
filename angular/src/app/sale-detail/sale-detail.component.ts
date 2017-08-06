@@ -15,6 +15,9 @@ export class SaleDetailComponent implements OnInit {
     sale: Sale;
     params: ParamMap;
 
+    lat: number;
+    lng: number;
+
     constructor(
       private saleService: SaleService,
       private route: ActivatedRoute,
@@ -24,11 +27,13 @@ export class SaleDetailComponent implements OnInit {
     ngOnInit(): any {
       this.route.paramMap
         .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
-        .subscribe(sale => this.sale = sale);
-      }
+        .subscribe(sale => {this.sale = sale;
+                            this.lat = +sale.latitude;
+                            this.lng = +sale.longitude;
+                            });
+     }
 
     goBack(): void {
       this.location.back();
     }
-
 }

@@ -22,9 +22,7 @@ export class SaleService {
   }
 
   getSale(id: number): Promise<Sale> {
-    // return this.getSales()
-    // .then(sales => sales.find(sale => sale.id === id));
-    const url = `${this.salesUrl}${id}/`;
+    const url = `${this.eachUrl}${id}/`;
     return this.http.get(url, this.createHeader())
       .toPromise()
       .then(response => response.json() as Sale)
@@ -58,5 +56,4 @@ export class SaleService {
       return new RequestOptions({ headers: headers });
     }
   }
-
 }
