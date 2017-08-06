@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from rest_framework.fields import SkipField
+from rest_framework.relations import PKOnlyObject
 from .models import *
 from collections import OrderedDict
 from decimal import *
@@ -29,6 +31,36 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
+
+    def to_representation(self, instance):
+        ret = OrderedDict()
+        fields = self._readable_fields
+
+        for field in fields:
+            try:
+                attribute = field.get_attribute(instance)
+            except SkipField:
+                continue
+            check_for_none = attribute.pk if isinstance(attribute, PKOnlyObject) else attribute
+            if check_for_none is None:
+                ret[field.field_name] = None
+            else:
+                ret[field.field_name] = field.to_representation(attribute)
+
+        seller_ratings = SellerRating.objects.filter(seller_id=instance.owner_id)
+        if seller_ratings.exists():
+            seller_ratings = SellerRatingSerializer(seller_ratings, many=True).data
+            total = 0
+            for i in seller_ratings:
+                total += i['rating']
+                total /= len(seller_ratings)
+            ret['seller_rating'] = OrderedDict()
+            ret['seller_rating']['rating'] = total
+            ret['seller_rating']['number_of_raters'] = len(seller_ratings)
+        else:
+            ret['seller_rating'] = None
+
+        return ret
 
 
 class PrivatePostSerializer(serializers.ModelSerializer):
