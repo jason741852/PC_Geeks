@@ -1,7 +1,7 @@
 from django.core.mail import send_mail
 
-from rest_framework.decorators import api_view
-from rest_framework import generics, permissions, filters
+from rest_framework import generics, filters, status
+from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.exceptions import ValidationError
 
@@ -72,31 +72,6 @@ class PostDeleteView(generics.DestroyAPIView):
     permission_classes = (IsAuthenticated, IsOwnerOrStaff,)
 
 
-# Obtains a list of Posts belonging to a user
-class PostPrivateListView(generics.ListAPIView):
-    serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    filter_fields = ('manufacturer', 'quality', 'price')
-
-    ordering_fields = '__all__'
-    ordering = 'date_created'
-
-    def get_queryset(self):
-        user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
-        return Post.objects.filter(owner_id=user)
-
-# Obtain a list of potential buyers belonging to a post
-class PotentialBuyerListView(generics.ListAPIView):
-    serializer_class = PotentialbuyerSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-
-    def get_queryset(self):
-        post = generics.get_object_or_404(Post, id=self.kwargs.get('pk'))
-        return Potential_buyer.objects.filter(post_id=post)
-
-
 
 
 """
@@ -125,8 +100,17 @@ class ImageCreateView(generics.CreateAPIView):
     serializer_class = ImageSerializer
     permission_classes = (IsAuthenticated,)
 
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data[u'post_id'] = self.kwargs.get('post_id')
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
     def get_serializer(self, *args, **kwargs):
-        self.request.data[u'post_id'] = str(self.kwargs.get('post_id'))
 
         serializer_class = self.get_serializer_class()
         kwargs['context'] = self.get_serializer_context()
@@ -144,31 +128,11 @@ class ImageDeleteView(generics.DestroyAPIView):
     Users Views
 """
 
-# Returns a list of all the users (should only be used by admins)
-class UserListView(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser,)
-
-
 # Returns the details of the given user
 class UserDetailsView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permissions_classes = (IsAuthenticated,)
-
-
-# Returns the details of the current user
-class UserSelfView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        user = queryset.get(id=self.request.user.id)
-        self.check_object_permissions(self.request, user)
-        return user
 
 
 # Registers a new user
@@ -193,6 +157,55 @@ class UserDeleteView(generics.DestroyAPIView):
 
 
 """
+    Self Views
+"""
+
+# Returns the details of the current user
+class SelfUserDetailsView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        user = queryset.get(id=self.request.user.id)
+        self.check_object_permissions(self.request, user)
+        return user
+
+
+# Obtains a list of Posts belonging to a user
+class SelfPostListView(generics.ListAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsOwner)
+
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filter_fields = ('manufacturer', 'quality', 'price')
+
+    ordering_fields = '__all__'
+    ordering = 'date_created'
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+
+# Obtains the details of a user's Post
+class SelfPostDetailsView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PrivatePostSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
+
+
+# Returns a list of Posts the current user is interested in
+class SelfPotentialBuyerListView(generics.ListAPIView):
+    serializer_class = PrivatePotentialBuyerSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return PotentialBuyer.objects.filter(user_id=self.request.user)
+
+
+
+"""
     Message Views
 """
 
@@ -206,94 +219,195 @@ class MessageListView(generics.ListAPIView):
         return Messaging.objects.filter(owner=self.request.user)
 
 
+# Creates a new message
 class MessageCreateView(generics.CreateAPIView):
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_serializer(self, *args, **kwargs):
-        self.request.data[u'owner'] = str(self.request.user.id)
-        self.request.data[u'send_userid'] = str(self.request.user.id)
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data[u'owner'] = str(self.request.user.id)
+        data[u'send_userid'] = str(self.request.user.id)
 
-        serializer_class = self.get_serializer_class()
-        kwargs['context'] = self.get_serializer_context()
-        return serializer_class(*args, **kwargs)
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 # Returns a message
 class MessageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsOwner)
+    permission_classes = (IsAuthenticated, IsOwner,)
 
-class CreatePotentialBuyerView(generics.ListCreateAPIView):
-    serializer_class = PotentialbuyerSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
 
-    def get_queryset(self):
-        return Potential_buyer.objects.all()
 
-    def perform_create(self, serializer):
-        serializer.save(
-            user_id=self.request.user,
-            post_id=Post.objects.get(id=self.request.data.get('post_id', 0))
-        )
+"""
+    Potential Buyer Views
+"""
 
-class PotentialBuyerInstanceView(generics.RetrieveDestroyAPIView):
-    serializer_class = PotentialbuyerSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
+# Returns a list of PotentialBuyers for a Post
+class PostPotentialBuyerListView(generics.ListAPIView):
+    serializer_class = PotentialBuyerSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Potential_buyer.objects.filter(user_id=self.request.user)
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        return PotentialBuyer.objects.filter(post_id=post)
 
 
-class  CreateBuyerRatingView(generics.ListCreateAPIView):
-    serializer_class = BuyerratingSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
+# Assigns a User as a PotentialBuyer for a Post
+class PotentialBuyerCreateView(generics.CreateAPIView):
+    queryset = PotentialBuyer.objects.all()
+    serializer_class = PotentialBuyerSerializer
+    permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
-        return Buyer_rating.objects.filter(rater_id=self.request.user)
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data[u'post_id'] = kwargs.get('post_id')
+        data[u'user_id'] = self.request.user.id
 
-    # Assign current user as Post owner
-    def perform_create(self, serializer):
-        serializer.save(
-            rater_id=self.request.user,
-            buyer_id=User.objects.get(id=self.request.data.get('buyer_id', 0)),
-            post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
-            comment=self.request.data.get('comment'),
-            rating=self.request.data.get('rating')
-        )
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-# Retrieves, modifies, and deletes Buyer_rating instances
-class BuyerRatingInstanceView(generics.RetrieveAPIView):
-    serializer_class = BuyerratingSerializer
-    # Don't need permission to GET
 
-    def get_queryset(self):
-        return Buyer_rating.objects.filter(rater_id=self.request.user)
+# Removes a User as a PotentialBuyer for a Post
+class PotentialBuyerDeleteView(generics.DestroyAPIView):
+    queryset = PotentialBuyer.objects.all()
+    serializer_class = PotentialBuyerSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
 
-class  CreateSellerRatingView(generics.ListCreateAPIView):
-    serializer_class = SellerratingSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
+    def get_object(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        potential_buyer = generics.get_object_or_404(PotentialBuyer, user_id=self.request.user, post_id=post)
+        return potential_buyer
 
-    def get_queryset(self):
-        return Seller_rating.objects.filter(rater_id=self.request.user)
 
-    # Assign current user as Post owner
-    def perform_create(self, serializer):
-        serializer.save(
-            rater_id=self.request.user,
-            seller_id=User.objects.get(id=self.request.data.get('seller_id', 0)),
-            post_id=Post.objects.get(id=self.request.data.get('post_id', 0)),
-            comment=self.request.data.get('comment'),
-            rating=self.request.data.get('rating')
-        )
 
-class SellerRatingInstanceView(generics.RetrieveAPIView):
-    serializer_class = SellerratingSerializer
-    # Don't need permission to GET
+"""
+    Buyer Rating Views
+"""
 
-    def get_queryset(self):
-        return Seller_rating.objects.filter(rater_id=self.request.user)
+# Assigns a rating to the Buyer of a Post
+class BuyerRatingCreateView(generics.CreateAPIView):
+    queryset = BuyerRating.objects.all()
+    serializer_class = BuyerRatingSerializer
+    permission_classes = (IsAuthenticated, IsSeller,)
+
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        post_id = kwargs.get('post_id')
+        data[u'post_id'] = post_id
+        data[u'rater_id'] = self.request.user.id
+        # uncomment below when buying is implemented
+        # post = get_object_or_404(Post, id=post_id)
+        # if post.buyer_id == None:
+        #     return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
+        # data[u'buyer_id'] = post.buyer_id.id
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+# Updates the rating of the Buyer of a Post
+class BuyerRatingUpdateView(generics.UpdateAPIView):
+    queryset = BuyerRating.objects.all()
+    serializer_class = BuyerRatingUpdateSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
+
+    def get_object(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        buyer_rating = generics.get_object_or_404(BuyerRating, rater_id=self.request.user, post_id=post)
+        self.check_object_permissions(self.request, buyer_rating)
+        return buyer_rating
+
+
+
+"""
+    Seller Rating Views
+"""
+
+# Assigns a rating to the Seller of a Post
+class SellerRatingCreateView(generics.CreateAPIView):
+    queryset = SellerRating.objects.all()
+    serializer_class = serializer_class = SellerRatingSerializer
+    permission_classes = (IsAuthenticated, IsBuyer,)
+
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        post_id = kwargs.get('post_id')
+        data[u'post_id'] = post_id
+        data[u'rater_id'] = self.request.user.id
+        # uncomment below when buying is implemented
+        # post = get_object_or_404(Post, id=post_id)
+        # if post.buyer_id == None:
+        #     return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
+        # data[u'seller_id'] = post.owner_id.id
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+# Updates the rating of the Seller of a Post
+class SellerRatingUpdateView(generics.UpdateAPIView):
+    queryset = SellerRating.objects.all()
+    serializer_class = SellerRatingUpdateSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
+
+    def get_object(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        seller_rating = generics.get_object_or_404(SellerRating, rater_id=self.request.user, post_id=post)
+        self.check_object_permissions(self.request, seller_rating)
+        return seller_rating
+
+
+
+"""
+    Staff Views
+"""
+
+# Returns a list of all the users (should only be used by admins)
+class StaffUserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = StaffUserSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+# Returns a list of all Messages
+class StaffMessageListView(generics.ListAPIView):
+    queryset = Messaging.objects.all()
+    serializer_class = MessagingSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+# Returns a list of all BuyerRatings
+class StaffBuyerRatingListView(generics.ListAPIView):
+    queryset = BuyerRating.objects.all()
+    serializer_class = BuyerRatingSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+# Returns a list of all SellerRatings
+class StaffSellerRatingListView(generics.ListAPIView):
+    queryset = SellerRating.objects.all()
+    serializer_class = SellerRatingSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+# Returns a list of all PotentialBuyers
+class StaffPotentialBuyerListView(generics.ListAPIView):
+    queryset = PotentialBuyer.objects.all()
+    serializer_class = PotentialBuyerSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
