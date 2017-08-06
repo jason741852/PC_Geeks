@@ -18,7 +18,6 @@
       <a *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }" class="col-1-4 loopDisplay">
         <div class="module sale">
           <h4>Selling {{sale.category}} {{sale.item}} for {{sale.price}}.00</h4>
-          </div>
           <p>
             <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
             <button class="btn btn-primary" role="button">Write a Review</button>
