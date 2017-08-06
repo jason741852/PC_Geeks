@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService
   ) {
-  this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 }
 
   ngOnInit() {
