@@ -4,7 +4,6 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Sale } from '../_models/sale';
-// import { SALES } from './mock-sales';
 
 @Injectable()
 export class SaleService {
@@ -18,11 +17,10 @@ export class SaleService {
       .toPromise()
       .then(response => response.json() as Sale[])
       .catch(this.handleError);
-    // return Promise.resolve(SALES);
   }
 
   getSale(id: number): Promise<Sale> {
-    const url = `${this.eachUrl}${id}/`;
+    const url = `${this.salesUrl}${id}/`;
     return this.http.get(url, this.createHeader())
       .toPromise()
       .then(response => response.json() as Sale)
