@@ -53,52 +53,16 @@ class PostDeleteView(generics.DestroyAPIView):
     permission_classes = (IsAuthenticated, IsOwnerOrStaff,)
 
 
-# Obtains a list of Posts belonging to a user
-class PostPrivateListView(generics.ListAPIView):
-    serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    filter_fields = ('manufacturer', 'quality', 'price')
-
-    ordering_fields = '__all__'
-    ordering = 'date_created'
-
-    def get_queryset(self):
-        user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
-        return Post.objects.filter(owner_id=user)
-
-
 
 """
     Users Views
 """
-
-# Returns a list of all the users (should only be used by admins)
-class UserListView(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser,)
-
 
 # Returns the details of the given user
 class UserDetailsView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permissions_classes = (IsAuthenticated,)
-
-
-# Returns the details of the current user
-class UserSelfView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        user = queryset.get(id=self.request.user.id)
-        self.check_object_permissions(self.request, user)
-        return user
 
 
 # Registers a new user
@@ -119,6 +83,56 @@ class UserDeleteView(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsStaffOrTargetUser,)
+
+
+
+"""
+    Self Views
+"""
+
+# Returns the details of the current user
+class SelfUserDetailsView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        user = queryset.get(id=self.request.user.id)
+        self.check_object_permissions(self.request, user)
+        return user
+
+
+# Obtains a list of Posts belonging to a user
+class SelfPostListView(generics.ListAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsOwner)
+
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filter_fields = ('manufacturer', 'quality', 'price')
+
+    ordering_fields = '__all__'
+    ordering = 'date_created'
+
+    def get_queryset(self):
+        user = generics.get_object_or_404(User, id=self.kwargs.get('pk'))
+        return Post.objects.filter(owner_id=user)
+
+
+# Obtains the details of a user's Post
+class SelfPostDetailsView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PrivatePostSerializer
+    permission_classes = (IsAuthenticated, IsOwner,)
+
+
+# Returns a list of Posts the current user is interested in
+class SelfPotentialBuyerListView(generics.ListAPIView):
+    serializer_class = PrivatePotentialBuyerSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return PotentialBuyer.objects.filter(user_id=self.request.user)
 
 
 
@@ -171,15 +185,6 @@ class PostPotentialBuyerListView(generics.ListAPIView):
     def get_queryset(self):
         post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
         return PotentialBuyer.objects.filter(post_id=post)
-
-
-# Returns a list of PotentialBuyers for a User
-class UserPotentialBuyerListView(generics.ListAPIView):
-    serializer_class = PotentialBuyerSerializer
-    permission_classes = (IsAuthenticated,)
-
-    def get_queryset(self):
-        return PotentialBuyer.objects.filter(user_id=self.request.user)
 
 
 # Assigns a User as a PotentialBuyer for a Post
@@ -297,6 +302,13 @@ class SellerRatingUpdateView(generics.UpdateAPIView):
 """
     Staff Views
 """
+
+# Returns a list of all the users (should only be used by admins)
+class StaffUserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = StaffUserSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
 
 # Returns a list of all Messages
 class StaffMessageListView(generics.ListAPIView):
