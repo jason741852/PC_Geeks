@@ -22,7 +22,7 @@ export class DashboardSaleComponent implements OnInit {
 
   }
   search(saleItem: string) {
-    //this.router.navigate(['/dashboard/' + saleItem])
+    this.router.navigate(['/dashboard/' + saleItem])
     location.reload()
   }
 }
