@@ -43,6 +43,7 @@ cookbook_file "recreate-database.sh" do
 	path "/home/ubuntu/recreate-database.sh"
 end
 directory '/home/ubuntu/django/api/migrations' do
+	recursive true
 	action :delete
 end
 execute 'django_makemigrations' do
