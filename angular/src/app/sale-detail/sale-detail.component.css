@@ -1,3 +1,11 @@
 button.btn.btn-primary {
   margin: 0 14px;
 }
+
+.detailBody{
+  width:50%;
+}
+
+.panel-body{
+  margin:50px;
+}
