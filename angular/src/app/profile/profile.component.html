@@ -13,15 +13,17 @@
   </div>
 
 </div>
-<h3>Delete Account?</h3>
+<div class ="editbox">
+  <h3>Edit Account?</h3>
+  <Button type = "button" (click)="editUser(currentUser.id)" class="btn btn-primary">Edit</Button>
 
 
+</div>
 
-<Button type = "button" (click)="deleteUser(currentUser.id)">Delete</Button>
+  <div class ="deletebox">
+    <h3>Delete Account?</h3>
+    <Button type = "button" (click)="deleteUser(currentUser.id)" class="btn btn-danger">Delete</Button>
+  </div>
 
 
-<br>
-<br>
-<br>
-<br>
-<button (click)="goBack()">Back</button>
+<button (click)="goBack()" class="btn btn-default">Back</button>
