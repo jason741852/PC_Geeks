@@ -12,6 +12,7 @@ def get_deleted_user():
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
+    rating = models.FloatField(default=0)
 
 
 class Post(models.Model):
