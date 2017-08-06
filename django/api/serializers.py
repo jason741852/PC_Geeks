@@ -50,10 +50,10 @@ class PostSerializer(serializers.ModelSerializer):
         seller_ratings = SellerRating.objects.filter(seller_id=instance.owner_id)
         if seller_ratings.exists():
             seller_ratings = SellerRatingSerializer(seller_ratings, many=True).data
-            total = 0
+            total = 0.0
             for i in seller_ratings:
                 total += i['rating']
-                total /= len(seller_ratings)
+            total /= len(seller_ratings)
             ret['seller_rating'] = OrderedDict()
             ret['seller_rating']['rating'] = total
             ret['seller_rating']['number_of_raters'] = len(seller_ratings)
