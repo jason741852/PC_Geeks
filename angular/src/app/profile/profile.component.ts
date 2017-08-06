@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
+import { CurrentUserService } from '../_services/currentuser.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -23,19 +23,16 @@ export class ProfileComponent implements OnInit {
     private location: Location,
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private userService: CurrentUserService,
     private router: Router,
-
-  ) {
-}
+  ) {}
 
   ngOnInit() {
-    this.loadAllUsers();
     this.loadSelf();
   }
 
   deleteUser(id: number) {
-    this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+    this.userService.delete();
     this.logout();
   }
 
@@ -45,14 +42,10 @@ export class ProfileComponent implements OnInit {
   }
   logout(){
     this.auth.logout();
-
   }
 
-  private loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users; });
-  }
   private loadSelf() {
-    this.userService.getSelf().subscribe(currentUser => { this.currentUser = currentUser; });
+    this.userService.getUser().then((user: User) => this.currentUser = user);
   }
 
   goBack(): void {
