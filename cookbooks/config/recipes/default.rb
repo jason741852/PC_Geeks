@@ -39,6 +39,9 @@ execute 'postgres_create_database' do
 end
 
 # Setup Django
+cookbook_file "recreate-database.sh" do
+	path "/home/ubuntu/recreate-database.sh"
+end
 execute 'django_makemigrations' do
 	command 'python3 manage.py makemigrations api'
 	cwd '/home/ubuntu/django'
