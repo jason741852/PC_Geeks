@@ -1,13 +1,16 @@
-from .permissions import *
-from django_filters.rest_framework import DjangoFilterBackend
+from django.http import JsonResponse
+
+from rest_framework.decorators import api_view
 from rest_framework import generics, permissions, filters
-from .serializers import *
-from .models import *
-
-
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.exceptions import ValidationError
+
 import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
+
+from .models import *
+from .serializers import *
+from .permissions import *
 
 
 
@@ -77,6 +80,48 @@ class PotentialBuyerListView(generics.ListAPIView):
         post = generics.get_object_or_404(Post, id=self.kwargs.get('pk'))
         return Potential_buyer.objects.filter(post_id=post)
 
+
+
+
+"""
+    Image Views
+"""
+
+# Returns a list of all Images
+class ImageListView(generics.ListAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsAdminUser,)
+
+
+# Returns a list of Images for a given Post
+class PostImageListView(generics.ListAPIView):
+    serializer_class = ImageSerializer
+
+    def get_queryset(self):
+        post = generics.get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        return Image.objects.filter(post_id=post)
+
+
+# Creates a new Image
+class ImageCreateView(generics.CreateAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_serializer(self, *args, **kwargs):
+        self.request.data[u'post_id'] = str(self.kwargs.get('post_id'))
+
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)
+
+
+# Deletes a user (should be replaced with 'deactivated' status on User)
+class ImageDeleteView(generics.DestroyAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = (IsOwnerOrStaff,)
 
 
 """

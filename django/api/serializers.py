@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from rest_framework.fields import SkipField
+from rest_framework.relations import PKOnlyObject
 from .models import *
+from collections import OrderedDict
 from decimal import *
 
 
@@ -28,6 +31,58 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
+
+    def to_representation(self, instance):
+        ret = OrderedDict()
+        fields = self._readable_fields
+        for field in fields:
+            try:
+                attribute = field.get_attribute(instance)
+            except SkipField:
+                continue
+            check_for_none = attribute.pk if isinstance(attribute, PKOnlyObject) else attribute
+            if check_for_none is None:
+                ret[field.field_name] = None
+            else:
+                ret[field.field_name] = field.to_representation(attribute)
+
+        images = Image.objects.filter(post_id=instance.id)
+        image_objs = ImageSerializer(images, many=True).data
+        images = []
+        for i in image_objs:
+            images.append(i['url'])
+        ret['images'] = images
+
+        return ret
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+
+
+class PostListSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    item = serializers.CharField(max_length=255)
+    category = serializers.CharField(max_length=255)
+    quality = serializers.CharField(max_length=255)
+    manufacturer = serializers.CharField(max_length=255)
+    price = serializers.IntegerField()
+    date_created = serializers.DateTimeField()
+
+    def to_representation(self, instance):
+        images = ImageSerializer(Image.objects.filter(post_id=instance.id), many=True)
+        return {
+            'id': instance.id,
+            'item': instance.item,
+            'category': instance.category,
+            'quality': instance.quality,
+            'manufacturer': instance.manufacturer,
+            'price': instance.price,
+            'date_created': instance.date_created,
+            'images': images.data,
+        }
    
 
 class MessagingSerializer(serializers.ModelSerializer):
@@ -87,11 +142,10 @@ class UserSerializer(serializers.ModelSerializer):
         pw = validated_data.get('password')
         if pw is not None:
             instance.set_password(pw)
-            
+
         instance.save()
 
         return instance
-
 
 
 class PotentialbuyerSerializer(serializers.ModelSerializer):
@@ -141,7 +195,6 @@ class BuyerratingSerializer(serializers.ModelSerializer):
             raise ValidationError('Cannot rate yourself')
 
         return data
-
 
 
 class SellerratingSerializer(serializers.ModelSerializer):

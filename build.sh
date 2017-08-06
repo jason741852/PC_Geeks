@@ -37,7 +37,7 @@ sudo touch reload.ini;'
 	elif [ $1 = '--migrate' ]; then
 		echo "Migrating Django database and refreshing uWSGI..."
 		vagrant ssh -c '
-source .profile;
+source /home/ubuntu/.profile;
 cd /home/ubuntu/django;
 python3 manage.py makemigrations api;
 python3 manage.py migrate;
@@ -45,7 +45,7 @@ sudo touch /home/ubuntu/reload.ini;'
 	elif [ $1 = '--recreate-database' ]; then
 		echo "Squashing migrations and recreating the database..."
 		vagrant ssh -c '
-source .profile;
+source /home/ubuntu/.profile;
 bash /home/ubuntu/recreate-database.sh;
 cd /home/ubuntu/django;
 rm -r api/migrations;

@@ -5,7 +5,6 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
@@ -16,7 +15,7 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
-    title = models.TextField(blank=False,default='title')
+    title = models.TextField(blank=True,default='title')
     body = models.TextField(blank=True, null=True)
     item = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
@@ -41,10 +40,17 @@ class Post(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Post ID:" + self.id
-        #return "Owner: " + self.owner_id.id +\
-        #       " Title: " + self.title
+        return "Owner: " + self.owner_id +\
+               " Title: " + self.title
 
+
+class Image(models.Model):
+    post_id = models.ForeignKey(
+        Post,
+        related_name='images',
+        on_delete=models.CASCADE
+    )
+    url = models.URLField()
 
 
 class Messaging(models.Model):
