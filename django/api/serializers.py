@@ -78,73 +78,104 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class PotentialbuyerSerializer(serializers.ModelSerializer):
+class PotentialBuyerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Potential_buyer
-        fields = ('user_id','post_id','date_created','date_modified')
-        read_only_fields = (
+        model = PotentialBuyer
+        fields = (
             'user_id',
+            'post_id',
+            'date_created',
+            'date_modified',
+        )
+        read_only_fields = (
             'date_created',
             'date_modified',
         )
 
     def validate(self, data):
-        post_id = (data.get('post_id').id)
-        post_owner_id = (data.get('post_id').owner_id.id)
-        user_id = self.context['request'].user.id
+        post = data.get('post_id')
+        post_owner = post.owner_id
+        user = data.get('user_id')
 
-        if user_id == post_owner_id:
-            raise ValidationError("Post owner should not be on the potential buyer list")
+        if user == post_owner:
+            raise ValidationError("The post owner should not be on the potential buyer list")
 
-        potential_buyer_list = Post.objects.get(id=post_id).potential_buyer.all()
+        potential_buyer_list = Post.objects.get(id=post.id).potential_buyer.all()
 
         for p in potential_buyer_list:
-            if p.user_id.id == user_id:
+            if p.user_id == user:
                 raise ValidationError('You are on the list already')
 
         return data
 
 
-class BuyerratingSerializer(serializers.ModelSerializer):
+class BuyerRatingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Buyer_rating
+        model = BuyerRating
         fields = '__all__'
         read_only_fields = (
-            'rater_id',
             'date_created',
-            'date_modified'
+            'date_modified',
         )
 
     def validate(self, data):
         buyer_id = data.get('buyer_id').id
-        rater_id = self.context['request'].user.id #rater_id
-        # print("buyer_id: {}".format(buyer_id))
-        # print("rater_id: {}".format(rater_id))
+        rater_id = data.get('rater_id').id
+        rating = data.get('rating')
+
+        if rating < 1 or rating > 5:
+            raise ValidationError('You must provide a rating between 1 and 5')
 
         if buyer_id == rater_id:
-            raise ValidationError('Cannot rate yourself')
+            raise ValidationError('You cannot rate yourself')
 
         return data
 
 
-
-class SellerratingSerializer(serializers.ModelSerializer):
+class BuyerRatingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Seller_rating
+        model = BuyerRating
         fields = '__all__'
         read_only_fields = (
+            'post_id',
             'rater_id',
+            'buyer_id',
+            'date_created',
+            'date_modified',
+        )
+
+
+class SellerRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerRating
+        fields = '__all__'
+        read_only_fields = (
             'date_created',
             'date_modified'
         )
 
     def validate(self, data):
         seller_id = data.get('seller_id').id
-        rater_id = self.context['request'].user.id #rater_id
-        # print("buyer_id: {}".format(seller_id))
-        # print("rater_id: {}".format(rater_id))
+        rater_id = data.get('rater_id').id
+        rating = data.get('rating')
+
+        if rating < 1 or rating > 5:
+            raise ValidationError('You must provide a rating between 1 and 5')
 
         if seller_id == rater_id:
-            raise ValidationError('Cannot rate yourself')
+            raise ValidationError('You cannot rate yourself')
 
         return data
+
+
+class SellerRatingUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerRating
+        fields = '__all__'
+        read_only_fields = (
+            'post_id',
+            'rater_id',
+            'seller_id',
+            'date_created',
+            'date_modified',
+        )
