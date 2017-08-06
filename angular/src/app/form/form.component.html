@@ -1,6 +1,4 @@
-<div class="col-lg-3">
-
-
+<div class="col-lg-5 col-centered">
   <form [formGroup]="saleForm" #formDir="ngForm">
     
     <h2>Create Sales</h2>
@@ -61,7 +59,8 @@
 
     <div class="form-group descriptionBody">
       <label for="body">Description</label> 
-      <input class="form-control" formControlName="body" required/>
+      <textarea class="descriptionBox form-control" formControlName="body" required
+      rows="5" id="comment"></textarea>
       <div *ngIf="body.invalid && (body.dirty || body.touched)"
       class="alert alert-danger">
         <div *ngIf="body.errors.required">
@@ -73,5 +72,6 @@
     <button (click)="add()" class="btn btn-primary">
       Add
     </button>
+
   </form>
 </div>
