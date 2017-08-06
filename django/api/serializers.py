@@ -104,7 +104,6 @@ class PrivatePostSerializer(serializers.ModelSerializer):
             for key in ('phone_number', 'is_active', 'email', 'is_superuser', 'is_staff', 'last_login', 'groups',
                         'user_permissions', 'password', 'date_joined', 'id'):
                 del buyer[key]
-            print buyer
 
         ret = OrderedDict()
         ret['id'] = instance.id
