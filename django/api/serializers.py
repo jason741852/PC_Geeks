@@ -87,6 +87,8 @@ class UserSerializer(serializers.ModelSerializer):
         pw = validated_data.get('password')
         if pw is not None:
             instance.set_password(pw)
+            
+        instance.save()
 
         return instance
 
