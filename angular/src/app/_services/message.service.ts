@@ -21,7 +21,7 @@ export class MessageService {
         );
   }
 
-  create(message: Message){
+  create(message: string){
     return this.http.post(
       this.baseUrl + "new/",
       message,

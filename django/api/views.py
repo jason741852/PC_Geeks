@@ -232,24 +232,26 @@ class MessageHeadView(generics.ListAPIView):
         return Messaging.objects.filter(Q(owner=self.request.user) | Q(receiver_id=self.request.user)).filter(parent_message=None)
 
 
-class MessageCreateView(generics.ListCreateAPIView):
-    queryset = Messaging.objects.all()
-    serializer_class = MessagingSerializer
-    permission_classes = (IsAuthenticated,)
+# class MessageCreateView(generics.ListCreateAPIView):
+#     queryset = Messaging.objects.all()
+#     serializer_class = MessagingSerializer
+#     permission_classes = (IsAuthenticated,)
+#
+#     def create(self, request, *args, **kwargs):
+#         data = request.data.copy()
+#         data[u'owner'] = str(self.request.user.id)
+#
+#         serializer = self.get_serializer(data=data)
+#         serializer.is_valid(raise_exception=True)
+#         self.perform_create(serializer)
+#         headers = self.get_success_headers(serializer.data)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    def create(self, request, *args, **kwargs):
-        data = request.data.copy()
-        data[u'owner'] = str(self.request.user.id)
 
-        serializer = self.get_serializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 # Returns a message
-class MessageDetailsView(generics.RetrieveUpdateDestroyAPIView):
+class MessageCreateView(generics.ListCreateAPIView):
     queryset = Messaging.objects.all()
     serializer_class = MessagingSerializer
     permission_classes = (IsAuthenticated, IsOwner,)
