@@ -21,10 +21,12 @@ export class MessageComponent implements OnInit {
   convo: Message[] = [];
   messages: Message[] = [];
   private new_message: string = "";
+  private post_to_send;
+  private new_message_receiver;
 
   constructor(
     private messageService: MessageService,
-    private currentuserService: CurrentUserService
+    private currentuserService: CurrentUserService,
   ) { }
 
   ngOnInit():any {
@@ -32,26 +34,27 @@ export class MessageComponent implements OnInit {
     this.currentuserService.getUser().then((user: User) => this.currentUser = user);
   }
 
-  getConversation(post_id: number, buyer_id: number){
-    console.log(post_id);
-    this.messageService.getConversation(post_id, buyer_id).subscribe(convo => this.convo = convo)
+  getConversation(post_id: number, owner: number, receiver_id: number){
+    console.log(this.messages);
+
+    if (this.currentUser.id == receiver_id){
+      this.new_message_receiver = owner;
+    }else{
+      this.new_message_receiver = receiver_id;
+    }
+
+
+    this.post_to_send = post_id;
+    this.messageService.getConversation(post_id, owner).subscribe(convo => this.convo = convo);
   }
 
   createMessage(first_message: Message){
-    console.log(first_message);
-    console.log(this.currentUser.id);
+    console.log("Verify current user id: " + this.currentUser.id);
+    console.log("Verify message is sent to user: " + this.new_message_receiver);
+    console.log("Verify this conversation is regarding to post: " + this.post_to_send);
+    console.log("Verify message content: " + this.new_message);
 
-    var receiver_id;
-    if (this.currentUser.id == parseInt(first_message.owner)){
-      receiver_id = first_message.receiver_id;
-    }else{
-      receiver_id = first_message.owner;
-    }
-    console.log(receiver_id);
-
-    console.log(this.new_message);
-
-    var message_data_to_send = JSON.stringify({body: this.new_message, receiver_id: receiver_id, parent_message: 1, post_id:first_message.post_id});
+    var message_data_to_send = JSON.stringify({body: this.new_message, receiver_id: this.new_message_receiver, parent_message: 1, post_id:this.post_to_send});
 
     this.messageService.create(message_data_to_send).subscribe(receipt => this.receipt = receipt);
 
