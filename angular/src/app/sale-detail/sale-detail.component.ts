@@ -35,8 +35,4 @@ export class SaleDetailComponent implements OnInit {
                             console.log(this.lng);
                             });
      }
-
-    goBack(): void {
-      this.location.back();
-    }
 }

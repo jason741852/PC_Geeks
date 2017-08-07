@@ -1,4 +1,4 @@
-<div *ngIf="currentUser" class="col-sm-6 col-md-4">
+<div *ngIf="currentUser" class="col-sm-6 col-md-4" style="margin-left: 20%">
   <div class="panel panel-deafult panel-heading">
     <h2 class="panel-title">User profile</h2>
   </div>
@@ -11,19 +11,15 @@
       <li class="list-group-item">Username: {{currentUser.username}}</li>
     </ul>
   </div>
-
-</div>
-<div class ="editbox">
-  <h3>Edit Account?</h3>
-  <Button type = "button" (click)="editUser(currentUser.id)" class="btn btn-primary">Edit</Button>
-
-
 </div>
 
+<div class="options">
+  <div class ="editbox">
+    <h3>Edit Account?</h3>
+    <Button type = "button" (click)="editUser(currentUser.id)" class="btn btn-primary">Edit</Button>
+  </div>
   <div class ="deletebox">
     <h3>Delete Account?</h3>
     <Button type = "button" (click)="deleteUser(currentUser.id)" class="btn btn-danger">Delete</Button>
   </div>
-
-
-<button (click)="goBack()" class="btn btn-default">Back</button>
+</div>

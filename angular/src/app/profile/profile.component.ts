@@ -24,10 +24,8 @@ export class ProfileComponent implements OnInit {
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router,
-
-  ) {
-}
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadAllUsers();
@@ -54,11 +52,4 @@ export class ProfileComponent implements OnInit {
   private loadSelf() {
     this.userService.getSelf().subscribe(currentUser => { this.currentUser = currentUser; });
   }
-
-  goBack(): void {
-    this.location.back();
-  }
-
-
-
 }
