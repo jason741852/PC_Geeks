@@ -1,7 +1,10 @@
+import {Image} from "./image";
+
 export class Sale {
   constructor(
     id: number,
-    image: string,
+    title:string,
+    images: Image[],
     body: string,
     item: string, // item name ie: Gtx 1080 etc
     category: string, // item type ie: Video Card
@@ -17,3 +20,5 @@ export class Sale {
     date_modified: string
   ) { }
 }
+
+

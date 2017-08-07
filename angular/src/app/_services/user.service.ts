@@ -28,7 +28,7 @@ export class UserService {
 
   getSelf() {
     return this.http.get(
-      this.baseUrl + "self",
+      "http://localhost:4200/api/self/",
           this.createHeader()
     ).map(
       (response: Response) => response.json() as User

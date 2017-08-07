@@ -4,12 +4,14 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Sale } from '../_models/sale';
+import {Image} from '../_models/image';
 
 @Injectable()
 export class SaleService {
 
     private salesUrl = 'http://localhost:4200/api/posts/';  // URL to web api
     private privateSaleUrl = 'http://localhost:4200/api/self/posts/';
+    private image: Image[] = []
 
     constructor(private http: Http) { }
 
@@ -36,17 +38,29 @@ export class SaleService {
             .catch(this.handleError);
     }
     // ------
-    create(item: string,
+
+  create(item: string,
+            title:string,
+            images:[string],
             category: string,
             quality: string,
             manufacturer: string,
             price: number,
             location: string,
             body: string): Promise<Sale> {
-        return this.http
+      console.log(this.image)
+    this.image.push({'id':1, 'post_id':1,'url':'1'})
+    console.log(this.image);
+    JSON.stringify(this.image)
+    console.log(    JSON.stringify(this.image)
+    )
+    return this.http
             .post(this.salesUrl + "new/",
+
                 JSON.stringify({
-                    item: item,
+                    'item': "lololol",
+                    title:title,
+                  'images':this.image,
                     category: category,
                     quality: quality,
                     manufacturer: manufacturer,

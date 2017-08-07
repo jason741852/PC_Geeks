@@ -26,7 +26,9 @@ export class FormComponent implements OnInit {
   category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
   createRequest = {
+      title: '',
       item: '',
+      images: [],
       category: this.category[0],
       quality: this.quality[0],
       manufacturer: this.manufacturer[0],
@@ -46,7 +48,10 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.getSales();
     this.saleForm = new FormGroup({
+    'title': new FormControl(this.createRequest.title, [Validators.required]),
+
     'item': new FormControl(this.createRequest.item, [Validators.required]),
+    'images': new FormControl(this.createRequest.images, [Validators.required]),
     'category': new FormControl(this.createRequest.category),
     'quality': new FormControl(this.createRequest.quality),
     'manufacturer': new FormControl(this.createRequest.manufacturer),
@@ -58,8 +63,11 @@ export class FormComponent implements OnInit {
   }
 
   add(): void {
+
     this.saleService.create(
     this.saleForm.get('item').value,
+    this.saleForm.get('title').value,
+    ["test"],
     this.saleForm.get('category').value,
     this.saleForm.get('quality').value,
     this.saleForm.get('manufacturer').value,
@@ -71,11 +79,14 @@ export class FormComponent implements OnInit {
         this.selectedSale = null;
       });
   }
+  get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
+  get images() { return this.saleForm.get('images'); }
+
   get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }
   //get quality() { return this.saleForm.get('quality'); }
   get price() { return this.saleForm.get('price'); }
   get body() { return this.saleForm.get('body'); }
-  
+
 }
