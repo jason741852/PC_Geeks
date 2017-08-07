@@ -73,6 +73,26 @@ class PostSerializer(serializers.ModelSerializer):
 
         return ret
 
+class PostSellSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = '__all__'
+        read_only_fields = (
+            'owner_id',
+            'date_created',
+            'date_modified',
+        )
+
+    def validate_buyer_id(self, value):
+        if value is None:
+            raise ValidationError('A buyer must be specified')
+        return value
+
+    def validate(self, data):
+        if data.get('buyer_id') == self.context['request'].user:
+            raise ValidationError('You cannot add yourself as a buyer')
+        return data
+
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:

@@ -246,14 +246,15 @@ class SelfPostDeleteView(generics.UpdateAPIView):
 
 # Marks a post as 'sold'
 class SelfPostSellView(generics.UpdateAPIView):
-    serializer_class = PostSerializer
+    serializer_class = PostSellSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrStaff, IsActivePost,)
 
     def get_queryset(self):
         return Post.objects.filter(owner_id=self.request.user)
 
     def update(self, request, *args, **kwargs):
-        data = QueryDict('status=sold')
+        data = QueryDict('status=sold', mutable=True)
+        data['buyer_id'] = request.data.get('buyer_id')
 
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=data, partial=True)
