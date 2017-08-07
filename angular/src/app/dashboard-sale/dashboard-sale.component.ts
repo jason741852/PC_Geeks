@@ -10,6 +10,7 @@ import { SaleService } from '../_services/sale.service';
   styleUrls: ['./dashboard-sale.component.css']
 })
 export class DashboardSaleComponent implements OnInit {
+  sell = 'selling';
   sales: Sale[] = [];
   image: string
 

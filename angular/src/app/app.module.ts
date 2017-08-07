@@ -9,12 +9,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { CommonModule } from '@angular/common';
 
 //Services
 import { SaleService } from './_services/sale.service';
 import { AlertService } from './_services/alert.service';
-import { AuthenticationService } from './_services/authentication.service'
-import { UserService } from './_services/user.service'
+import { AuthenticationService } from './_services/authentication.service';
+import { UserService } from './_services/user.service';
+import { CurrentUserService } from './_services/currentuser.service';
 
 //Components
 import { AppComponent } from './app.component';
@@ -60,13 +63,17 @@ import { ReportComponent } from './report/report.component';
     JsonpModule,
     SlideMenuModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+    })
   ],
   providers: [
     SaleService,
     AlertService,
     AuthenticationService,
     UserService,
+    CurrentUserService,
     BaseRequestOptions
   ],
   bootstrap: [AppComponent]
