@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgModule } from '@angular/core';
 
-import { Sale } from '../_models/sale';
 import { SaleService } from '../_services/sale.service';
+import { AlertService } from '../_services/alert.service';
 
 
 @Component({
@@ -13,17 +12,15 @@ import { SaleService } from '../_services/sale.service';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  sales: Sale[];
-  selectedSale: Sale;
   saleForm: FormGroup;
-  manufacturer = [' ', 'AMD', 'Asus', 'ATI',
+  manufacturer = ['AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
-'NVIDIA', 'OcUK', 'Palit', 'PNY', 'PowerColor', 'Sapphire', 'Sparkle', 'VisionTek', 'XFX', 'Zogis', 'Zotac'];
+'NVIDIA', 'OcUK', 'Palit', 'PNY', 'PowerColor', 'Sapphire', 'Sparkle', 'VisionTek', 'XFX', 'Zogis', 'Zotac', 'Other'];
 
-  quality = [' ', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor'];
+  quality = ['Excellent', 'Very Good', 'Good', 'Average', 'Poor'];
 
-  category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
+  category = ['CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
   createRequest = {
       item: '',
@@ -35,16 +32,14 @@ export class FormComponent implements OnInit {
       body: ''
   };
 
+  submitted = false;
+
   constructor(
         private router: Router,
-        private saleService: SaleService) { };
-
-  getSales(): void {
-    this.saleService.getSales().then(sales => this.sales = sales);
-  }
+        private saleService: SaleService,
+        private alertService: AlertService) { };
 
   ngOnInit(): void {
-    this.getSales();
     this.saleForm = new FormGroup({
     'item': new FormControl(this.createRequest.item, [Validators.required]),
     'category': new FormControl(this.createRequest.category),
@@ -58,18 +53,23 @@ export class FormComponent implements OnInit {
   }
 
   add(): void {
-    this.saleService.create(
-    this.saleForm.get('item').value,
-    this.saleForm.get('category').value,
-    this.saleForm.get('quality').value,
-    this.saleForm.get('manufacturer').value,
-    this.saleForm.get('price').value,
-    this.saleForm.get('location').value,
-    this.saleForm.get('body').value)
-      .then(sale => {
-        this.sales.push(sale);
-        this.selectedSale = null;
+    this.submitted = true;
+    if (this.saleForm.valid) {
+      this.saleService.create(
+        this.saleForm.get('item').value,
+        this.saleForm.get('category').value,
+        this.saleForm.get('quality').value,
+        this.saleForm.get('manufacturer').value,
+        this.saleForm.get('price').value,
+        this.saleForm.get('location').value,
+        this.saleForm.get('body').value
+      ).then(sale => {
+        this.alertService.success('Your post has been created!', true);
+        this.router.navigate(['/detail/' + sale.id]);
+      }).catch(error => {
+        console.log(error);
       });
+    }
   }
   get item() { return this.saleForm.get('item'); }
   get location() { return this.saleForm.get('location'); }

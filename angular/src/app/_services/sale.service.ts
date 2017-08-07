@@ -47,7 +47,7 @@ export class SaleService {
                 }),
                 this.createHeader())
             .toPromise()
-            .then(res => res.json().data as Sale)
+            .then(res => res.json() as Sale)
             .catch(this.handleError);
     }
 
