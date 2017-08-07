@@ -1,8 +1,11 @@
-<div *ngIf="currentUser" class="col-sm-6 col-md-4">
+<div class="container">
+<div *ngIf="currentUser" class="col-sm-6">
+  
   <div class="panel panel-deafult panel-heading">
     <h2 class="panel-title">User profile</h2>
   </div>
-  <div class="panel-body row col-md-7">
+
+  <div class="panel-body">
     <ul class="list-group description">
       <li class="list-group-item">ID: {{currentUser.id}}</li>
       <li class="list-group-item">First Name: {{currentUser.first_name}}</li>
@@ -13,17 +16,16 @@
   </div>
 
 </div>
+
 <div class ="editbox">
   <h3>Edit Account?</h3>
   <Button type = "button" (click)="editUser(currentUser.id)" class="btn btn-primary">Edit</Button>
-
-
 </div>
 
-  <div class ="deletebox">
-    <h3>Delete Account?</h3>
-    <Button type = "button" (click)="deleteUser(currentUser.id)" class="btn btn-danger">Delete</Button>
-  </div>
+<div class ="deletebox">
+  <h3>Delete Account?</h3>
+  <Button type = "button" (click)="deleteUser(currentUser.id)" class="btn btn-danger">Delete</Button>
+</div>
 
 
 <button (click)="goBack()" class="btn btn-default">Back</button>
