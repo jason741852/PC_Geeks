@@ -19,8 +19,6 @@ export class CurrentUserService {
             this.createAuthHeader()
         ).toPromise().then(
             (res: Response) => {
-                console.log(res);
-                console.log(res.json());
                 return res.json() as User;
         }).catch(
             this.handleError
@@ -33,8 +31,6 @@ export class CurrentUserService {
             this.createAuthHeader()
         ).toPromise().then(
             (res: Response) => {
-                console.log(res);
-                console.log(res.json());
                 return res.json() as Sale[];
         }).catch(
             this.handleError
