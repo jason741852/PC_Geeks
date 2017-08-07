@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -36,6 +37,7 @@ export class FormComponent implements OnInit {
 
   constructor(
         private router: Router,
+        private loc: Location,
         private saleService: SaleService,
         private alertService: AlertService) { };
 
@@ -65,6 +67,7 @@ export class FormComponent implements OnInit {
         this.saleForm.get('body').value
       ).then(sale => {
         this.alertService.success('Your post has been created!', true);
+        this.loc.replaceState('/dashboard');
         this.router.navigate(['/detail/' + sale.id]);
       }).catch(error => {
         console.log(error);
