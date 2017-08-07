@@ -101,7 +101,7 @@ execute 'npm_install_@agm/core' do
 	cwd '/home/ubuntu/angular'
 end
 execute 'npm_install_@types/googlemaps' do
-	command 'npm install @types/googlemaps --save=dev'
+	command 'npm install @types/googlemaps --save-dev'
 	cwd '/home/ubuntu/angular'
 end
 execute 'build_angular_app' do
