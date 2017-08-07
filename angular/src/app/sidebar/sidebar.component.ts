@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) {}
 
   ngOnInit() {
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

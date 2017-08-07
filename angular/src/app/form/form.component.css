@@ -9,3 +9,8 @@ margin: 0 auto;
 div{
     padding:5px;
 }
+
+agm-map {
+  height: 25em;
+  width: 35em;
+}

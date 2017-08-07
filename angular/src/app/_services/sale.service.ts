@@ -33,6 +33,8 @@ export class SaleService {
             manufacturer: string,
             price: number,
             location: string,
+            latitude: number,
+            longitude: number,
             body: string): Promise<Sale> {
         return this.http
             .post(this.salesUrl + "new/",
@@ -43,6 +45,8 @@ export class SaleService {
                     manufacturer: manufacturer,
                     price: price,
                     location: location,
+                    latitude: latitude,
+                    longitude: longitude,
                     body: body
                 }),
                 this.createHeader())

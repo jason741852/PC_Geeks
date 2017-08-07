@@ -47,11 +47,4 @@ export class ProfileComponent implements OnInit {
   private loadSelf() {
     this.userService.getUser().then((user: User) => this.currentUser = user);
   }
-
-  goBack(): void {
-    this.location.back();
-  }
-
-
-
 }

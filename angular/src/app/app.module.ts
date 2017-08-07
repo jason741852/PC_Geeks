@@ -65,7 +65,8 @@ import { ReportComponent } from './report/report.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ',
+      libraries: ['places']
     })
   ],
   providers: [

@@ -25,7 +25,7 @@ import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 const routes: Routes = [
     {
       path: '',
-      redirectTo: '/dashboard',
+      redirectTo: '/main',
       pathMatch: 'full'
     },
     {

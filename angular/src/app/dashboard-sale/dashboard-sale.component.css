@@ -1,3 +1,7 @@
+.container{
+  margin-left: 20%;
+}
+
 .item{
   margin: 50px;
   border-style: solid;
@@ -11,16 +15,23 @@ img {
     max-height: 100%;
 }
 
-.pageing{
-  text-align: center;
-  margin:2em;
+.searchBar{
+  position: relative;
 }
 
 .searchButton{
-  margin-top:10px;
+  margin-top: 10px;
+  position: absolute;
+  left: 1em;
 }
 
+.toggle{
+  margin-top: 10px;
+  position: absolute;
+  right: 1em;
+}
 
-
-
-
+#page{
+  margin-top: 5em;
+  padding-left: 0;
+}

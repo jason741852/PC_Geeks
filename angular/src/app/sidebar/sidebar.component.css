@@ -1,10 +1,16 @@
 .logo{
-font-weight:normal;
-text-transform:uppercase;
-color:#000000;
-letter-spacing:4pt;
-word-spacing:10pt;
-font-size:54px;
-text-align:left;
-font-family:arial,helvetica, sans-serif;
+  font-weight:normal;
+  text-transform:uppercase;
+  color:#000000;
+  letter-spacing:4pt;
+  word-spacing:10pt;
+  font-size:54px;
+  text-align:center;
+  font-family:arial,helvetica, sans-serif;
+}
+
+button.btn.btn-default {
+  position: fixed;
+  right: 1em;
+  top: 1em;
 }
