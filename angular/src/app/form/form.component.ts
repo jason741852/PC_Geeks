@@ -122,11 +122,11 @@ export class FormComponent implements OnInit {
     this.saleForm.get('manufacturer').value,
     this.saleForm.get('price').value,
     this.saleForm.get('location').value,
+    this.latitude,
+    this.longitude,
     this.saleForm.get('body').value)
       .then(sale => {
         this.sales.push(sale);
-        // this.latitude.push(sale);
-        // this.longitude.push(sale);
         this.selectedSale = null;
       });
   }
