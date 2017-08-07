@@ -24,7 +24,7 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
-    title = models.TextField(max_length=255)
+    title = models.TextField(blank=True, null=True, max_length=255)
     body = models.TextField(blank=True, null=True)
     item = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
