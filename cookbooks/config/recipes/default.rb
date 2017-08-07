@@ -96,6 +96,10 @@ execute 'npm_install_node-sass' do
 	command 'npm install --no-bin-links node-sass'
 	cwd '/home/ubuntu/angular'
 end
+execute 'npm_install_@agm/core' do
+	command 'npm install @agm/core --save'
+	cwd '/home/ubuntu/angular'
+end
 execute 'build_angular_app' do
 	command 'ng build'
 	cwd '/home/ubuntu/angular'

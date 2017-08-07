@@ -9,6 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { CommonModule } from '@angular/common';
 
 //Services
 import { SaleService } from './_services/sale.service';
@@ -60,7 +62,10 @@ import { ReportComponent } from './report/report.component';
     JsonpModule,
     SlideMenuModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+    })
   ],
   providers: [
     SaleService,

@@ -9,3 +9,8 @@ button.btn.btn-primary {
 .panel-body{
   margin:50px;
 }
+
+agm-map {
+  height: 25em;
+  width: 35em;
+}
