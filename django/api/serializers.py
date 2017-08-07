@@ -1,8 +1,15 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from rest_framework.fields import SkipField
+from rest_framework.relations import PKOnlyObject
 from .models import *
+from collections import OrderedDict
 from decimal import *
 
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +35,113 @@ class PostSerializer(serializers.ModelSerializer):
             raise ValidationError('Latitude must be between -180 and 180')
 
         return data
+
+    def to_representation(self, instance):
+        ret = OrderedDict()
+        fields = self._readable_fields
+
+        for field in fields:
+            try:
+                attribute = field.get_attribute(instance)
+            except SkipField:
+                continue
+            check_for_none = attribute.pk if isinstance(attribute, PKOnlyObject) else attribute
+            if check_for_none is None:
+                ret[field.field_name] = None
+            else:
+                ret[field.field_name] = field.to_representation(attribute)
+
+        images = Image.objects.filter(post_id=instance.id)
+        image_objs = ImageSerializer(images, many=True).data
+        images = []
+        for i in image_objs:
+            images.append(i['url'])
+        ret['images'] = images
+
+        seller_ratings = SellerRating.objects.filter(seller_id=instance.owner_id)
+        if seller_ratings.exists():
+            seller_ratings = SellerRatingSerializer(seller_ratings, many=True).data
+            total = 0.0
+            for i in seller_ratings:
+                total += i['rating']
+            total /= len(seller_ratings)
+            ret['seller_rating'] = OrderedDict()
+            ret['seller_rating']['rating'] = total
+            ret['seller_rating']['number_of_raters'] = len(seller_ratings)
+        else:
+            ret['seller_rating'] = None
+
+        return ret
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+
+
+class PrivatePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'title',
+            'body',
+            'item',
+            'category',
+            'quality',
+            'manufacturer',
+            'price',
+            'location',
+            'latitude',
+            'longitude',
+            'buyer_id',
+            'date_created',
+            'date_modified',
+        )
+
+    def to_representation(self, instance):
+        potential_buyers = PotentialBuyerSerializer(PotentialBuyer.objects.filter(post_id=instance.id), many=True).data
+
+        buyer, buyer_rating, seller_rating = None, None, None
+        if instance.buyer_id is not None:
+            try:
+                buyer_rating = BuyerRating.objects.get(buyer_id=instance.buyer_id.id, post_id=instance.id)
+                buyer_rating = BuyerRatingSerializer(instance=buyer_rating).data
+            except BuyerRating.DoesNotExist:
+                pass
+            try:
+                seller_rating = SellerRating.objects.get(seller_id=instance.owner_id, post_id=instance.id)
+                seller_rating = BuyerRatingSerializer(instance=seller_rating).data
+            except SellerRating.DoesNotExist:
+                pass
+
+            # filter out information of the buyer
+            buyer = UserSerializer(instance=instance.buyer_id).data
+            for key in ('phone_number', 'is_active', 'email', 'is_superuser', 'is_staff', 'last_login', 'groups',
+                        'user_permissions', 'password', 'date_joined', 'id'):
+                del buyer[key]
+
+        ret = OrderedDict()
+        ret['id'] = instance.id
+        ret['title'] = instance.title
+        ret['body'] = instance.body
+        ret['item'] = instance.item
+        ret['category'] = instance.category
+        ret['quality'] = instance.quality
+        ret['manufacturer'] = instance.manufacturer
+        ret['price'] = instance.price
+        ret['location'] = instance.location
+        ret['latitude'] = instance.latitude
+        ret['longitude'] = instance.longitude
+        ret['buyer'] = buyer
+        ret['date_created'] = instance.date_created
+        ret['date_modified'] = instance.date_modified
+        ret['buyer_rating'] = buyer_rating
+        ret['seller_rating'] = seller_rating
+        ret['potential_buyers'] = potential_buyers
+
+        return ret
 
 
 class MessagingSerializer(serializers.ModelSerializer):
@@ -70,74 +184,157 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.email = validated_data.get('email', instance.email)
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
 
-class PotentialbuyerSerializer(serializers.ModelSerializer):
+        pw = validated_data.get('password')
+        if pw is not None:
+            instance.set_password(pw)
+
+        instance.save()
+
+        return instance
+
+    def to_representation(self, instance):
+        ret = OrderedDict()
+        ret['id'] = instance.id
+        ret['username'] = instance.username
+        ret['first_name'] = instance.first_name
+        ret['last_name'] = instance.last_name
+        ret['email'] = instance.email
+        ret['phone_number'] = instance.phone_number
+
+        buyer_ratings = BuyerRating.objects.filter(buyer_id=instance.id)
+        buyer_ratings = BuyerRatingSerializer(buyer_ratings, many=True).data
+        ret['buyer_ratings'] = buyer_ratings
+
+        seller_ratings = SellerRating.objects.filter(seller_id=instance.id)
+        seller_ratings = SellerRatingSerializer(seller_ratings, many=True).data
+        ret['seller_ratings'] = seller_ratings
+
+        return ret
+
+
+class PotentialBuyerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Potential_buyer
-        fields = ('user_id','post_id','date_created','date_modified')
-        read_only_fields = (
+        model = PotentialBuyer
+        fields = (
             'user_id',
+            'post_id',
+            'date_created',
+            'date_modified',
+        )
+        read_only_fields = (
             'date_created',
             'date_modified',
         )
 
     def validate(self, data):
-        post_id = (data.get('post_id').id)
-        post_owner_id = (data.get('post_id').owner_id.id)
-        user_id = self.context['request'].user.id
+        post = data.get('post_id')
+        post_owner = post.owner_id
+        user = data.get('user_id')
 
-        if user_id == post_owner_id:
-            raise ValidationError("Post owner should not be on the potential buyer list")
+        if user == post_owner:
+            raise ValidationError("The post owner should not be on the potential buyer list")
 
-        potential_buyer_list = Post.objects.get(id=post_id).potential_buyer.all()
+        potential_buyer_list = Post.objects.get(id=post.id).potential_buyer.all()
 
         for p in potential_buyer_list:
-            if p.user_id.id == user_id:
+            if p.user_id == user:
                 raise ValidationError('You are on the list already')
 
         return data
 
 
-class BuyerratingSerializer(serializers.ModelSerializer):
+class PrivatePotentialBuyerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Buyer_rating
+        model = PotentialBuyer
+        fields = ('post_id',)
+
+    def to_representation(self, instance):
+        post = PostSerializer(instance=instance.post_id).data
+        for key in ('body', 'latitude', 'longitude', 'date_created', 'date_modified', 'owner_id', 'buyer_id'):
+            del post[key]
+        return post
+
+
+class BuyerRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BuyerRating
         fields = '__all__'
         read_only_fields = (
-            'rater_id',
             'date_created',
-            'date_modified'
+            'date_modified',
         )
 
     def validate(self, data):
         buyer_id = data.get('buyer_id').id
-        rater_id = self.context['request'].user.id #rater_id
-        # print("buyer_id: {}".format(buyer_id))
-        # print("rater_id: {}".format(rater_id))
+        rater_id = data.get('rater_id').id
+        rating = data.get('rating')
+
+        if rating < 1 or rating > 5:
+            raise ValidationError('You must provide a rating between 1 and 5')
 
         if buyer_id == rater_id:
-            raise ValidationError('Cannot rate yourself')
+            raise ValidationError('You cannot rate yourself')
 
         return data
 
 
-
-class SellerratingSerializer(serializers.ModelSerializer):
+class BuyerRatingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Seller_rating
+        model = BuyerRating
         fields = '__all__'
         read_only_fields = (
+            'post_id',
             'rater_id',
+            'buyer_id',
+            'date_created',
+            'date_modified',
+        )
+
+
+class SellerRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerRating
+        fields = '__all__'
+        read_only_fields = (
             'date_created',
             'date_modified'
         )
 
     def validate(self, data):
         seller_id = data.get('seller_id').id
-        rater_id = self.context['request'].user.id #rater_id
-        # print("buyer_id: {}".format(seller_id))
-        # print("rater_id: {}".format(rater_id))
+        rater_id = data.get('rater_id').id
+        rating = data.get('rating')
+
+        if rating < 1 or rating > 5:
+            raise ValidationError('You must provide a rating between 1 and 5')
 
         if seller_id == rater_id:
-            raise ValidationError('Cannot rate yourself')
+            raise ValidationError('You cannot rate yourself')
 
         return data
+
+
+class SellerRatingUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerRating
+        fields = '__all__'
+        read_only_fields = (
+            'post_id',
+            'rater_id',
+            'seller_id',
+            'date_created',
+            'date_modified',
+        )
+
+
+class StaffUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

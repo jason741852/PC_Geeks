@@ -1,1 +1,9 @@
+.nav{
+    background-color: #0275d8;
+    height: 50px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color:black;
+}
 

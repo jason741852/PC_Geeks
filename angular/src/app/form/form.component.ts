@@ -25,13 +25,15 @@ export class FormComponent implements OnInit {
 
   category = [' ', 'CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
-  createRequest = { 
+  createRequest = {
       item: '',
       category: this.category[0],
       quality: this.quality[0],
       manufacturer: this.manufacturer[0],
       price: '',
-      body: ''};
+      location: '',
+      body: ''
+  };
 
   constructor(
         private router: Router,
@@ -50,17 +52,19 @@ export class FormComponent implements OnInit {
     'manufacturer': new FormControl(this.createRequest.manufacturer),
     'price': new FormControl(this.createRequest.price, [Validators.required, Validators.min(0),
     Validators.pattern('[0-9]+')]),
+    'location': new FormControl(this.createRequest.location, Validators.required),
     'body': new FormControl(this.createRequest.body)
   });
   }
 
   add(): void {
     this.saleService.create(
-    this.saleForm.get('item').value, 
-    this.saleForm.get('category').value, 
+    this.saleForm.get('item').value,
+    this.saleForm.get('category').value,
     this.saleForm.get('quality').value,
     this.saleForm.get('manufacturer').value,
     this.saleForm.get('price').value,
+    this.saleForm.get('location').value,
     this.saleForm.get('body').value)
       .then(sale => {
         this.sales.push(sale);
@@ -68,8 +72,10 @@ export class FormComponent implements OnInit {
       });
   }
   get item() { return this.saleForm.get('item'); }
+  get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }
   //get quality() { return this.saleForm.get('quality'); }
   get price() { return this.saleForm.get('price'); }
-  get body() { return this.saleForm.get('body'); } 
+  get body() { return this.saleForm.get('body'); }
+  
 }

@@ -39,6 +39,13 @@ execute 'postgres_create_database' do
 end
 
 # Setup Django
+cookbook_file "recreate-database.sh" do
+	path "/home/ubuntu/recreate-database.sh"
+end
+directory '/home/ubuntu/django/api/migrations' do
+	recursive true
+	action :delete
+end
 execute 'django_makemigrations' do
 	command 'python3 manage.py makemigrations api'
 	cwd '/home/ubuntu/django'
@@ -87,6 +94,10 @@ execute 'npm_install' do
 end
 execute 'npm_install_node-sass' do
 	command 'npm install --no-bin-links node-sass'
+	cwd '/home/ubuntu/angular'
+end
+execute 'npm_install_@agm/core' do
+	command 'npm install @agm/core --save'
 	cwd '/home/ubuntu/angular'
 end
 execute 'build_angular_app' do

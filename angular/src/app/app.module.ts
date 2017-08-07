@@ -4,10 +4,13 @@ import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { BaseRequestOptions, HttpModule, JsonpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { RatingModule } from 'ngx-rating'
 import { SlideMenuModule } from './slideMenuNavigation/slideMenu';
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { CommonModule } from '@angular/common';
 
 //Services
 import { SaleService } from './_services/sale.service';
@@ -16,12 +19,16 @@ import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
 import { PotentialBuyerService } from './_services/potential_buyer.service'
 import { MessageService } from './_services/message.service'
+import { CurrentUserService } from './_services/currentuser.service';
+
 
 //Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
+import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -31,6 +38,7 @@ import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.componen
 import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { MessageComponent } from './message/message.component'
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -47,23 +55,30 @@ import { MessageComponent } from './message/message.component'
     ListSaleComponent,
     DashboardFilterComponent,
     ProfileComponent,
-    MessageComponent
+    MessageComponent,
+    ReportComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     JsonpModule,
     SlideMenuModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+    })
   ],
   providers: [
     SaleService,
     AlertService,
     AuthenticationService,
     UserService,
+    CurrentUserService,
     PotentialBuyerService,
     MessageService,
     BaseRequestOptions

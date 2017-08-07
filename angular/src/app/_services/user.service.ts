@@ -5,59 +5,31 @@ import { User } from '../_models/user';
 
 @Injectable()
 export class UserService {
-    private baseUrl = 'http://localhost:4200/api/users/';
 
     constructor(private http: Http) { }
 
-    getAll() {
+    getUser(id: number) {
         return this.http.get(
-            this.baseUrl,
-            this.createHeader()
+            "http://localhost:4200/api/user/" + id + "/",
+            this.createAuthHeader()
         ).map(
             (response: Response) => response.json() as User[]
         );
     }
 
-    getById(id: number) {
-        return this.http.get(
-            this.baseUrl + id
-        ).map(
-            (response: Response) => response.json()
-        );
-    }
-
-    create(user: User) {
+    register(user: User) {
         return this.http.post(
-          this.baseUrl + "new/",
-            user
+            "http://localhost:4200/api/register/",
+              user
         ).map(
-            (response: Response) => response.json()
-        );
-    }
-
-    update(user: User) {
-        return this.http.put(
-          this.baseUrl + "update/" + user.id,
-            user,
-            this.createHeader()
-        ).map(
-            (response: Response) => response.json()
-        );
-    }
-
-    delete(id: number) {
-        return this.http.delete(
-            this.baseUrl + "delete/" + id,
-            this.createHeader()
-        ).map(
-            (response: Response) => response.json()
+              (response: Response) => response.json()
         );
     }
 
     // private helper methods
 
     // Creates Authorization header
-    private createHeader() {
+    private createAuthHeader() {
         let token = sessionStorage.getItem('token');
         if (token) {
             let headers = new Headers({ 'Authorization': 'Token ' + token });

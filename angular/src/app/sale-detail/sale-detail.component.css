@@ -1,3 +1,16 @@
 button.btn.btn-primary {
   margin: 0 14px;
 }
+
+.detailBody{
+  width:50%;
+}
+
+.panel-body{
+  margin:50px;
+}
+
+agm-map {
+  height: 25em;
+  width: 35em;
+}
