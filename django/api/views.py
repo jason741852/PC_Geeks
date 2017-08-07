@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+from django.http import QueryDict
 
 from rest_framework import generics, filters, status
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .serializers import *
 from .permissions import *
+
 
 
 class ReportViewSet(generics.CreateAPIView):
@@ -29,15 +31,20 @@ class ReportViewSet(generics.CreateAPIView):
             ['pcgeeks470@gmail.com'],
             fail_silently=False)   
 
+
+
 """
     Posts Views
 """
 
-# Returns a list of all Posts
+# Returns a list of all active Posts
 class PostPublicListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     ordering = 'date_created'
+
+    def get_queryset(self):
+        return Post.objects.filter(status='active')
 
 
 # Returns the details of a single Post
@@ -54,23 +61,6 @@ class PostCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner_id=self.request.user)
-
-
-# Updates a Post
-class PostUpdateView(generics.UpdateAPIView):
-    serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, IsOwner,)
-
-    def get_queryset(self):
-        return Post.objects.filter(owner_id=self.request.user)
-
-
-# Deletes a post
-class PostDeleteView(generics.DestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, IsOwnerOrStaff,)
-
 
 
 
@@ -208,6 +198,75 @@ class SelfPotentialBuyerListView(generics.ListAPIView):
         return PotentialBuyer.objects.filter(user_id=self.request.user)
 
 
+# Updates a Post
+class SelfPostUpdateView(generics.UpdateAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsOwner, IsActivePost,)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+    # prevent user from changing the status of the post
+    def update(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data.pop('status')
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
+
+
+# Marks a post as 'deleted'
+class SelfPostDeleteView(generics.UpdateAPIView):
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsOwnerOrStaff, IsActivePost,)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+    def update(self, request, *args, **kwargs):
+        data = QueryDict('status=deleted')
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
+
+
+# Marks a post as 'sold'
+class SelfPostSellView(generics.UpdateAPIView):
+    serializer_class = PostSellSerializer
+    permission_classes = (IsAuthenticated, IsOwnerOrStaff, IsActivePost,)
+
+    def get_queryset(self):
+        return Post.objects.filter(owner_id=self.request.user)
+
+    def update(self, request, *args, **kwargs):
+        data = QueryDict('status=sold', mutable=True)
+        data['buyer_id'] = request.data.get('buyer_id')
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
+
+
 
 """
     Message Views
@@ -267,7 +326,7 @@ class PostPotentialBuyerListView(generics.ListAPIView):
 class PotentialBuyerCreateView(generics.CreateAPIView):
     queryset = PotentialBuyer.objects.all()
     serializer_class = PotentialBuyerSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsActivePost,)
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
@@ -309,11 +368,10 @@ class BuyerRatingCreateView(generics.CreateAPIView):
         post_id = kwargs.get('post_id')
         data[u'post_id'] = post_id
         data[u'rater_id'] = self.request.user.id
-        # uncomment below when buying is implemented
-        # post = get_object_or_404(Post, id=post_id)
-        # if post.buyer_id == None:
-        #     return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
-        # data[u'buyer_id'] = post.buyer_id.id
+        post = generics.get_object_or_404(Post, id=post_id)
+        if post.buyer_id == None:
+            return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
+        data[u'buyer_id'] = post.buyer_id.id
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
@@ -351,11 +409,10 @@ class SellerRatingCreateView(generics.CreateAPIView):
         post_id = kwargs.get('post_id')
         data[u'post_id'] = post_id
         data[u'rater_id'] = self.request.user.id
-        # uncomment below when buying is implemented
-        # post = get_object_or_404(Post, id=post_id)
-        # if post.buyer_id == None:
-        #     return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
-        # data[u'seller_id'] = post.owner_id.id
+        post = generics.get_object_or_404(Post, id=post_id)
+        if post.buyer_id is None:
+            return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
+        data[u'seller_id'] = post.owner_id.id
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
@@ -410,6 +467,45 @@ class StaffUserDeleteView(generics.DestroyAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+# Returns a list of all Posts (regardless of status)
+class StaffPostListView(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+    ordering = 'date_created'
+
+    def get_queryset(self):
+        return Post.objects.filter(status='active')
+
+
+# Updates a Post
+class StaffPostUpdateView(generics.UpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+
+
+# Marks a post as 'removed'
+class StaffPostDeleteView(generics.UpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser,)
+
+    def update(self, request, *args, **kwargs):
+        data = QueryDict('status=removed')
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
 
 
 # Returns a list of all Messages
