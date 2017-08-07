@@ -45,16 +45,15 @@ export class SaleService {
       console.log(this.image)
     this.image.push({'id':1, 'post_id':1,'url':'1'})
     console.log(this.image);
-    JSON.stringify(this.image)
     console.log(    JSON.stringify(this.image)
     )
     return this.http
             .post(this.salesUrl + "new/",
 
                 JSON.stringify({
-                    'item': "lololol",
+                    item: item,
                     title:title,
-                  'images':this.image,
+                    images: this.image,
                     category: category,
                     quality: quality,
                     manufacturer: manufacturer,

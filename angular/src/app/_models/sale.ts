@@ -20,7 +20,7 @@ export class Sale {
   //   date_modified: string
   // ) { }
     id: number;
-    image: string;
+    image: Image[];
     title: string;
     body: string;
     item: string; // item name ie: Gtx 1080 etc
