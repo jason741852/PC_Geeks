@@ -21,13 +21,14 @@
     </div>
     
     <div class="row">
-      <div class="item col-xs-4 col-lg-4 col-centered" *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
+      <div class="item col-lg-4 col-centered"
+      *ngFor="let sale of sales | paginate: { itemsPerPage: 6, currentPage: p }">
         <div class="thumbnail">
           <img src="http://placehold.it/400x250/000/fff" alt="" />
           <ul>
             <li>Selling {{sale.item}}</li>
-            <li>{{sale.manufacturer}}{{sale.category}}</li>
-            <li>{{sale.price}}</li>
+            <li>{{sale.manufacturer}} {{sale.category}}</li>
+            <li>${{sale.price}}</li>
           </ul>
           <p>
             <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
@@ -37,4 +38,5 @@
       </div>
     </div>
   </div>
+
 </div>

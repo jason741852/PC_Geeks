@@ -5,7 +5,7 @@ if [ -d ./api/migrations ]; then
 	echo 'Removing migrations'
 	rm -r ./api/migrations
 fi
-if [ -f ./db.sqlite3 ] && [ $1 == '-d' ]; then
+if [ -f ./db.sqlite3 ] && [ $1 = '-d' ]; then
 	echo 'Removing existing database'
 	rm -r ./db.sqlite3
 fi
