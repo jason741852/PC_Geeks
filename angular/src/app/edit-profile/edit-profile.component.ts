@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
+import { CurrentUserService } from '../_services/currentuser.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { AlertService } from '../_services/alert.service';
 
@@ -25,32 +25,29 @@ export class EditProfileComponent implements OnInit {
     private location: Location,
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private userService: CurrentUserService,
     private router: Router,
     private alertService: AlertService
   ) {
 }
 
   ngOnInit() {
-    this.loadAllUsers();
     this.loadSelf();
   }
 
   deleteUser(id: number) {
-    this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+    this.userService.delete().then(() => {
+        // notify the user? redirect to main page?
+    });
     this.logout();
   }
 
   logout(){
     this.auth.logout();
-
   }
 
-  private loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users; });
-  }
   private loadSelf() {
-    this.userService.getSelf().subscribe(currentUser => { this.currentUser = currentUser; });
+    this.userService.getUser().then((currentUser: User) => { this.currentUser = currentUser; });
   }
 
   goBack(): void {
@@ -58,17 +55,14 @@ export class EditProfileComponent implements OnInit {
   }
   update() {
     this.loading = true;
-    this.userService.update(this.model, this.currentUser["id"])
-      .subscribe(
-        data => {
-          this.alertService.success('Registration successful', true);
-
-          this.router.navigate(['/profile']);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        });
+    this.userService.update(this.model)
+      .then(() => {
+        this.alertService.success('Registration successful', true);
+        this.router.navigate(['/profile']);
+      }, (error: any) => {
+        this.alertService.error(error);
+        this.loading = false;
+      });
   }
 
 

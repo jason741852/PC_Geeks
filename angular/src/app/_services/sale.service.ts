@@ -9,7 +9,6 @@ import { Sale } from '../_models/sale';
 export class SaleService {
 
     private salesUrl = 'http://localhost:4200/api/posts/';  // URL to web api
-    private privateSaleUrl = 'http://localhost:4200/api/self/posts/';
 
     constructor(private http: Http) { }
 
@@ -22,14 +21,6 @@ export class SaleService {
 
     getPublicSaleDetails(id: number): Promise<Sale> {
         const url = `${this.salesUrl}${id}/`;
-        return this.http.get(url, this.createHeader())
-            .toPromise()
-            .then(response => response.json() as Sale)
-            .catch(this.handleError);
-    }
-
-    getPrivateSaleDetails(id: number): Promise<Sale> {
-        const url = `${this.privateSaleUrl}${id}/`;
         return this.http.get(url, this.createHeader())
             .toPromise()
             .then(response => response.json() as Sale)
