@@ -4,7 +4,6 @@ from django.http import QueryDict
 from rest_framework import generics, filters, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from rest_framework.exceptions import ValidationError
 
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend

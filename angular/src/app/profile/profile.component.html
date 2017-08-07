@@ -13,13 +13,23 @@
   </div>
 
 </div>
-<div class ="editbox">
-  <h3>Edit Account?</h3>
+<div class="editbox">
+  <h3>Edit Account</h3>
   <Button type = "button" (click)="editUser()" class="btn btn-primary">Edit Details</Button>
     <Button type="button" (click)="changePassword()" class="btn btn-primary">Change Password</Button>
 </div>
-<div class ="deletebox">
+<div class="deletebox">
   <h3>Delete Account?</h3>
-  <Button type = "button" (click)="deleteUser(currentUser.id)" class="btn btn-danger">Delete</Button>
+  <div *ngIf="!confirm_deletion">
+      <Button type="button" (click)="displayDeleteUserConfirmation(true)" class="btn btn-danger">Delete</Button>
+  </div>
+  <div *ngIf="confirm_deletion">
+      <label for="confirmPassword" class="alert alert-warning">Please type in your password to confirm: </label>
+      <input type="password" name="confirmPassword" [(ngModel)]="password" #confirm_password="ngModel" [(value)]="password"/>
+      <div *ngIf="error_messages.password" class="alert alert-danger" >Incorrect password</div>
+      <div>
+          <Button type="button" (click)="deleteUser()" class="btn btn-danger">Confirm</Button>
+          <Button type="button" (click)="displayDeleteUserConfirmation(false)" class="btn">Cancel</Button>
+      </div></div>
 </div>
 <button (click)="goBack()" class="btn btn-default">Back</button>

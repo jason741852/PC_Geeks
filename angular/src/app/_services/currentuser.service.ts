@@ -48,7 +48,7 @@ export class CurrentUserService {
         );
     }
 
-    update(user: User): Promise<string> {
+    update(user: User): Promise<Response> {
         return this.http.patch(
             this.baseUrl + "update/",
             user,
@@ -60,8 +60,8 @@ export class CurrentUserService {
         );
     }
 
-    delete(): Promise<string> {
-        return this.http.get(
+    delete(): Promise<Response> {
+        return this.http.delete(
             this.baseUrl + "delete/",
             this.createAuthHeader()
         ).toPromise().then(
