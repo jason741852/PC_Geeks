@@ -52,24 +52,24 @@ export class CurrentUserService {
         );
     }
 
-    update(user: User): Promise<> {
+    update(user: User): Promise<string> {
         return this.http.patch(
             this.baseUrl + "update/",
             user,
             this.createAuthHeader()
         ).toPromise().then(
-            (res: Response) => res.json()
+            (res: Response) => res
         ).catch(
             this.handleError
         );
     }
 
-    delete(): Promise<> {
+    delete(): Promise<string> {
         return this.http.get(
             this.baseUrl + "delete/",
             this.createAuthHeader()
         ).toPromise().then(
-            (res: Response) => res.json()
+            (res: Response) => res
         ).catch(
             this.handleError
         );

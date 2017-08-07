@@ -1,4 +1,4 @@
-﻿import { Rating } from "./rating.ts"
+﻿import { Rating } from './rating';
 
 export class User {
     id: number;
