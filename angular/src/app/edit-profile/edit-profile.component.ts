@@ -13,6 +13,7 @@ export class EditProfileComponent implements OnInit {
   currentUser: User;
   model: any = {};
   loading = false;
+  error_messages: any = {};
 
   constructor(
     private userService: CurrentUserService,
@@ -36,7 +37,7 @@ export class EditProfileComponent implements OnInit {
         this.alertService.success('Your profile has been updated!', true);
         this.router.navigate(['/profile']);
       }, (error: any) => {
-        this.alertService.error(error);
+        this.error_messages = error.json();
         this.loading = false;
       });
   }
