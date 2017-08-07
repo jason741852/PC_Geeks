@@ -20,19 +20,20 @@ export class RegisterComponent {
         private alertService: AlertService) { }
 
     register() {
-        this.loading = true;
-        delete this.model.confirm_password;
-        this.userService.register(this.model)
-            .subscribe(
-                data => {
-                    this.alertService.success('Registration successful!', true);
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.error_messages = error.json();
-                    this.loading = false;
-                });
-        delete this.model.password;
+        if (!this.passwordMismatch()) {
+            this.loading = true;
+            delete this.model.confirm_password;
+            this.userService.register(this.model)
+                .subscribe(
+                    data => {
+                        this.alertService.success('Registration successful!', true);
+                        this.router.navigate(['/login']);
+                    },
+                    error => {
+                        this.error_messages = error.json();
+                        this.loading = false;
+                    });
+        }
     }
 
     passwordMismatch() {
