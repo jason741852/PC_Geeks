@@ -25,6 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { ChangePasswordComponent } from "./change-password/change-profile.component";
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -54,7 +55,8 @@ import { AlertComponent } from "./alert/alert.component";
     ProfileComponent,
     ReportComponent,
     EditProfileComponent,
-    AlertComponent
+    AlertComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

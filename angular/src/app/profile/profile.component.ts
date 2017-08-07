@@ -1,8 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { User } from '../_models/user';
 import { CurrentUserService } from '../_services/currentuser.service';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -13,16 +12,12 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  registerForm: FormGroup;
   currentUser: User;
-  users: User[] = [];
 
 
   constructor(
-    private route: ActivatedRoute,
     private location: Location,
     private auth: AuthenticationService,
-    private formBuilder: FormBuilder,
     private userService: CurrentUserService,
     private router: Router,
   ) {}
@@ -31,15 +26,20 @@ export class ProfileComponent implements OnInit {
     this.loadSelf();
   }
 
-  deleteUser(id: number) {
+  editUser() {
+    this.router.navigate(['/editprofile']);
+  }
+
+  changePassword() {
+    this.router.navigate(['/changepassword']);
+  }
+
+  deleteUser() {
     this.userService.delete();
     this.logout();
   }
 
-  editUser(id: number) {
-    this.router.navigate(['/editprofile'])
 
-  }
   logout(){
     this.auth.logout();
   }
