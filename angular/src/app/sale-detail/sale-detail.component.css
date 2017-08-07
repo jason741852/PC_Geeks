@@ -1,16 +1,25 @@
 button.btn.btn-primary {
-  margin: 0 14px;
+  margin: auto;
 }
 
 .detailBody{
-  width:50%;
+  width:30%;
+  margin-left: 20%;
+  position: relative;
 }
 
 .panel-body{
-  margin:50px;
+  margin:auto;
 }
 
 agm-map {
   height: 25em;
   width: 35em;
+  margin: auto;
+}
+
+.container {
+  position: absolute;
+  left: 100%;
+  top: 15%;
 }
