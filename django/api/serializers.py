@@ -5,6 +5,7 @@ from rest_framework.relations import PKOnlyObject
 from .models import *
 from collections import OrderedDict
 from decimal import *
+import re
 
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
@@ -193,6 +194,16 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active',
             'date_joined',
         )
+
+    def validate_password(self, value):
+        if len(value) < 6:
+            raise ValidationError('Password must be at least 6 characters long')
+        return value
+
+    def validate_phone_number(self, value):
+        if re.search('[a-zA-Z]', value):
+            raise ValidationError('Phone number should not contain any of the characters from the alphabet')
+        return value
 
     def create(self, validated_data):
         user = User(
