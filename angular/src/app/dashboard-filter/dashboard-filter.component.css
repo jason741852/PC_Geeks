@@ -6,6 +6,12 @@
 [class*='col-']:last-of-type {
   padding-right: 0;
 }
+.col-lg-3 {
+  margin: 0 162px;
+  text-align: center;
+  max-width: 50%
+}
+
 a {
   text-decoration: none;
 }
@@ -68,9 +74,7 @@ h4 {
   margin: 20px;
 }
 
-.col-md-8 {
-  background: lightblue;
-}
-.col-md-4 {
-  background: lightblue;
+.pageing{
+  text-align: center;
+  margin:2em;
 }

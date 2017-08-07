@@ -1,34 +1,32 @@
-<div class="row">
-<div class="col-md-4">
-</div>
-  <div class="col-md-8">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="container">
+  <div class="body">
+    <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
     <form (keyup.enter)="search(saleItem.value)">
-
-      <div class="col-lg-3">
+      <div class="searchBar">
         <label for="saleItem">Search:</label>
         <input #saleItem type="text" class="form-control" id="saleItem">
 
-        <button (click)="search(saleItem.value)" class="btn btn-primary">
-          Search
+        <button (click)="search(saleItem.value)" class="searchButton btn btn-primary">
+        Search
         </button>
       </div>
-
     </form>
-    <h1>All the Sales</h1>
 
-    <div class="grid grid-pad">
-      <span *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
-      <a class="col-1-4 loopDisplay">
-        <div class="module sale">
-          <h4>Selling {{sale.category}} {{sale.item}} for {{sale.price}}.00</h4>
+    <div class="row">
+      <div class="item col-xs-4 col-lg-4 col-centered" *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
+        <div class="thumbnail">
+          <img src="http://placehold.it/400x250/000/fff" alt="" />
+          <ul>
+            <li>Selling {{sale.item}}</li>
+            <li>{{sale.manufacturer}}{{sale.category}}</li>
+            <li>{{sale.price}}</li>
+          </ul>
           <p>
             <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
-            <button class="btn btn-primary" role="button">Write a Review</button>
+            <button class="btn btn-primary reportButton" role="button" [routerLink]="['/report', sale.id]">Report This Post</button>
           </p>
-        </div>
-        </a>
-      </span>
+      </div>
     </div>
   </div>
 </div>
+

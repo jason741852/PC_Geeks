@@ -3,12 +3,12 @@
     <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.first_name" #firstName="ngModel" required />
             <div *ngIf="f.submitted && !firstName.valid" class="help-block" style="color:red;">First Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.last_name" #lastName="ngModel" required />
             <div *ngIf="f.submitted && !lastName.valid" class="help-block" style="color:red;">Last Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">

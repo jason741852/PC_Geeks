@@ -2,11 +2,15 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
+class Report(models.Model):
+    message = models.TextField(blank=False, null=False)
+    post_id = models.IntegerField(default=-1)
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
@@ -14,6 +18,7 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
+    title = models.TextField(max_length=255)
     body = models.TextField(blank=True, null=True)
     item = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
@@ -38,9 +43,17 @@ class Post(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Owner: " + self.owner_id +\
+        return "Owner: " + str(self.owner_id) +\
                " Title: " + self.title
 
+
+class Image(models.Model):
+    post_id = models.ForeignKey(
+        Post,
+        related_name='images',
+        on_delete=models.CASCADE
+    )
+    url = models.URLField()
 
 
 class Messaging(models.Model):
@@ -55,3 +68,61 @@ class Messaging(models.Model):
     # Return a human readable representation of the model instance.
     def __str__(self):
         return "{}".format(self.post_name)
+
+
+class PotentialBuyer(models.Model):
+    user_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='post_interested_in',
+        on_delete=models.CASCADE
+    )
+    post_id = models.ForeignKey(
+        Post,
+        related_name = 'potential_buyer',
+        on_delete=models.CASCADE
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+
+class BuyerRating(models.Model):
+    post_id = models.OneToOneField(
+        Post,
+        on_delete=models.CASCADE
+    )
+    rater_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='submitted_buyer_rating',
+        on_delete=models.CASCADE
+    )
+    buyer_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='rating_as_a_buyer',
+        on_delete=models.CASCADE
+    )
+    rating = models.IntegerField(blank=False)
+    comment = models.TextField(blank=False,max_length=1000)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+
+class SellerRating(models.Model):
+    post_id = models.OneToOneField(
+        Post,
+        on_delete=models.CASCADE
+    )
+    rater_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='submitted_seller_rating',
+        on_delete=models.CASCADE
+    )
+    seller_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='rating_as_a_seller',
+        on_delete=models.CASCADE
+    )
+    rating = models.IntegerField(blank=False)
+    comment = models.TextField(blank=False,max_length=1000)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+

@@ -83,6 +83,7 @@
     "model": "api.post",
     "pk": 1,
     "fields": {
+        "title": "1070",
         "body": "Very good deal. I guarantee it.",
         "item": "nVidia GTX 1070",
         "category": "Video Card",
@@ -102,10 +103,11 @@
     "model": "api.post",
     "pk": 2,
     "fields": {
+        "title": "Used AM4 CPU",
         "body": "Lightly used, like a folded-up napkin.",
         "item": "R5 1600X",
         "category": "CPU",
-        "quality": "OK",
+        "quality": "Average",
         "manufacturer": "AMD",
         "price": 300,
         "location": "SFU Burnaby",
@@ -114,13 +116,14 @@
         "owner_id": 1,
         "buyer_id": 2,
         "date_created": "2017-07-25T13:12:35.943Z",
-        "date_modified": "2017-07-25T13:12:35.943Z"
+        "date_modified": "2017-07-26T22:04:44.689Z"
     }
 },
 {
     "model": "api.post",
     "pk": 3,
     "fields": {
+        "title": "BEASTLY CPU - GREAT PRICE!!!",
         "body": "Not a scam, just wanted to pay for surgery. I promise you.",
         "item": "i7 6900X",
         "category": "CPU",
@@ -140,19 +143,388 @@
     "model": "api.post",
     "pk": 4,
     "fields": {
+        "title": "DESTRYER OF WORLDS!!!",
+        "body": "DUDE, THIS IS THE BEST GFX CARD EVER. I'VE GOT TWO ALREADY, SO BUY THIS ONE UP QUICK!!!1",
+        "item": "GTX 1080ti",
+        "category": "Video Card",
+        "quality": "Excellent",
+        "manufacturer": "AMD",
+        "price": 200,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-07-26T00:01:05.316Z",
+        "date_modified": "2017-07-26T00:01:05.316Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 5,
+    "fields": {
+        "title": "RGB full-sized keyboard (K70)",
         "body": "High price because of great memories.",
         "item": "K70 RGB (Red Switch)",
         "category": "Keyboard",
-        "quality": "OK",
+        "quality": "Average",
         "manufacturer": "Corsair",
         "price": 500,
         "location": "Metrotown",
         "latitude": 49.226150,
         "longitude": -122.999113,
-        "owner_id": 2,
-        "buyer_id": 3,
+        "owner_id": 3,
+        "buyer_id": 2,
         "date_created": "2017-07-26T00:06:46.954Z",
         "date_modified": "2017-07-26T00:06:46.954Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 6,
+    "fields": {
+        "title": "Good 1080p card",
+        "body": "Great card, can run most games 1080 on medium to high settings.",
+        "item": "R9 380 4GB",
+        "category": "Video Card",
+        "quality": "Average",
+        "manufacturer": "Club 3D",
+        "price": 100,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-07-27T15:24:46.154Z",
+        "date_modified": "2017-07-27T15:24:46.154Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 7,
+    "fields": {
+        "title": "Sturdy case 10/10",
+        "body": "The only thing sturdier than this case is a rock. But you can't even put a computer in a rock, so this is better.",
+        "item": "Obsidian 900D",
+        "category": "Case",
+        "quality": "Average",
+        "manufacturer": "Corsair",
+        "price": 350,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": 4,
+        "date_created": "2017-07-30T12:45:19.175Z",
+        "date_modified": "2017-07-31T11:44:35.985Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 8,
+    "fields": {
+        "title": "Tier 1 PSU - P2 650W",
+        "body": "If this was a girl, I'd do things to it. And by things, I mean treat it nicely and with respect, because that's how you should treat all women. But what do I know, I don't have a girlfriend. Well, at least I have my games and computers.",
+        "item": "SuperNOVA 650 P2",
+        "category": "Power Supply",
+        "quality": "Good",
+        "manufacturer": "EVGA",
+        "price": 120,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": 1,
+        "date_created": "2017-07-27T23:00:24.664Z",
+        "date_modified": "2017-07-30T16:24:11.121Z"
+    }
+},
+{
+    "model": "api.buyerrating",
+    "pk": 1,
+    "fields": {
+        "rating": 5,
+        "comment": "Great guy, had money ready. Lots of money. Like, fat stacks.",
+        "post_id": 8,
+        "rater_id": 3,
+        "buyer_id": 1,
+        "date_created": "2017-08-01T11:11:35.654Z",
+        "date_modified": "2017-08-01T11:11:35.654Z"
+    }
+},
+{
+    "model": "api.buyerrating",
+    "pk": 2,
+    "fields": {
+        "rating": 1,
+        "comment": "I don't know what his problem was, but he kept sniffing me and asking if I had the 'good good'. What does that even mean?",
+        "post_id": 2,
+        "rater_id": 1,
+        "buyer_id": 2,
+        "date_created": "2017-07-27T07:57:55.110Z",
+        "date_modified": "2017-07-27T07:57:55.110Z"
+    }
+},
+{
+    "model": "api.sellerrating",
+    "pk": 1,
+    "fields": {
+        "rating": 3,
+        "comment": "2/10 personality, but at least the item was in good shape.",
+        "post_id": 8,
+        "rater_id": 1,
+        "seller_id": 3,
+        "date_created": "2017-08-01T23:00:24.664Z",
+        "date_modified": "2017-08-01T23:00:24.664Z"
+    }
+},
+{
+    "model": "api.sellerrating",
+    "pk": 2,
+    "fields": {
+        "rating": 4,
+        "comment": "Really nice guy, too bad he spit on me once and didn't say sorry.",
+        "post_id": 7,
+        "rater_id": 4,
+        "seller_id": 3,
+        "date_created": "2017-07-31T14:08:33.354Z",
+        "date_modified": "2017-07-31T14:08:33.354Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 1,
+    "fields": {
+        "post_id": 2,
+        "user_id": 2,
+        "date_created": "2017-07-25T14:35:17.009Z",
+        "date_modified": "2017-07-25T14:35:17.009Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 2,
+    "fields": {
+        "post_id": 2,
+        "user_id": 3,
+        "date_created": "2017-07-25T16:09:30.554Z",
+        "date_modified": "2017-07-25T16:09:30.554Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 3,
+    "fields": {
+        "post_id": 2,
+        "user_id": 4,
+        "date_created": "2017-07-25T23:57:18.398Z",
+        "date_modified": "2017-07-25T23:57:18.398Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 4,
+    "fields": {
+        "post_id": 8,
+        "user_id": 1,
+        "date_created": "2017-07-29T15:15:01.150Z",
+        "date_modified": "2017-07-29T15:15:01.150Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 1,
+    "fields": {
+        "body": "yo BROTHA, wus good DUDE?",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:35:14.656Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 2,
+    "fields": {
+        "body": "i saw you got this cpu? 1600?",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:35:22.332Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 2,
+    "fields": {
+        "body": "hey, yeah i have it",
+        "owner_id": 1,
+        "send_userid": 1,
+        "receive_userid": 2,
+        "date_created": "2017-07-25T18:37:10.006Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 3,
+    "fields": {
+        "body": "yaa like can you bump down to 200? i only got 200 bones 4 2day",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:37:58.121Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 4,
+    "fields": {
+        "body": "gotta hook a BROTHA UP with the good good, u no?",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:38:12.998Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 5,
+    "fields": {
+        "body": "im not really sure what you are saying, but i can do 250",
+        "owner_id": 1,
+        "send_userid": 1,
+        "receive_userid": 2,
+        "date_created": "2017-07-25T18:38:34.487Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "aah yaa",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:38:41.126Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "GOOD MAN, ill cum pick up tomorrow",
+        "owner_id": 2,
+        "send_userid": 2,
+        "receive_userid": 1,
+        "date_created": "2017-07-25T18:38:50.326Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "soudns good",
+        "owner_id": 1,
+        "send_userid": 1,
+        "receive_userid": 2,
+        "date_created": "2017-07-25T18:39:11.887Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "hey, you still got that psu?",
+        "owner_id": 1,
+        "send_userid": 1,
+        "receive_userid": 3,
+        "date_created": "2017-07-29T15:15:33.367Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "i'll buy it off you for 80",
+        "owner_id": 1,
+        "send_userid": 1,
+        "receive_userid": 3,
+        "date_created": "2017-07-29T15:15:44.981Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "OMG thats the best price ever! SOLD!",
+        "owner_id": 3,
+        "send_userid": 3,
+        "receive_userid": 1,
+        "date_created": "2017-07-29T15:16:59.510Z"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 1,
+    "fields": {
+        "post_id": 3,
+        "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/15727360_10158278200185001_1870468928873308154_n.jpg?oh=109626d46dd8d38ebbaf8b3b824b5039&oe=59EC27F7"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 2,
+    "fields": {
+        "post_id": 3,
+        "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/13237592_10157160024270001_5847296561128403983_n.jpg?oh=f73e0432d6b2fe825bb56313d32d0a56&oe=59EE9837"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 3,
+    "fields": {
+        "post_id": 3,
+        "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t31.0-8/1025311_10153123619630001_81806131_o.jpg?oh=5d9d4771fab6c1d62a5a880689cd1e15&oe=59F82049"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 4,
+    "fields": {
+        "post_id": 4,
+        "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/12832522_10153307163855518_3906708949424262009_n.jpg?oh=35fdd9d59dc7ea9faa612e6b1e01e747&oe=5A270AB8"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 5,
+    "fields": {
+        "post_id": 4,
+        "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t31.0-8/12697244_840448579400047_5860007111914278047_o.jpg?oh=71eb5ea69765bfb7e8d8a6f374f8dbd8&oe=59EE5858"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 6,
+    "fields": {
+        "post_id": 1,
+        "url": "https://images.evga.com/products/gallery/08G-P4-6171-KR_XL_1.jpg"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 7,
+    "fields": {
+        "post_id": 1,
+        "url": "https://tpucdn.com/reviews/EVGA/GTX_1070_SC/images/small.png"
+    }
+},
+{
+    "model": "api.image",
+    "pk": 8,
+    "fields": {
+        "post_id": 2,
+        "url": "https://images10.newegg.com/NeweggImage/ProductImageCompressAll300/19-113-434%20(front).jpg"
     }
 }
 ]

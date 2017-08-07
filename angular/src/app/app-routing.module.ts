@@ -12,12 +12,14 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ReportComponent } from './report/report.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { Sale } from './_models/sale';
 import { SaleService } from './_services/sale.service';
 import { HttpModule } from '@angular/http';
+import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 
 
 const routes: Routes = [
@@ -43,6 +45,10 @@ const routes: Routes = [
       component: ProfileComponent
     },
     {
+      path: 'editprofile',
+      component: EditProfileComponent
+    },
+    {
       path: 'form',
       component: FormComponent
     },
@@ -61,6 +67,10 @@ const routes: Routes = [
     {
       path: 'detail/:id',
       component: SaleDetailComponent
+    },
+    {
+      path: 'report/:id',
+      component: ReportComponent
     },
 ];
 

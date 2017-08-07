@@ -26,10 +26,13 @@ export class SaleDetailComponent implements OnInit {
 
     ngOnInit(): any {
       this.route.paramMap
-        .switchMap((params: ParamMap) => this.saleService.getSale(+params.get('id')))
+        .switchMap((params: ParamMap) => this.saleService.getPublicSaleDetails(+params.get('id')))
         .subscribe(sale => {this.sale = sale;
-                            this.lat = +sale.latitude;
-                            this.lng = +sale.longitude;
+                            this.lat = +this.sale.latitude;
+                            this.lng = +this.sale.longitude;
+                            console.log(this.sale);
+                            console.log(this.lat);
+                            console.log(this.lng);
                             });
      }
 

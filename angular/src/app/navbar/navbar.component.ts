@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
         {'title': 'Motherboard', 'link': '#' },
         {'title': 'Memory', 'link': '#' },
         {'title': 'Storage', 'link': '#' },
-        {'title': 'Video Card', 'link': '#' },
         {'title': 'Power Supply', 'link': '#' },
         {'title': 'Case', 'link': '#' },
       ]
