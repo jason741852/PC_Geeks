@@ -23,19 +23,20 @@ class PostSerializer(serializers.ModelSerializer):
             'date_modified',
         )
 
-    def validate(self, data):
-        price = data.get('price')
-        latitude = data.get('latitude')
-        longitude = data.get('longitude')
-
-        if price is not None and price < 0:
+    def validate_price(self, value):
+        if value < 0:
             raise ValidationError('The price cannot be negative')
-        if latitude is not None and (latitude < Decimal(-90) or latitude > Decimal(90)):
-            raise ValidationError('Latitude must be between -90 and 90')
-        if longitude is not None and (longitude < Decimal(-180) or longitude > Decimal(180)):
-            raise ValidationError('Latitude must be between -180 and 180')
+        return value
 
-        return data
+    def validate_latitude(self, value):
+        if value < Decimal(-90) or value > Decimal(90):
+            raise ValidationError('Latitude must be between -90 and 90')
+        return value
+
+    def validate_longitude(self, value):
+        if value < Decimal(-180) or value > Decimal(180):
+            raise ValidationError('Latitude must be between -180 and 180')
+        return value
 
     def to_representation(self, instance):
         ret = OrderedDict()
