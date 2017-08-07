@@ -1,1 +1,10 @@
-Hi
+<a *ngFor="let message of messages" class="col-1-4 loopDisplay">
+        <button (click)="getConversation(message.post_id, message.owner)"> <h1>{{message.owner}}</h1>
+        <p>{{message.body}}  {{message.date_created}}</p> </button>
+        <a *ngFor="let msg of convo; let last = last;" class="col-1-4 loopDisplay">
+          <p>{{msg.body}} {{msg.date_created}}</p>
+        </a>
+        <input type="text" [(ngModel)]="new_message" #name="ngModel" />
+        <button (click)="createMessage(message)" class="btn btn-primary">Send</button>
+
+</a>

@@ -8,6 +8,7 @@ from .models import *
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.exceptions import ValidationError
 import django_filters
+from django.db.models import Q
 
 
 
@@ -139,10 +140,18 @@ class UserDeleteView(generics.DestroyAPIView):
 class MessageListView(generics.ListAPIView):
     serializer_class = MessagingSerializer
     permission_classes = (IsAuthenticated,)
-    ordering = 'date_created'
+    ordering = '-date_created'
 
     def get_queryset(self):
-        return Messaging.objects.filter(owner=self.request.user)
+        return Messaging.objects.filter(Q(owner=self.request.user) | Q(receiver_id=self.request.user))
+
+class MessageHeadView(generics.ListAPIView):
+    serializer_class = MessagingSerializer
+    permission_classes = (IsAuthenticated,)
+    ordering = '-date_created'
+
+    def get_queryset(self):
+        return Messaging.objects.filter(Q(owner=self.request.user) | Q(receiver_id=self.request.user)).filter(parent_message=None)
 
 
 class MessageCreateView(generics.ListCreateAPIView):
@@ -171,12 +180,20 @@ class MessageCreateView(generics.ListCreateAPIView):
             )
 
 # Returns a conversation specifically to a Post and a Buyer
-class MessageDetailsView(generics.ListAPIView):
+class MessageConversationView(generics.ListAPIView):
     serializer_class = MessagingSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Messaging.objects.filter(post_id=self.kwargs.get('pid')).filter(owner=self.kwargs.get('bid')).prefetch_related('next_message').all()
+        #return Messaging.objects.filter(post_id=self.kwargs.get('pid')).filter(owner=self.kwargs.get('bid')).filter(Q(owner=self.request.user) | Q(receiver_id=self.request.user)).filter(parent_message=None).("next_message").all()
+        return Messaging.objects.filter(post_id=self.kwargs.get('pid')).filter(Q(owner=self.request.user) | Q(receiver_id=self.request.user)).filter(Q(owner=self.kwargs.get('bid')) | Q(receiver_id=self.kwargs.get('bid')))
+        #return Messaging.objects.filter(post_id=self.kwargs.get('pid')).filter(owner=self.kwargs.get('bid')).prefetch_related('next_message').all()
+
+
+
+"""
+    Potential_buyer Views
+"""
 
 class CreatePotentialBuyerView(generics.ListCreateAPIView):
     serializer_class = PotentialbuyerSerializer

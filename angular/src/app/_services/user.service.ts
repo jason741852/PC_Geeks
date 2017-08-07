@@ -14,7 +14,7 @@ export class UserService {
             this.baseUrl,
             this.createHeader()
         ).map(
-            (response: Response) => response.json()
+            (response: Response) => response.json() as User[]
         );
     }
 

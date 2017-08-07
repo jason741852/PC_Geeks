@@ -15,6 +15,7 @@ import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service'
 import { UserService } from './_services/user.service'
 import { PotentialBuyerService } from './_services/potential_buyer.service'
+import { MessageService } from './_services/message.service'
 
 //Components
 import { AppComponent } from './app.component';
@@ -64,6 +65,7 @@ import { MessageComponent } from './message/message.component'
     AuthenticationService,
     UserService,
     PotentialBuyerService,
+    MessageService,
     BaseRequestOptions
   ],
   bootstrap: [AppComponent]
