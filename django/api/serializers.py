@@ -29,7 +29,7 @@ class PostSerializer(serializers.ModelSerializer):
         longitude = data.get('longitude')
 
         if price is not None and price < 0:
-            raise ValidationError('Price cannot be negative')
+            raise ValidationError('The price cannot be negative')
         if latitude is not None and (latitude < Decimal(-90) or latitude > Decimal(90)):
             raise ValidationError('Latitude must be between -90 and 90')
         if longitude is not None and (longitude < Decimal(-180) or longitude > Decimal(180)):
@@ -197,12 +197,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value):
         if len(value) < 6:
-            raise ValidationError('Password must be at least 6 characters long')
+            raise ValidationError('Your password must be at least 6 characters long')
         return value
 
     def validate_phone_number(self, value):
         if re.search('[a-zA-Z]', value):
-            raise ValidationError('Phone number should not contain any of the characters from the alphabet')
+            raise ValidationError('Your phone number should not contain any of the characters from the alphabet')
         return value
 
     def create(self, validated_data):
@@ -283,7 +283,7 @@ class PotentialBuyerSerializer(serializers.ModelSerializer):
 
         for p in potential_buyer_list:
             if p.user_id == user:
-                raise ValidationError('You are on the list already')
+                raise ValidationError('You are already interested in this listing')
 
         return data
 

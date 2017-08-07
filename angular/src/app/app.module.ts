@@ -35,6 +35,7 @@ import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.componen
 import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { ReportComponent } from './report/report.component';
+import { AlertComponent } from "./alert/alert.component";
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { ReportComponent } from './report/report.component';
     DashboardFilterComponent,
     ProfileComponent,
     ReportComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
