@@ -17,7 +17,8 @@ export class FormComponent implements OnInit {
   sales: Sale[];
   selectedSale: Sale;
   saleForm: FormGroup;
-  getImages: Image[]
+  images: any[] = [];
+  imageUrl: string = '';
   manufacturer = [' ', 'AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
@@ -51,10 +52,7 @@ export class FormComponent implements OnInit {
     this.getSales();
     this.saleForm = new FormGroup({
     'title': new FormControl(this.createRequest.title, [Validators.required]),
-
     'item': new FormControl(this.createRequest.item, [Validators.required]),
-    'images': new FormControl(this.createRequest.images, [Validators.required]),
-
     'category': new FormControl(this.createRequest.category),
     'quality': new FormControl(this.createRequest.quality),
     'manufacturer': new FormControl(this.createRequest.manufacturer),
@@ -76,20 +74,29 @@ export class FormComponent implements OnInit {
       this.saleForm.get('location').value,
       this.saleForm.get('body').value)
       .then(sale => {
-        this.saleService.createImages(
-          sale.id,
-          this.saleForm.get('images').value)
-          .then(getImage => {
-          });
+        for (let i in this.images) {
+          this.saleService.addImage(sale.id, this.images[i]);
+        }
+        this.router.navigate(['/detail/' + sale.id]);
       });
+  }
 
+  addImage() {
+    if (this.images.length < 5) {
+      this.images.push(this.imageUrl);
+      this.imageUrl = '';
+    }
+    else {
+      // error message here
+    }
+  }
 
-
+  removeImage(url: string) {
+    this.images.splice(this.images.indexOf(url), 1);
   }
 
   get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
-  get images() { return this.saleForm.get('images'); }
 
   get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }

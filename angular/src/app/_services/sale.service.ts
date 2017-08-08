@@ -11,8 +11,6 @@ export class SaleService {
 
     private salesUrl = 'http://localhost:4200/api/posts/';  // URL to web api
 
-    private image: Image[] = []
-
 
     constructor(private http: Http) { }
 
@@ -31,14 +29,12 @@ export class SaleService {
             .catch(this.handleError);
     }
     // ------
-  createImages(id: number, images:[string],): Promise<Image> {
-    const url = `${this.salesUrl}${id}/images/new/`;
-
-
-    return this.http
-
-      .post(url, JSON.stringify ({url: images}),
-      this.createHeader())
+    addImage(id: number, url: string): Promise<Image> {
+        console.log(url);
+      return this.http.post(
+        this.salesUrl + id + '/images/new/',
+        JSON.stringify ({url: url}),
+        this.createHeader())
       .toPromise()
       .then(response => response.json() as Image)
       .catch(this.handleError);

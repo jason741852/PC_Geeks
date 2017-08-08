@@ -9,3 +9,8 @@ margin: 0 auto;
 div{
     padding:5px;
 }
+
+.thumbnail {
+    padding-top: 240px;
+    padding-left: 320px;
+}
