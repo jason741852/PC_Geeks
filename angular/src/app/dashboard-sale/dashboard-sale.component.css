@@ -42,14 +42,17 @@ ul {
   list-style-type: none;
 }
 
-.listclass
-{
+.listclass {
     display: inline-block;
     vertical-align: top;
     float: none;
     width: 100%;
     background-color: #fff;
     margin-bottom: 10px;
+}
+
+.thumbnail {
+  padding-top:273px;
 }
 
 .imgResize{

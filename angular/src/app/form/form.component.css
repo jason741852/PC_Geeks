@@ -14,3 +14,8 @@ agm-map {
   height: 25em;
   width: 35em;
 }
+
+.thumbnail {
+    padding-top: 240px;
+    padding-left: 320px;
+}

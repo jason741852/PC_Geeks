@@ -7,6 +7,7 @@ import { } from '@types/googlemaps';
 
 import { SaleService } from '../_services/sale.service';
 import { AlertService } from '../_services/alert.service';
+import {google, google} from "@agm/core/services/google-maps-types";
 
 
 @Component({
@@ -16,6 +17,8 @@ import { AlertService } from '../_services/alert.service';
 })
 export class FormComponent implements OnInit {
   saleForm: FormGroup;
+  images: any[] = [];
+  imageUrl: string = '';
   manufacturer = ['AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
@@ -26,7 +29,9 @@ export class FormComponent implements OnInit {
   category = ['CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
   createRequest = {
+      title: '',
       item: '',
+      images: [],
       category: this.category[0],
       quality: this.quality[0],
       manufacturer: this.manufacturer[0],
@@ -58,6 +63,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleForm = new FormGroup({
+      'title': new FormControl(this.createRequest.title, [Validators.required]),
       'item': new FormControl(this.createRequest.item, [Validators.required]),
       'category': new FormControl(this.createRequest.category),
       'quality': new FormControl(this.createRequest.quality),
@@ -117,6 +123,7 @@ export class FormComponent implements OnInit {
     if (this.saleForm.valid) {
       this.saleService.create(
       this.saleForm.get('item').value,
+      this.saleForm.get('title').value,
       this.saleForm.get('category').value,
       this.saleForm.get('quality').value,
       this.saleForm.get('manufacturer').value,
@@ -126,6 +133,9 @@ export class FormComponent implements OnInit {
       this.longitude,
       this.saleForm.get('body').value)
         .then(sale => {
+          for (let i in this.images) {
+            this.saleService.addImage(sale.id, this.images[i]);
+          }
           this.alertService.success('Your post has been created!', true);
           this.loc.replaceState('/dashboard');
           this.router.navigate(['/detail/' + sale.id]);
@@ -136,7 +146,23 @@ export class FormComponent implements OnInit {
     }
   }
 
+  addImage() {
+    if (this.images.length < 5) {
+      this.images.push(this.imageUrl);
+      this.imageUrl = '';
+    }
+    else {
+      // error message here
+    }
+  }
+
+  removeImage(url: string) {
+    this.images.splice(this.images.indexOf(url), 1);
+  }
+
+  get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
+
   get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }
   //get quality() { return this.saleForm.get('quality'); }

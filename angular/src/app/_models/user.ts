@@ -6,6 +6,7 @@ export class User {
     first_name: string;
     last_name: string;
     email: string;
+
     phone_number: string;
     buyer_ratings: Rating[];
     seller_ratings: Rating[];

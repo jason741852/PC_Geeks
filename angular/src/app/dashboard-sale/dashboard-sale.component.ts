@@ -10,9 +10,7 @@ import { SaleService } from '../_services/sale.service';
   styleUrls: ['./dashboard-sale.component.css'],
 })
 export class DashboardSaleComponent implements OnInit {
-  sell = 'selling';
   sales: Sale[] = [];
-  image: string;
 
   //List Classes
   /*
@@ -39,6 +37,8 @@ export class DashboardSaleComponent implements OnInit {
   }
   */
 
+  image: string
+
   constructor(private saleService: SaleService, private router: Router) { }
 
   ngOnInit(): void {
@@ -51,5 +51,4 @@ export class DashboardSaleComponent implements OnInit {
     this.router.navigate(['/dashboard/' + saleItem])
     location.reload()
   }
-  
 }
