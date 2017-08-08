@@ -13,6 +13,8 @@
           <li class="list-group-item">Price: {{sale.price}}.00</li>
           <li class="list-group-item">Location: {{sale.location}}</li>
           <li class="list-group-item">Description: {{sale.body}}</li>
+          <li class="list-group-item">Description: {{sale.owner_id}}</li>
+
           <div class = "images">
             <img src="{{sale.images['0']}}" style="width:128px;height:128px;">
             <img src="{{sale.images['1']}}" style="width:128px;height:128px;">
@@ -21,6 +23,9 @@
             <img src="{{sale.images['4']}}" style="width:128px;height:128px;">
           </div>
         </ul>
+      </div>
+      <div *ngIf="sale.owner_id == currentUser.id" class ="deleteButton">
+        <button (click)="deletePost()" class="btn btn-danger">Delete Post</button>
       </div>
 
       <button (click)="goBack()" class="btn btn-primary">Back</button>

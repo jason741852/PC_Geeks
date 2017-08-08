@@ -36,6 +36,17 @@ export class CurrentUserService {
             this.handleError
         );
     }
+    deletePost(id:number): Promise<Sale> {
+      return this.http.patch(
+        this.baseUrl + "posts/delete/" + id +"/", '',
+        this.createAuthHeader()
+      ).toPromise().then(
+        (res: Response) => res
+      ).catch(
+        this.handleError
+      );
+    }
+
 
     getPostDetails(id: number): Promise<Sale> {
         return this.http.get(
