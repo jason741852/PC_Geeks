@@ -42,6 +42,8 @@ img {
 
 ul {
   list-style-type: none;
+  padding-left: 0;
+
 }
 
 .listclass {
@@ -54,13 +56,7 @@ ul {
 }
 
 .thumbnail {
-  padding-top: 240px;
-  padding-left: 320px;
-}
-
-.imgResize{
-  width:100px;
-  height:62.5;
+  height: 230px;
 }
 
 .divResize{
@@ -83,4 +79,12 @@ button {
 
 .postImage {
     padding: 2px;
+}
+
+.offset-md-1{
+  margin-left: 0;
+}
+
+.titleBox{
+  height:40px;
 }
