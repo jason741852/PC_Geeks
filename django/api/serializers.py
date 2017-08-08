@@ -5,6 +5,7 @@ from rest_framework.relations import PKOnlyObject
 from .models import *
 from collections import OrderedDict
 from decimal import *
+import re
 
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,19 +23,20 @@ class PostSerializer(serializers.ModelSerializer):
             'date_modified',
         )
 
-    def validate(self, data):
-        price = data.get('price')
-        latitude = data.get('latitude')
-        longitude = data.get('longitude')
+    def validate_price(self, value):
+        if value < 0:
+            raise ValidationError('The price cannot be negative')
+        return value
 
-        if price is not None and price < 0:
-            raise ValidationError('Price cannot be negative')
-        if latitude is not None and (latitude < Decimal(-90) or latitude > Decimal(90)):
+    def validate_latitude(self, value):
+        if value < Decimal(-90) or value > Decimal(90):
             raise ValidationError('Latitude must be between -90 and 90')
-        if longitude is not None and (longitude < Decimal(-180) or longitude > Decimal(180)):
-            raise ValidationError('Latitude must be between -180 and 180')
+        return value
 
-        return data
+    def validate_longitude(self, value):
+        if value < Decimal(-180) or value > Decimal(180):
+            raise ValidationError('Latitude must be between -180 and 180')
+        return value
 
     def to_representation(self, instance):
         ret = OrderedDict()
@@ -194,6 +196,16 @@ class UserSerializer(serializers.ModelSerializer):
             'date_joined',
         )
 
+    def validate_password(self, value):
+        if len(value) < 6:
+            raise ValidationError('Your password must be at least 6 characters long')
+        return value
+
+    def validate_phone_number(self, value):
+        if re.search('[a-zA-Z]', value):
+            raise ValidationError('Your phone number should not contain any of the characters from the alphabet')
+        return value
+
     def create(self, validated_data):
         user = User(
             username=validated_data['username'],
@@ -272,7 +284,7 @@ class PotentialBuyerSerializer(serializers.ModelSerializer):
 
         for p in potential_buyer_list:
             if p.user_id == user:
-                raise ValidationError('You are on the list already')
+                raise ValidationError('You are already interested in this listing')
 
         return data
 

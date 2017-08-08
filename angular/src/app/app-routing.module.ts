@@ -13,13 +13,14 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReportComponent } from './report/report.component';
+import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { ChangePasswordComponent } from "./change-password/change-profile.component";
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { Sale } from './_models/sale';
 import { SaleService } from './_services/sale.service';
 import { HttpModule } from '@angular/http';
-import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
     {
       path: 'editprofile',
       component: EditProfileComponent
+    },
+    {
+        path: 'changepassword',
+        component: ChangePasswordComponent
     },
     {
       path: 'form',

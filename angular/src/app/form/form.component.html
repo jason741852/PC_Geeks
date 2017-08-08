@@ -5,10 +5,10 @@
     <div class="form-group">
       <label for="item">Sale item:</label>
       <input id="item" class="form-control" formControlName="item" required/>
-      <div *ngIf="item.invalid && (item.dirty || item.touched)"
+      <div *ngIf="item.invalid && (item.dirty || item.touched || submitted)"
       class="alert alert-danger">
         <div *ngIf="item.errors.required">
-          Name is required.
+          The name of your item is required.
         </div>
       </div>
     </div>
@@ -27,16 +27,16 @@
       Sale Price:</label>
       <input id="price" class="form-control"
       formControlName="price" class="form-control" required/>
-      <div *ngIf="price.invalid && (price.dirty || price.touched)"
+      <div *ngIf="price.invalid && (price.dirty || price.touched || submitted)"
       class="alert alert-danger">
         <div *ngIf="price.errors.required">
             Price is required.
         </div>
         <div *ngIf="price.errors.min">
-            Price must be a number and greater than 0.
+            Price must greater than 0.
         </div>
         <div *ngIf="price.errors.pattern">
-            Must be a number.
+            Price must be a number.
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
     <div class="form-group">
       <label for="location">Location for transaction:</label>
       <input placeholder="name of location" id="location" class="form-control" formControlName="location" required/>
-      <div *ngIf="location.invalid && (location.dirty || location.touched)"
+      <div *ngIf="location.invalid && (location.dirty || location.touched || submitted)"
       class="alert alert-danger">
         <div *ngIf="location.errors.required">
           Location is required.
@@ -76,15 +76,15 @@
       <label for="body">Description</label>
       <textarea class="descriptionBox form-control" formControlName="body" required
       rows="5" id="comment"></textarea>
-      <div *ngIf="body.invalid && (body.dirty || body.touched)"
+      <div *ngIf="body.invalid && (body.dirty || body.touched || submitted)"
       class="alert alert-danger">
         <div *ngIf="body.errors.required">
-          Need to include a desciprition or additional notes
+          A description or additional notes must be provided
         </div>
       </div>
     </div>
 
-    <button (click)="add()" class="btn btn-primary" routerLink="/dashboard">
+    <button (click)="add()" class="btn btn-primary">
       Add
     </button>
 
