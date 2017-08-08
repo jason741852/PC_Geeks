@@ -16,6 +16,11 @@ export class MainPageComponent implements OnInit {
   	private sub: any;
 	subscribePost = '';
 	email = '';
+	contactUs = '';
+	personName = '';
+	subject = '';
+	info = '';
+	contactEmail ='';
 	
 	subscribe() {
 	    this.subscribePost = 'You are subscribed';
@@ -30,6 +35,14 @@ export class MainPageComponent implements OnInit {
 	}
 
 	send(){
+		this.contactUs = 'Contact Admins';
+	    console.log(this.email);
+	    this.http
+  		.post('/api/report/', {message:"Name: " + this.personName + " Email: " +this.contactEmail + " Subject: " + this.subject + " Message: " + this.info, id:8888888},)
+  		.subscribe(result => 
+  			{
+  				console.log(result);
+  			});
 		alert("We have received your feedback!");
 	}
 
