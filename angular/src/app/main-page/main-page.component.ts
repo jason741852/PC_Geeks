@@ -46,6 +46,10 @@ export class MainPageComponent implements OnInit {
 		alert("We have received your feedback!");
 	}
 
+	facebook(){
+		window.location.href = 'https://www.facebook.com';
+	}
+
   
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
