@@ -26,15 +26,30 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="images">Image:</label>
-      <input id="images" class="form-control" formControlName="images" required/>
-      <div *ngIf="images.invalid && (images.dirty || images.touched)"
-           class="alert alert-danger">
-        <div *ngIf="images.errors.required">
-          Image is required.
-        </div>
-      </div>
+    <div class="form-group images">
+      <label for="images1">Image 1:</label>
+      <input id="images1" class="form-control" formControlName="images1" />
+
+    </div>
+    <div class="form-group images">
+      <label for="images2">Image 2:</label>
+      <input id="images2" class="form-control" formControlName="images2" />
+
+    </div>
+    <div class="form-group images">
+      <label for="images3">Image 3:</label>
+      <input id="images3" class="form-control" formControlName="images3" />
+
+    </div>
+    <div class="form-group images">
+      <label for="images4">Image 4:</label>
+      <input id="images4" class="form-control" formControlName="images4" />
+
+    </div>
+    <div class="form-group images">
+      <label for="images5">Image 5:</label>
+      <input id="images5" class="form-control" formControlName="images5" />
+
     </div>
 
     <div class="form-group">

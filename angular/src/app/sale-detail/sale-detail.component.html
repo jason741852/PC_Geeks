@@ -13,9 +13,32 @@
           <li class="list-group-item">Price: {{sale.price}}.00</li>
           <li class="list-group-item">Location: {{sale.location}}</li>
           <li class="list-group-item">Description: {{sale.body}}</li>
+          <div class = "images" id ="pageone">
+            <a href="#myPopup" data-rel="popup" data-position-to="window">
+              <img src="{{sale.images['0']}}" style="width:128px;height:128px;"></a>
+            <a href="#myPopup" data-rel="popup" data-position-to="window">
+              <img src="{{sale.images['1']}}" style="width:128px;height:128px;"></a>
+            <a href="#myPopup" data-rel="popup" data-position-to="window">
+              <img src="{{sale.images['2']}}" style="width:128px;height:128px;"></a>
+            <a href="#myPopup" data-rel="popup" data-position-to="window">
+              <img src="{{sale.images['3']}}" style="width:128px;height:128px;"></a>
+            <a href="#myPopup" data-rel="popup" data-position-to="window">
+              <img src="{{sale.images['4']}}" style="width:128px;height:128px;"></a>
+
+            <div data-role="popup" id="myPopup">
+              <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="skaret.jpg" style="width:800px;height:400px;" alt="Skaret View">
+            </div>
+
+          </div>
+
+
+
         </ul>
       </div>
-    <button (click)="goBack()" class="btn btn-primary">Back</button>
+
+
+
+      <button (click)="goBack()" class="btn btn-primary">Back</button>
     </div>
 
     <div class="col-md-6">

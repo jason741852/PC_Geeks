@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { Sale } from '../_models/sale';
 import { SaleService } from '../_services/sale.service';
+import {Image} from "../_models/image";
 
 @Component({
   selector: 'app-sale-detail',
@@ -14,7 +15,6 @@ import { SaleService } from '../_services/sale.service';
 export class SaleDetailComponent implements OnInit {
     sale: Sale;
     params: ParamMap;
-
     lat: number;
     lng: number;
 
@@ -34,6 +34,7 @@ export class SaleDetailComponent implements OnInit {
                             console.log(this.lat);
                             console.log(this.lng);
                             });
+
      }
 
     goBack(): void {

@@ -15,9 +15,7 @@ import {Image} from "../_models/image";
 })
 export class FormComponent implements OnInit {
   sales: Sale[];
-  selectedSale: Sale;
   saleForm: FormGroup;
-  getImages: Image[]
   manufacturer = [' ', 'AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
@@ -30,7 +28,11 @@ export class FormComponent implements OnInit {
   createRequest = {
       title: '',
       item: '',
-      images: [],
+      images1: '',
+      images2: '',
+      images3: '',
+      images4: '',
+      images5: '',
       category: this.category[0],
       quality: this.quality[0],
       manufacturer: this.manufacturer[0],
@@ -53,7 +55,12 @@ export class FormComponent implements OnInit {
     'title': new FormControl(this.createRequest.title, [Validators.required]),
 
     'item': new FormControl(this.createRequest.item, [Validators.required]),
-    'images': new FormControl(this.createRequest.images, [Validators.required]),
+    'images1': new FormControl(this.createRequest.images1),
+    'images2': new FormControl(this.createRequest.images2),
+    'images3': new FormControl(this.createRequest.images3),
+    'images4': new FormControl(this.createRequest.images4),
+    'images5': new FormControl(this.createRequest.images5),
+
 
     'category': new FormControl(this.createRequest.category),
     'quality': new FormControl(this.createRequest.quality),
@@ -76,9 +83,30 @@ export class FormComponent implements OnInit {
       this.saleForm.get('location').value,
       this.saleForm.get('body').value)
       .then(sale => {
+          this.saleService.createImages(
+            sale.id,
+            this.saleForm.get('images1').value)
+            .then(getImage => {
+            });
+
         this.saleService.createImages(
           sale.id,
-          this.saleForm.get('images').value)
+          this.saleForm.get('images2').value)
+          .then(getImage => {
+          });
+        this.saleService.createImages(
+          sale.id,
+          this.saleForm.get('images3').value)
+          .then(getImage => {
+          });
+        this.saleService.createImages(
+          sale.id,
+          this.saleForm.get('images4').value)
+          .then(getImage => {
+          });
+        this.saleService.createImages(
+          sale.id,
+          this.saleForm.get('images5').value)
           .then(getImage => {
           });
       });
@@ -89,7 +117,11 @@ export class FormComponent implements OnInit {
 
   get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
-  get images() { return this.saleForm.get('images'); }
+  get images1() { return this.saleForm.get('images1'); }
+  get images2() { return this.saleForm.get('images2'); }
+  get images3() { return this.saleForm.get('images3'); }
+  get images4() { return this.saleForm.get('images4'); }
+  get images5() { return this.saleForm.get('images5'); }
 
   get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }
