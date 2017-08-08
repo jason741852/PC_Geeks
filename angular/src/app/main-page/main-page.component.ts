@@ -26,7 +26,7 @@ export class MainPageComponent implements OnInit {
   			{
   				console.log(result);
   			});
-  		this.router.navigate(['./main']);
+  		this.router.navigate(['./dashboard']);
 	}
 
   
