@@ -53,6 +53,20 @@ export class MainPageComponent implements OnInit {
 	instagram(){
 		window.location.href = 'https://www.instagram.com';
 	}
+	snapchat(){
+		window.location.href = 'https://www.snapchat.com';
+	}
+
+	pinterest(){
+		window.location.href = 'https://www.pinterest.com';
+	}
+	twitter(){
+		window.location.href = 'https://www.twitter.com';
+	}
+
+	linkedin(){
+		window.location.href = 'https://www.linkedin.com';
+	}
 
   
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
