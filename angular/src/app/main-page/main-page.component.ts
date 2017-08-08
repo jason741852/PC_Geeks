@@ -50,6 +50,10 @@ export class MainPageComponent implements OnInit {
 		window.location.href = 'https://www.facebook.com';
 	}
 
+	instagram(){
+		window.location.href = 'https://www.instagram.com';
+	}
+
   
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
