@@ -7,7 +7,6 @@ import { } from '@types/googlemaps';
 
 import { SaleService } from '../_services/sale.service';
 import { AlertService } from '../_services/alert.service';
-import { google } from "@agm/core/services/google-maps-types";
 
 
 @Component({
