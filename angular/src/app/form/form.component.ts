@@ -94,6 +94,9 @@ export class FormComponent implements OnInit {
           }
 
           //set latitude, longitude and zoom
+          this.latitude = parseFloat(this.latitude.toFixed(6));
+          this.longitude = parseFloat(this.longitude.toFixed(9));
+
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
@@ -122,8 +125,8 @@ export class FormComponent implements OnInit {
       this.saleForm.get('manufacturer').value,
       this.saleForm.get('price').value,
       this.saleForm.get('location').value,
-      this.latitude,
-      this.longitude,
+      this.latitude = parseFloat(this.latitude.toFixed(3)),
+      this.longitude = parseFloat(this.longitude.toFixed(3)),
       this.saleForm.get('body').value)
         .then(sale => {
           this.alertService.success('Your post has been created!', true);

@@ -6,3 +6,8 @@
 .navbar-light .navbar-nav .nav-link {
     color:black;
 }
+
+.backButton{
+    position: static;
+    float: right;
+}

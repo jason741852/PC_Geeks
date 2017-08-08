@@ -5,6 +5,8 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../_services/authentication.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   moduleId: module.id,
@@ -15,6 +17,7 @@ import { AuthenticationService } from '../_services/authentication.service';
   ],
   templateUrl: './navbar.component.html'
 })
+
 export class NavbarComponent implements OnInit {
   private menuItemsArray: any[] = [
     {'title': 'Categories', 'link': '#',
@@ -67,10 +70,12 @@ export class NavbarComponent implements OnInit {
       ]
     },
   ];
+
   public filter: string;
-
-  constructor(private router: Router, public auth: AuthenticationService
-
+  constructor(
+    private router: Router, 
+    public auth: AuthenticationService,
+    private location: Location
   ) {}
   public onMenuClose() {
     console.log('menu closed');
@@ -78,6 +83,7 @@ export class NavbarComponent implements OnInit {
   public onMenuOpen() {
     console.log('menu Opened');
   }
+
   private onItemSelect(item: any) {
 
     if (item.title === 'CPU') {
@@ -99,6 +105,18 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     this.auth.logout();
+  }
+  
+  sideBar_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+  
+  sideBar_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

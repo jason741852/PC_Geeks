@@ -1,27 +1,37 @@
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;margin-top:1em;" id="mySidebar">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
+<button class="w3-button w3-xlarge w3-hide-large sideButton" (click)="sideBar_open()">&#9776;</button>
+<div class="w3-collapse w3-animate-left w3-sidebar w3-bar-block w3-white w3-top" 
+style="z-index:3;width:250px;margin-top:1em;" id="mySidebar">
 
+  <button class="navbar-toggler navbar-toggler-right" 
+      type="button" data-target="#navbarNavDropdown" 
+      aria-controls="navbarNavDropdown" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <cuppa-slidemenu [menulist]="menuItemsArray" 
+  (open)="onMenuOpen()" (close)="onMenuClose()" 
+  (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu>
+  
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <ul class="w3-bar-item w3-button">
+      <button (click)="sideBar_close()" class="w3-bar-item w3-large w3-hide-large">Close &times;</button>
+   
+    <ul>
       <a class="w3-bar-item w3-button" routerLink="/">Home</a>
+      <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sale</a>
     </ul>
-    <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
+    <ul *ngIf="!auth.isLoggedIn()">
       <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
-    </ul>
-    <ul *ngIf="!auth.isLoggedIn()" class="w3-bar-item w3-button">
       <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
     </ul>
-    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
+    <ul *ngIf="auth.isLoggedIn()">
       <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
-    </ul>
-    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
       <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
-    </ul>
-    <ul *ngIf="auth.isLoggedIn()" class="w3-bar-item w3-button">
       <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
     </ul>
+  
   </div>
-</nav>
+</div>
+<button (click)="goBack()" class="btn btn-primary detailButton backButton">Back</button>
+
