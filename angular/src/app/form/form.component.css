@@ -9,3 +9,6 @@ margin: 0 auto;
 div{
     padding:5px;
 }
+.deleteButton {
+  height:70px
+}
