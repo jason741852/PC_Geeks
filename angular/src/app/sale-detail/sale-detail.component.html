@@ -29,5 +29,6 @@
 </div>
 </div>
 
-<button (click)="potential_buyer()" routerLink="/message/all" class="btn btn-primary">I'm Interested</button>
+<input type="text" [(ngModel)]="new_message" #name="ngModel" />
+<button (click)="createMessage(message)" routerLink="/message/all" class="btn btn-primary">I'm interested! Send seller a message</button>
 <button (click)="goBack()" class="btn btn-primary">Back</button>

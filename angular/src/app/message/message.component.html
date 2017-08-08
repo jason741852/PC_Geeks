@@ -1,11 +1,29 @@
-<a *ngFor="let message of messages" class="col-1-4 loopDisplay">
-        <button (click)="getConversation(message.post_id, message.owner, message.receiver_id)"> <h1>{{message.owner}}</h1>
-        <p>{{message.body}}  {{message.date_created}}</p> </button>
-
+<div class="row">
+<a *ngFor="let message of messages">
+      <div class="convoHeads col" (click)="getConversation(message.post_id, message.owner, message.receiver_id)">
+        <h1>{{message.post_id}}</h1>
+        <p>{{message.body}}</p>
+    </div>
 </a>
+</div>
 
 <a *ngFor="let msg of convo; let last = last;" class="col-1-4 loopDisplay">
-  <p>{{msg.body}} {{msg.date_created}}</p>
+  <div class="self_message media" *ngIf="msg.owner==currentUser.id">
+    <div class="media-body text-box-anon">
+      <h4 class="media-heading">Anon
+        <span class="small pull-right">{{msg.date_created}}</span>
+      </h4>
+      <p>{{msg.body}}</p>
+    </div>
+  </div>
+  <div class="other_message media" *ngIf="msg.owner!=currentUser.id">
+    <div class="media-body text-box-me">
+      <h4 class="media-heading">Me
+        <span class="small pull-right">{{msg.date_created}}</span>
+      </h4>
+      <p>{{msg.body}}</p>
+    </div>
+  </div>
 </a>
 
 

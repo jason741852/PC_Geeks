@@ -4,4 +4,5 @@ export class Message {
   date_created: string;
   body: string;
   post_id: number;
+  post_item: string;
 }

@@ -222,12 +222,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PotentialBuyerSerializer(serializers.ModelSerializer):
     class Meta:
         model = PotentialBuyer
-        fields = (
-            'user_id',
-            'post_id',
-            'date_created',
-            'date_modified',
-        )
+        fields = '__all__'
         read_only_fields = (
             'date_created',
             'date_modified',
