@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { Sale } from '../_models/sale';
 import { SaleService } from '../_services/sale.service';
+import {Image} from "../_models/image";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class FormComponent implements OnInit {
   sales: Sale[];
   selectedSale: Sale;
   saleForm: FormGroup;
+  getImages: Image[]
   manufacturer = [' ', 'AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
@@ -52,6 +54,7 @@ export class FormComponent implements OnInit {
 
     'item': new FormControl(this.createRequest.item, [Validators.required]),
     'images': new FormControl(this.createRequest.images, [Validators.required]),
+
     'category': new FormControl(this.createRequest.category),
     'quality': new FormControl(this.createRequest.quality),
     'manufacturer': new FormControl(this.createRequest.manufacturer),
@@ -63,22 +66,30 @@ export class FormComponent implements OnInit {
   }
 
   add(): void {
-
-    this.saleService.create(
-    this.saleForm.get('item').value,
-    this.saleForm.get('title').value,
-    ["test"],
-    this.saleForm.get('category').value,
-    this.saleForm.get('quality').value,
-    this.saleForm.get('manufacturer').value,
-    this.saleForm.get('price').value,
-    this.saleForm.get('location').value,
-    this.saleForm.get('body').value)
+   this.saleService.create(
+      this.saleForm.get('item').value,
+      this.saleForm.get('title').value,
+      this.saleForm.get('category').value,
+      this.saleForm.get('quality').value,
+      this.saleForm.get('manufacturer').value,
+      this.saleForm.get('price').value,
+      this.saleForm.get('location').value,
+      this.saleForm.get('body').value)
       .then(sale => {
         this.sales.push(sale);
-        this.selectedSale = null;
+        console.log(sale["id"]);
+      });
+
+
+
+    console.log(this.sales["id"])
+    this.saleService.createImages(
+      1,
+      this.saleForm.get('images').value)
+      .then(getImage => {
       });
   }
+
   get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
   get images() { return this.saleForm.get('images'); }

@@ -2,14 +2,15 @@
 <div class="col-lg-5 col-centered">
   <form [formGroup]="saleForm" #formDir="ngForm">
 
-    <h2>Create Sales?</h2>
+    <h2>Create Sales</h2>
+
     <div class="form-group">
       <label for="title">Post Title:</label>
       <input id="title" class="form-control" formControlName="title" required/>
-      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+      <div *ngIf="title.invalid && (images.dirty || title.touched)"
            class="alert alert-danger">
         <div *ngIf="title.errors.required">
-          Title is required.
+          title is required.
         </div>
       </div>
     </div>
@@ -26,8 +27,8 @@
     </div>
 
     <div class="form-group">
-      <label for="location">Images:</label>
-      <input id="images" class="form-control" formControlName="images/>
+      <label for="images">Image:</label>
+      <input id="images" class="form-control" formControlName="images" required/>
       <div *ngIf="images.invalid && (images.dirty || images.touched)"
            class="alert alert-danger">
         <div *ngIf="images.errors.required">

@@ -14,8 +14,8 @@
 
     <div class="row">
       <div class="item col-xs-4 col-lg-4 col-centered" *ngFor="let sale of sales | paginate: { itemsPerPage: 5, currentPage: p }">
-        <div class="thumbnail">
-          <img src="http://placehold.it/400x250/000/fff" alt="" />
+        <div class="thumbnail" [ngStyle]="{'background-image': 'url('+sale.images['0']+')'}" style="background-repeat: no-repeat; background-size: 348px 320px;">
+
           <ul>
             <li>Selling {{sale.item}}</li>
             <li>{{sale.manufacturer}}{{sale.category}}</li>
@@ -28,5 +28,5 @@
       </div>
     </div>
   </div>
-</div>
 
+</div>

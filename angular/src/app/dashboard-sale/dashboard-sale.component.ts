@@ -13,6 +13,7 @@ export class DashboardSaleComponent implements OnInit {
   sell = 'selling';
   sales: Sale[] = [];
   image: string
+  currentSale: Sale;
 
   constructor(private saleService: SaleService, private router: Router) { }
 
@@ -26,4 +27,5 @@ export class DashboardSaleComponent implements OnInit {
     this.router.navigate(['/dashboard/' + saleItem])
     location.reload()
   }
+
 }

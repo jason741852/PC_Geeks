@@ -11,7 +11,6 @@ export class SaleService {
 
     private salesUrl = 'http://localhost:4200/api/posts/';  // URL to web api
 
-    private privateSaleUrl = 'http://localhost:4200/api/self/posts/';
     private image: Image[] = []
 
 
@@ -32,28 +31,37 @@ export class SaleService {
             .catch(this.handleError);
     }
     // ------
+  createImages(id: number, images:[string],): Promise<Image> {
+    console.log(this.image)
+
+    const url = `${this.salesUrl}${id}/images/new/`;
+
+
+    return this.http
+
+      .post(url, JSON.stringify ({url: "https://images10.newegg.com/NeweggImage/ProductImage/14-487-267-S99.jpg"}),
+      this.createHeader())
+      .toPromise()
+      .then(response => response.json() as Image)
+      .catch(this.handleError);
+  }
 
   create(item: string,
             title:string,
-            images:[string],
             category: string,
             quality: string,
             manufacturer: string,
             price: number,
             location: string,
             body: string): Promise<Sale> {
-      console.log(this.image)
-    this.image.push({'id':1, 'post_id':1,'url':'1'})
-    console.log(this.image);
-    console.log(    JSON.stringify(this.image)
-    )
+
     return this.http
             .post(this.salesUrl + "new/",
 
                 JSON.stringify({
                     item: item,
                     title:title,
-                    images: this.image,
+                    image: {url: "https://images10.newegg.com/NeweggImage/ProductImage/14-487-267-S99.jpg"},
                     category: category,
                     quality: quality,
                     manufacturer: manufacturer,
