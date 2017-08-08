@@ -9,7 +9,7 @@
   font-family:arial,helvetica, sans-serif;
 }
 
-button.btn.btn-default {
+.btn {
   position: fixed;
   right: 1em;
   top: 1em;
