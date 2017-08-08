@@ -29,6 +29,10 @@ export class MainPageComponent implements OnInit {
   		alert("Subscribed! Thank you for your support!");
 	}
 
+	send(){
+		alert("We have received your feedback!");
+	}
+
   
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
