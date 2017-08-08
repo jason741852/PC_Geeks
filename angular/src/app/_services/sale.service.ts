@@ -32,14 +32,12 @@ export class SaleService {
     }
     // ------
   createImages(id: number, images:[string],): Promise<Image> {
-    console.log(this.image)
-
     const url = `${this.salesUrl}${id}/images/new/`;
 
 
     return this.http
 
-      .post(url, JSON.stringify ({url: "https://images10.newegg.com/NeweggImage/ProductImage/14-487-267-S99.jpg"}),
+      .post(url, JSON.stringify ({url: images}),
       this.createHeader())
       .toPromise()
       .then(response => response.json() as Image)
@@ -71,7 +69,7 @@ export class SaleService {
                 }),
                 this.createHeader())
             .toPromise()
-            .then(res => res.json().data as Sale)
+            .then(res => res.json() as Sale)
             .catch(this.handleError);
     }
 

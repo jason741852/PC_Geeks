@@ -76,18 +76,15 @@ export class FormComponent implements OnInit {
       this.saleForm.get('location').value,
       this.saleForm.get('body').value)
       .then(sale => {
-        this.sales.push(sale);
-        console.log(sale["id"]);
+        this.saleService.createImages(
+          sale.id,
+          this.saleForm.get('images').value)
+          .then(getImage => {
+          });
       });
 
 
 
-    console.log(this.sales["id"])
-    this.saleService.createImages(
-      1,
-      this.saleForm.get('images').value)
-      .then(getImage => {
-      });
   }
 
   get title() { return this.saleForm.get('title'); }
