@@ -2,7 +2,13 @@
   <div class="col-xl-10 offset-xl-1">
       <div class="row">
           <div class="col-lg-6 col-xs-12">
-              <label for="saleItem">Search:</label>
+                <label for="saleItem">
+                    Filter Posts:<button class="noteButton w3-button w3-circle w3-black"
+                    data-toggle="collapse" data-target="#note">?</button>
+                    <div id="note" class="collapse">
+                        Filter by category, manufacturer..
+                    </div>
+                </label>
               <input (keyup)="search()" [(ngModel)]="searchText" type="text" class="form-control" name="saleItem" id="saleItem">
           </div>
       </div>
@@ -20,7 +26,7 @@
               <div class="item">
                   <div class="col-md-10 offset-md-1 pt-md-1 pb-md-1">
                       <div class="row titleBox">
-                          <h5 class="title">{{sale.title}}</h5>
+                          <h5 class="title">{{sale.title}}: {{sale.item}}</h5>
                       </div>
                       <div class="thumbnail postImage col-lg-12 img-responsive">
                               <img src="{{sale.images[0]}}">

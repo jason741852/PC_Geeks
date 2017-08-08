@@ -88,3 +88,10 @@ button {
 .titleBox{
   height:40px;
 }
+
+.noteButton{
+  width:30px;
+}
+#note{
+  color:blue;
+}
