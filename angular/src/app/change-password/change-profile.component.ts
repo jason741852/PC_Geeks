@@ -35,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.getUser().then((currentUser: User) => {
       this.currentUser = currentUser;
       this.has_user_loaded = true;
-    });
+    }).catch(err => this.has_user_loaded = true);
   }
 
   update() {

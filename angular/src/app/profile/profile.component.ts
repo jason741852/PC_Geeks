@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { CurrentUserService } from '../_services/currentuser.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { AlertService } from "../_services/alert.service";
+import { isNullOrUndefined } from "util";
 
 @Component({
   selector: 'app-profile-detail',
@@ -14,6 +15,7 @@ import { AlertService } from "../_services/alert.service";
 })
 export class ProfileComponent implements OnInit {
   currentUser: User;
+  has_user_loaded = false;
 
   confirm_deletion = false;
   password: any;
@@ -61,7 +63,12 @@ export class ProfileComponent implements OnInit {
   }
 
   private loadSelf() {
-    this.userService.getUser().then((user: User) => this.currentUser = user);
+    this.userService.getUser().then((user: User) => {
+        this.currentUser = user;
+        this.has_user_loaded = true;
+    }).catch(err => {
+        this.has_user_loaded = true;
+    });
   }
 
   goBack(): void {
@@ -70,6 +77,10 @@ export class ProfileComponent implements OnInit {
 
   displayDeleteUserConfirmation(val: boolean) {
       this.confirm_deletion = val;
+  }
+
+  private userExists() {
+    return isNullOrUndefined(this.currentUser);
   }
 
 }
