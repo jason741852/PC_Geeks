@@ -4,33 +4,33 @@
   <form name="form" (ngSubmit)="f.form.valid && update()" #f="ngForm" novalidate>
     
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.first_name" #firstName="ngModel" required />
-      <div *ngIf="f.submitted && !firstName.valid" class="help-block" style="color:red;">First Name is required</div>
-    </div>
-
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.last_name" #lastName="ngModel" required />
-      <div *ngIf="f.submitted && !lastName.valid" class="help-block" style="color:red;">Last Name is required</div>
-    </div>
-
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="email">Email</label>
-      <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
-      <div *ngIf="f.submitted && !email.valid" class="help-block" style="color:red;">email is required</div>
+      <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [value]="currentUser.email" required />
+      <div *ngIf="(email.touched || f.submitted) && email.invalid && email.dirty" class="alert alert-danger" >Email is required</div>
+      <div *ngIf="error_messages.email" class="alert alert-danger" >Invalid email format - please ensure that your email is typed correctly</div>
     </div>
 
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-      <div *ngIf="f.submitted && !username.valid" class="help-block" style="color:red;">Username is required</div>
+      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" [value]="currentUser.username" required />
+      <div *ngIf="(username.touched || f.submitted) && username.invalid && username.dirty" class="alert alert-danger" >Username is required</div>
     </div>
 
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" class="help-block" style="color:red;">Password is required</div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.first_name" #firstName="ngModel" [value]="currentUser.first_name" required />
+      <div *ngIf="(firstName.touched || f.submitted) && firstName.invalid && firstName.dirty" class="alert alert-danger" >First name is required</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.last_name" #lastName="ngModel" [value]="currentUser.last_name" required />
+      <div *ngIf="(lastName.touched || f.submitted) && lastName.invalid && lastName.dirty" class="alert alert-danger" >Last name is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !phone_number.valid }">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="model.phone_number" #phone_number="ngModel" [value]="currentUser.phone_number" />
+      <div *ngIf="error_messages.phone_number" class="alert alert-danger" >{{error_messages.phone_number}}</div>
     </div>
 
     <div class="form-group">

@@ -25,6 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { ChangePasswordComponent } from "./change-password/change-profile.component";
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -35,6 +36,7 @@ import { DashboardSaleComponent } from './dashboard-sale/dashboard-sale.componen
 import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { ReportComponent } from './report/report.component';
+import { AlertComponent } from "./alert/alert.component";
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { ReportComponent } from './report/report.component';
     DashboardFilterComponent,
     ProfileComponent,
     ReportComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AlertComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
