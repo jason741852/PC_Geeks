@@ -37,6 +37,9 @@ import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { ReportComponent } from './report/report.component';
 import { AlertComponent } from "./alert/alert.component";
+import { SupportComponent } from './support/support.component';
+import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -56,7 +59,10 @@ import { AlertComponent } from "./alert/alert.component";
     ReportComponent,
     EditProfileComponent,
     AlertComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SupportComponent,
+    AboutComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
