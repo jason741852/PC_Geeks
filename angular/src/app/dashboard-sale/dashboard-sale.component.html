@@ -1,21 +1,14 @@
 <div class="row">
   <div class="col-xl-10 offset-xl-1">
       <div class="row">
-          <form (keyup.enter)="search(saleItem.value)" class="col-md-8">
-              <div class="searchBar">
-                  <label for="saleItem">Search:</label>
-                  <input #saleItem type="text" class="form-control" id="saleItem">
-
-                  <button (click)="search(saleItem.value)" class="searchButton btn btn-primary">
-                      Search
-                  </button>
-
-                  <div class="toggle">
-                      <button class="grid-view" [routerLink]="['/dashboard']">Grid</button>
-                      <button class="list-view" [routerLink]="['/list']">List</button>
-                  </div>
-              </div>
-          </form>
+          <div class="col-lg-6 col-xs-12">
+              <label for="saleItem">Search:</label>
+              <input (keyup)="search()" [(ngModel)]="searchText" type="text" class="form-control" name="saleItem" id="saleItem">
+          </div>
+      </div>
+      <div class="row toggle">
+          <button class="grid-view" [routerLink]="['/dashboard']">Grid</button>
+          <button class="list-view" [routerLink]="['/list']">List</button>
       </div>
       <div class="row">
           <div id="page">
@@ -23,9 +16,9 @@
           </div>
       </div>
       <div class="row">
-          <div class="col-xl-4 col-lg-6 pt-xl-3 pb-xl-3" *ngFor="let sale of sales | paginate: { itemsPerPage: 12, currentPage: p }">
-              <div class="col-lg-10 offset-lg-1 item">
-                  <div class="col-lg-10 offset-lg-1 pt-lg-1 pb-lg-1">
+          <div class="col-xl-4 col-lg-6 pt-xl-3 pb-xl-3 pt-xs-2 pb-xs-2" *ngFor="let sale of shownSales | paginate: { itemsPerPage: 12, currentPage: p }">
+              <div class="item">
+                  <div class="col-md-10 offset-md-1 pt-md-1 pb-md-1">
                       <div class="row" [routerLink]="['/detail', sale.id]">
                           <h5 class="title">{{sale.title}}</h5>
                       </div>
@@ -35,11 +28,9 @@
                           </a>
                       </div>
                       <div class="row">
-                          <ul>
-                              <li>Selling {{sale.item}}</li>
-                              <li>{{sale.manufacturer}} {{sale.category}}</li>
-                              <li>${{sale.price}}</li>
-                          </ul>
+                          <div class="row">Selling {{sale.item}}</div>
+                          <div class="row">{{sale.manufacturer}} {{sale.category}}</div>
+                          <div class="row">${{sale.price}}</div>
                       </div>
                       <div  class="row">
                           <button class="btn btn-default detailButton" role="button" [routerLink]="['/detail', sale.id]">I'm Interested</button>
