@@ -15,6 +15,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ReportComponent } from './report/report.component';
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
 import { ChangePasswordComponent } from "./change-password/change-profile.component";
+import { SupportComponent } from './support/support.component';
+import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
@@ -76,6 +79,18 @@ const routes: Routes = [
     {
       path: 'report/:id',
       component: ReportComponent
+    },
+    {
+      path: 'support',
+      component: SupportComponent
+    },
+    {
+      path: 'about',
+      component: AboutComponent
+    },
+    {
+      path: 'help',
+      component: HelpComponent
     },
 ];
 
