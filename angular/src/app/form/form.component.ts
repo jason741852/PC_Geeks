@@ -83,32 +83,42 @@ export class FormComponent implements OnInit {
       this.saleForm.get('location').value,
       this.saleForm.get('body').value)
       .then(sale => {
+        console.log(this.saleForm.get('images1').value)
+        if (this.saleForm.get('images1').value != '') {
           this.saleService.createImages(
             sale.id,
             this.saleForm.get('images1').value)
             .then(getImage => {
             });
-
-        this.saleService.createImages(
-          sale.id,
-          this.saleForm.get('images2').value)
-          .then(getImage => {
-          });
-        this.saleService.createImages(
-          sale.id,
-          this.saleForm.get('images3').value)
-          .then(getImage => {
-          });
-        this.saleService.createImages(
-          sale.id,
-          this.saleForm.get('images4').value)
-          .then(getImage => {
-          });
-        this.saleService.createImages(
-          sale.id,
-          this.saleForm.get('images5').value)
-          .then(getImage => {
-          });
+        }
+        if (this.saleForm.get('images2').value != '') {
+          this.saleService.createImages(
+            sale.id,
+            this.saleForm.get('images2').value)
+            .then(getImage => {
+            });
+        }
+        if (this.saleForm.get('images3').value != '') {
+          this.saleService.createImages(
+            sale.id,
+            this.saleForm.get('images3').value)
+            .then(getImage => {
+            });
+        }
+        if (this.saleForm.get('images4').value != '') {
+          this.saleService.createImages(
+            sale.id,
+            this.saleForm.get('images4').value)
+            .then(getImage => {
+            });
+        }
+        if (this.saleForm.get('images5').value != '') {
+          this.saleService.createImages(
+            sale.id,
+            this.saleForm.get('images5').value)
+            .then(getImage => {
+            });
+        }
       });
 
 

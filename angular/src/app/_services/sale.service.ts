@@ -59,7 +59,6 @@ export class SaleService {
                 JSON.stringify({
                     item: item,
                     title:title,
-                    image: {url: "https://images10.newegg.com/NeweggImage/ProductImage/14-487-267-S99.jpg"},
                     category: category,
                     quality: quality,
                     manufacturer: manufacturer,
