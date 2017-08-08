@@ -26,6 +26,7 @@ export class SaleDetailComponent implements OnInit {
     potential_buyer_instance_array: Potential_buyer[];
     potential_buyer_instance: Potential_buyer;
     params: ParamMap;
+    user = User;
     message: Message;
     private new_message: string = "";
 

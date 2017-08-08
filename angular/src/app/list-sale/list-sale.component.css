@@ -1,0 +1,29 @@
+.container{
+  margin-left: 20%;
+}
+
+.searchBar{
+  position: relative;
+}
+
+.searchButton{
+  margin-top: 10px;
+  position: absolute;
+  left: 1em;
+}
+
+.toggle{
+  margin-top: 10px;
+  position: absolute;
+  right: 1em;
+}
+
+#page{
+  margin-top: 5em;
+  padding-left: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin-bottom: 10px;
+}

@@ -45,7 +45,22 @@ class IsBuyer(BasePermission):
         return True
 
 
-# TODO: should return True if the current user is the seller of the current listing (Post)
 class IsSeller(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return True
+        return obj.owner_id == request.user
+
+
+class IsActivePost(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if isinstance(obj, Post):
+            return obj.status == 'active'
+        elif isinstance(obj, Image):
+            return obj.post_id.status == 'active'
+        elif isinstance(obj, PotentialBuyer):
+            return obj.post_id.status == 'active'
+        elif isinstance(obj, BuyerRating):
+            return obj.post_id.status == 'active'
+        elif isinstance(obj, SellerRating):
+            return obj.post_id.status == 'active'
+        else:
+            raise APIException("IsActivePost received an object that it cannot handle.")

@@ -4,6 +4,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+POST_STATUS_CHOICES = (
+    ('active', 'active'),
+    ('sold', 'sold'),
+    ('deleted', 'deleted'),
+    ('removed', 'removed'),
+)
+
 
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
@@ -14,11 +21,10 @@ class Report(models.Model):
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
-    rating = models.FloatField(default=0)
 
 
 class Post(models.Model):
-    title = models.TextField(max_length=255)
+    title = models.TextField(blank=True, null=True, max_length=255)
     body = models.TextField(blank=True, null=True)
     item = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
@@ -28,6 +34,7 @@ class Post(models.Model):
     location = models.CharField(max_length=255, blank=True)
     latitude = models.DecimalField(null=True, max_digits=9, decimal_places=6)
     longitude = models.DecimalField(null=True, max_digits=9, decimal_places=6)
+    status = models.CharField(max_length=8, choices=POST_STATUS_CHOICES, default='active')
     owner_id = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='posts',

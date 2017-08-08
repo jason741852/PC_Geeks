@@ -17,6 +17,8 @@ export class UserService {
         );
     }
 
+
+
     register(user: User) {
         return this.http.post(
             "http://localhost:4200/api/register/",

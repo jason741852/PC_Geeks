@@ -1,4 +1,7 @@
+import {Image} from "./image";
+
 export class Sale {
+
   // constructor(
   //   id: number,
   //   image: string,
@@ -17,7 +20,7 @@ export class Sale {
   //   date_modified: string
   // ) { }
     id: number;
-    image: string;
+    image: Image[];
     title: string;
     body: string;
     item: string; // item name ie: Gtx 1080 etc
@@ -33,3 +36,5 @@ export class Sale {
     date_created: string;
     date_modified: string;
 }
+
+

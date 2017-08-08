@@ -1,5 +1,9 @@
+.container{
+  margin-left: 20%;
+}
+
 .item{
-  margin: 50px;
+  margin: 20px;
   border-style: solid;
   border-color: grey;
   border-width: 1px;
@@ -9,6 +13,12 @@ img {
     margin-top:10px;
     max-width: 100%;
     max-height: 100%;
+    min-width:0%;
+    min-height:0%;
+}
+
+.searchBar{
+  position: relative;
 }
 
 .pageing{
@@ -17,10 +27,45 @@ img {
 }
 
 .searchButton{
-  margin-top:10px;
+  margin-top: 10px;
+  position: absolute;
+  left: 1em;
 }
 
+.toggle{
+  margin-top: 10px;
+  position: absolute;
+  right: 1em;
+}
 
+ul {
+  list-style-type: none;
+}
 
+.listclass {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
 
+.thumbnail {
+  padding-top:273px;
+}
 
+.imgResize{
+  width:100px;
+  height:62.5;
+}
+
+.divResize{
+  height: 85px;
+  width: 600px;
+}
+
+#page{
+  margin-top: 5em;
+  padding-left: 0;
+}

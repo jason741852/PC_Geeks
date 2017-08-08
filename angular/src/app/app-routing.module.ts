@@ -14,6 +14,11 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MessageComponent } from './message/message.component';
 import { ReportComponent } from './report/report.component';
+import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { ChangePasswordComponent } from "./change-password/change-profile.component";
+import { SupportComponent } from './support/support.component';
+import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,13 +26,12 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { Sale } from './_models/sale';
 import { SaleService } from './_services/sale.service';
 import { HttpModule } from '@angular/http';
-import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 
 
 const routes: Routes = [
     {
       path: '',
-      redirectTo: '/dashboard',
+      redirectTo: '/main',
       pathMatch: 'full'
     },
     {
@@ -49,6 +53,10 @@ const routes: Routes = [
     {
       path: 'editprofile',
       component: EditProfileComponent
+    },
+    {
+        path: 'changepassword',
+        component: ChangePasswordComponent
     },
     {
       path: 'form',
@@ -78,7 +86,19 @@ const routes: Routes = [
     {
       path: 'report/:id',
       component: ReportComponent
-    }
+    },
+    {
+      path: 'support',
+      component: SupportComponent
+    },
+    {
+      path: 'about',
+      component: AboutComponent
+    },
+    {
+      path: 'help',
+      component: HelpComponent
+    },
 ];
 
 @NgModule({

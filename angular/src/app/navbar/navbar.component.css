@@ -1,4 +1,4 @@
-.nav{
+.nav {
     background-color: #0275d8;
     height: 50px;
 }
@@ -7,3 +7,18 @@
     color:black;
 }
 
+.backButton{
+    position: static;
+    float: right;
+}
+.logo{
+  font-weight:normal;
+  text-transform:uppercase;
+  color:#ffffff;
+  letter-spacing:4pt;
+  word-spacing:10pt;
+  font-size:54px;
+  text-align:center;
+  font-family:arial,helvetica, sans-serif;
+  background-color: black;
+}

@@ -9,3 +9,13 @@ margin: 0 auto;
 div{
     padding:5px;
 }
+
+agm-map {
+  height: 25em;
+  width: 35em;
+}
+
+.thumbnail {
+    padding-top: 240px;
+    padding-left: 320px;
+}

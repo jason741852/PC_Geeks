@@ -28,6 +28,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { ChangePasswordComponent } from "./change-password/change-profile.component";
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -39,6 +40,10 @@ import { ListSaleComponent } from './list-sale/list-sale.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { MessageComponent } from './message/message.component'
 import { ReportComponent } from './report/report.component';
+import { AlertComponent } from "./alert/alert.component";
+import { SupportComponent } from './support/support.component';
+import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -57,7 +62,12 @@ import { ReportComponent } from './report/report.component';
     ProfileComponent,
     MessageComponent,
     ReportComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AlertComponent,
+    ChangePasswordComponent,
+    SupportComponent,
+    AboutComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +80,8 @@ import { ReportComponent } from './report/report.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ'
+      apiKey: 'AIzaSyBgFlNhXKMMIboiiv2zgyUv6fA-9_qGeaQ',
+      libraries: ['places']
     })
   ],
   providers: [

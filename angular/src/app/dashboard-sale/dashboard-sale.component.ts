@@ -7,11 +7,36 @@ import { SaleService } from '../_services/sale.service';
 @Component({
   selector: 'app-dashboard-sale',
   templateUrl: './dashboard-sale.component.html',
-  styleUrls: ['./dashboard-sale.component.css']
+  styleUrls: ['./dashboard-sale.component.css'],
 })
 export class DashboardSaleComponent implements OnInit {
-  sell = 'selling';
   sales: Sale[] = [];
+
+  //List Classes
+  /*
+  listProperty:boolean = false;
+  imgProperty:boolean = false;
+  divProperty:boolean = false;
+  setRow(){
+    let classes= {
+      listclass: this.listProperty,
+    }
+    return classes;
+  }
+  setImg(){
+    let classes={
+      imgResize: this.imgProperty,
+    }
+    return classes;
+  }
+  setCol(){
+    let classes={
+      divResize: this.divProperty,
+    }
+    return classes;
+  }
+  */
+
   image: string
 
   constructor(private saleService: SaleService, private router: Router) { }

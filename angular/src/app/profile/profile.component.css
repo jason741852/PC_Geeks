@@ -1,3 +1,14 @@
 .deletebox {
-  margin-top:40px;
+  margin-top: 40px;
+}
+
+.options {
+  margin-left: 20%;
+}
+
+.description{
+  margin-bottom: 20px;
+}
+.btn{
+  margin:10px;
 }
