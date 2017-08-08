@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 
 import { Sale } from '../_models/sale';
 import { SaleService } from '../_services/sale.service';
+import {User} from "../_models/user";
+import {CurrentUserService} from "../_services/currentuser.service";
 
 @Component({
   selector: 'app-sale-detail',
@@ -14,14 +16,15 @@ import { SaleService } from '../_services/sale.service';
 export class SaleDetailComponent implements OnInit {
     sale: Sale;
     params: ParamMap;
-
+    user = User;
     lat: number;
     lng: number;
 
     constructor(
       private saleService: SaleService,
       private route: ActivatedRoute,
-      private location: Location
+      private location: Location,
+      private userService: CurrentUserService
     ) {}
 
     ngOnInit(): any {
