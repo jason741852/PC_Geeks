@@ -3,9 +3,9 @@
 }
 
 .item{
-  margin: 20px;
-  border-style: solid;
-  border-color: grey;
+  height: 100%;
+  border-style: groove;
+  border-color: lightgrey;
   border-width: 1px;
 }
 
@@ -52,7 +52,8 @@ ul {
 }
 
 .thumbnail {
-  padding-top:273px;
+  padding-top: 240px;
+  padding-left: 320px;
 }
 
 .imgResize{
@@ -61,11 +62,23 @@ ul {
 }
 
 .divResize{
-  height: 85px;
-  width: 600px;
+  height: 50%;
 }
 
 #page{
   margin-top: 5em;
   padding-left: 0;
+}
+
+.title {
+    height: 60px;
+}
+
+button {
+    margin: 4px;
+    padding: 4px;
+}
+
+.postImage {
+    padding: 2px;
 }

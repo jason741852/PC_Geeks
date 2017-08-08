@@ -1,41 +1,54 @@
-<div class="container">
-  <div class="body">
-    <form (keyup.enter)="search(saleItem.value)" class="col-md-8">
-      <div class="searchBar">
-        <label for="saleItem">Search:</label>
-        <input #saleItem type="text" class="form-control" id="saleItem">
+<div class="row">
+  <div class="col-xl-10 offset-xl-1">
+      <div class="row">
+          <form (keyup.enter)="search(saleItem.value)" class="col-md-8">
+              <div class="searchBar">
+                  <label for="saleItem">Search:</label>
+                  <input #saleItem type="text" class="form-control" id="saleItem">
 
-        <button (click)="search(saleItem.value)" class="searchButton btn btn-primary">
-          Search
-        </button>
+                  <button (click)="search(saleItem.value)" class="searchButton btn btn-primary">
+                      Search
+                  </button>
 
-        <div class="toggle">
-          <button class="grid-view" [routerLink]="['/dashboard']">Grid</button>
-          <button class="list-view" [routerLink]="['/list']">List</button>
-        </div>
+                  <div class="toggle">
+                      <button class="grid-view" [routerLink]="['/dashboard']">Grid</button>
+                      <button class="list-view" [routerLink]="['/list']">List</button>
+                  </div>
+              </div>
+          </form>
       </div>
-    </form>
-
-    <div id="page">
-      <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
-    </div>
-    
-    <div class="row">
-      <div class="item col-lg-4 col-centered"
-      *ngFor="let sale of sales | paginate: { itemsPerPage: 6, currentPage: p }">
-        <div class="thumbnail" [ngStyle]="{'background-image': 'url('+sale.images['0']+')'}" style="background-repeat: no-repeat; background-size: 348px 271px;">
-          <ul>
-            <li>Selling {{sale.item}}</li>
-            <li>{{sale.manufacturer}} {{sale.category}}</li>
-            <li>${{sale.price}}</li>
-          </ul>
-          <p>
-            <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
-            <button class="btn btn-primary reportButton" role="button" [routerLink]="['/report', sale.id]">Report This Post</button>
-          </p>
-        </div>
+      <div class="row">
+          <div id="page">
+              <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
+          </div>
       </div>
-    </div>
+      <div class="row">
+          <div class="col-xl-4 col-lg-6 pt-xl-3 pb-xl-3" *ngFor="let sale of sales | paginate: { itemsPerPage: 12, currentPage: p }">
+              <div class="col-lg-10 offset-lg-1 item">
+                  <div class="col-lg-10 offset-lg-1 pt-lg-1 pb-lg-1">
+                      <div class="row" [routerLink]="['/detail', sale.id]">
+                          <h5 class="title">{{sale.title}}</h5>
+                      </div>
+                      <div class="row">
+                          <a [routerLink]="['/detail', sale.id]" class="postImage">
+                              <img src="{{sale.images[0]}}" class="col-lg-12 img-responsive">
+                          </a>
+                      </div>
+                      <div class="row">
+                          <ul>
+                              <li>Selling {{sale.item}}</li>
+                              <li>{{sale.manufacturer}} {{sale.category}}</li>
+                              <li>${{sale.price}}</li>
+                          </ul>
+                      </div>
+                      <div  class="row">
+                          <button class="btn btn-default detailButton" role="button" [routerLink]="['/detail', sale.id]">I'm Interested</button>
+                          <button class="btn btn-default detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
+                          <button class="btn btn-danger reportButton" role="button" [routerLink]="['/report', sale.id]">Report This Post</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-
 </div>
