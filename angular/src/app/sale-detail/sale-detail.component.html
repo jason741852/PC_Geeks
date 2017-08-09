@@ -23,6 +23,28 @@
       <li class="list-group-item">Seller's rating: {{sale.seller_rating.rating}} star(s) with {{sale.seller_rating.number_of_raters}} rater(s)</li>
     </ul>
   </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="map">
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row" style="padding:20px 10px 20px 10px;">
+    <div class="col-12 col-lg-8">
+        <input type="text" [(ngModel)]="new_message" #name="ngModel" />
+        <button (click)="createMessage(message)" routerLink="/message/all" class="btn btn-primary">I'm interested! Send seller a message</button>
+    </div>
+</div>
+
+
   <div class="rating">
     <form [formGroup]="saleForm" #formDir="ngForm">
       <h2>Rate seller</h2>
@@ -48,39 +70,8 @@
     </form>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="map">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
-
-        </div>
-      </div>
-    </div>
-  </div>
-<div class="row" style="padding:20px 10px 20px 10px;">
-    <div class="col-12 col-lg-8">
-        <input type="text" [(ngModel)]="new_message" #name="ngModel" />
-        <button (click)="createMessage(message)" routerLink="/message/all" class="btn btn-primary">I'm interested! Send seller a message</button>
-    </div>
-</div>
 
 
-
-
-
-
-
-  <div *ngIf="currentUser" class="detailBody">
-
-    <div *ngIf="sale.owner_id == currentUser.id || currentUser.id == 1" class ="deleteButton">
-      <div class = "buttonbox">
-        <button (click)="deletePost()" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
 
 <div class="row" style="margin-bottom: 60px">
     <div *ngIf="sale" class="imagebox">
@@ -92,6 +83,14 @@
     </div>
 </div>
 
+  <div *ngIf="currentUser" class="detailBody">
+
+    <div *ngIf="sale.owner_id == currentUser.id || currentUser.id == 1" class ="deleteButton">
+      <div class = "buttonbox">
+        <button (click)="deletePost()" class="btn btn-danger">Delete Post</button>
+      </div>
+    </div>
+  </div>
 
 </div>
 
