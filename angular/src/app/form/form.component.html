@@ -1,110 +1,113 @@
-<div class="col-lg-4 offset-lg-2">
-  <form [formGroup]="saleForm" #formDir="ngForm">
-    <h2>Create Sales</h2>
-    <div class="form-group">
-      <label for="title">Buying or Selling</label>
-        <select name="quality"
-              formControlName="title" class="btn btn-secondary dropdown-toggle form-control" required>
-              <option *ngFor="let each of title" [value]="each">{{each}}</option>
-        </select>
-    </div>
+<div class="col-md-10 offset-md-1">
+    <form [formGroup]="saleForm" #formDir="ngForm">
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <h2>Create Sales</h2>
+                <div class="form-group">
+                    <label for="title">Buying or Selling</label>
+                    <select name="quality"
+                            formControlName="title" class="btn btn-secondary dropdown-toggle form-control" required>
+                        <option *ngFor="let each of title" [value]="each">{{each}}</option>
+                    </select>
+                </div>
 
-    <div class="form-group">
-      <label for="item">Sale item:</label>
-      <input id="item" class="form-control" formControlName="item" required/>
-        <div *ngIf="item.invalid && (item.dirty || item.touched || submitted)"
-          class="alert alert-danger">
-        <div *ngIf="item.errors.required">The name of your item is required.</div>
-      </div>
-    </div>
+                <div class="form-group">
+                    <label for="item">Sale item:</label>
+                    <input id="item" class="form-control" formControlName="item" required/>
+                    <div *ngIf="item.invalid && (item.dirty || item.touched || submitted)"
+                         class="alert alert-danger">
+                        <div *ngIf="item.errors.required">The name of your item is required.</div>
+                    </div>
+                </div>
 
-    <div class="form-group">
-      <label for="category">Category: </label>
-      <select name="category"
-            formControlName="category" class="btn btn-secondary dropdown-toggle form-control" required>
-      <option *ngFor="let each of category" [value]="each">{{each}}</option>
-      </select>
-    </div>
+                <div class="form-group">
+                    <label for="category">Category: </label>
+                    <select name="category"
+                            formControlName="category" class="btn btn-secondary dropdown-toggle form-control" required>
+                        <option *ngFor="let each of category" [value]="each">{{each}}</option>
+                    </select>
+                </div>
 
-    <div class="form-group">
-      <label for="price">Sale Price:</label>
-      <input id="price" class="form-control"
-           formControlName="price" class="form-control" required/>
-        <div *ngIf="price.invalid && (price.dirty || price.touched || submitted)"
-           class="alert alert-danger">
-          <div *ngIf="price.errors.required">Price is required.</div>
-          <div *ngIf="price.errors.min">Price must greater than 0.</div>
-          <div *ngIf="price.errors.pattern">Price must be a number.</div>
-      </div>
-    </div>
+                <div class="form-group">
+                    <label for="price">Sale Price:</label>
+                    <input id="price" class="form-control"
+                           formControlName="price" class="form-control" required/>
+                    <div *ngIf="price.invalid && (price.dirty || price.touched || submitted)"
+                         class="alert alert-danger">
+                        <div *ngIf="price.errors.required">Price is required.</div>
+                        <div *ngIf="price.errors.min">Price must greater than 0.</div>
+                        <div *ngIf="price.errors.pattern">Price must be a number.</div>
+                    </div>
+                </div>
 
-    <div class="form-group">
-    <label for="quality">Quality: </label>
-    <select name="quality"
-            formControlName="quality" class="btn btn-secondary dropdown-toggle form-control" required>
-      <option *ngFor="let each of quality" [value]="each">{{each}}</option>
-    </select>
-    </div>
+                <div class="form-group">
+                    <label for="quality">Quality: </label>
+                    <select name="quality"
+                            formControlName="quality" class="btn btn-secondary dropdown-toggle form-control" required>
+                        <option *ngFor="let each of quality" [value]="each">{{each}}</option>
+                    </select>
+                </div>
 
-    <div class="form-group">
-      <label for="manufacturer">Manufacturer: </label>
-      <select name="manufacturer"
-              formControlName="manufacturer" class="btn btn-secondary dropdown-toggle form-control" required>
-          <option *ngFor="let each of manufacturer" [value]="each">{{each}}</option>
-      </select>
-    </div>
+                <div class="form-group">
+                    <label for="manufacturer">Manufacturer: </label>
+                    <select name="manufacturer"
+                            formControlName="manufacturer" class="btn btn-secondary dropdown-toggle form-control" required>
+                        <option *ngFor="let each of manufacturer" [value]="each">{{each}}</option>
+                    </select>
+                </div>
 
-    <div class="form-group">
-      <label for="location">Location for transaction:</label>
-      <input placeholder="name of location" id="location" class="form-control" formControlName="location" required/>
-      <div *ngIf="location.invalid && (location.dirty || location.touched || submitted)"
-      class="alert alert-danger">
-        <div *ngIf="location.errors.required">
-          Location is required.
+                <div class="form-group">
+                    <label for="location">Location for transaction:</label>
+                    <input placeholder="name of location" id="location" class="form-control" formControlName="location" required/>
+                    <div *ngIf="location.invalid && (location.dirty || location.touched || submitted)"
+                         class="alert alert-danger">
+                        <div *ngIf="location.errors.required">
+                            Location is required.
+                        </div>
+                    </div>
+                    <input placeholder="address of location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+                    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                    </agm-map>
+                </div>
+
+                <div class="form-group descriptionBody">
+                    <label for="body">Description</label>
+                    <textarea class="descriptionBox form-control" formControlName="body" required
+                              rows="5" id="comment"></textarea>
+                    <div *ngIf="body.invalid && (body.dirty || body.touched || submitted)"
+                         class="alert alert-danger">
+                        <div *ngIf="body.errors.required">
+                            A description or additional notes must be provided
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                <h3>Images</h3>
+                <div class="alert alert-info">Limited to 5 images maximum.</div>
+                <div class="pt-4">
+                    <label for="image">Image URL:</label>
+                    <input id="image" class="form-control" #inputImg required/>
+                    <!--<div *ngIf="images.invalid && (images.dirty || images.touched) && images.errors.required"-->
+                    <!--class="alert alert-danger">A URL of your image is required.</div>-->
+                </div>
+                <div class="form-group">
+                    <button (click)="addImage(inputImg.value)" class="btn btn-default">Add Image</button>
+                </div>
+                <div class="border-image" *ngFor="let img of images">
+                    <a href="{{img}}" target="_blank">
+                        <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + img + ')'}"
+                             style="background-repeat: no-repeat; background-size: 320px 240px;"></div>
+                    </a>
+                    <button (click)="removeImage(img)" class="btn btn-danger">Remove Image</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <input placeholder="address of location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-      <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-      </agm-map>
-    </div>
-
-    <div class="form-group descriptionBody">
-      <label for="body">Description</label>
-      <textarea class="descriptionBox form-control" formControlName="body" required
-      rows="5" id="comment"></textarea>
-      <div *ngIf="body.invalid && (body.dirty || body.touched || submitted)"
-      class="alert alert-danger">
-        <div *ngIf="body.errors.required">
-          A description or additional notes must be provided
+        <div class="row" style="margin-bottom: 120px;">
+            <div class="offset-md-1">
+                <button (click)="add()" class="btn btn-primary">Add</button>
+            </div>
         </div>
-      </div>
-    </div>
-
   </form>
-<div>
-    <h3>Images</h3>
-    <div class="alert alert-info">Limited to 5 images maximum.</div>
-    <div class="pt-lg-4">
-        <label for="image">Image URL:</label>
-        <input id="image" class="form-control" [(ngModel)]="imageUrl" required/>
-        <!--<div *ngIf="images.invalid && (images.dirty || images.touched) && images.errors.required"-->
-        <!--class="alert alert-danger">A URL of your image is required.</div>-->
-    </div>
-    <div class="form-group">
-        <button (click)="addImage()" class="btn btn-default">Add Image</button>
-    </div>
-    <div class="rounded border-1" *ngFor="let img of images">
-        <a href="{{img}}" target="_blank">
-            <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + img + ')'}"
-                 style="background-repeat: no-repeat; background-size: 320px 240px;"></div>
-        </a>
-        <button (click)="removeImage(img)" class="btn btn-danger">Remove Image</button>
-    </div>
 </div>
-
-    <button (click)="add()" class="btn btn-primary">
-      Add
-    </button>
-
-    </div>

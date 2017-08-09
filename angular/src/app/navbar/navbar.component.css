@@ -6,11 +6,6 @@
 .navbar-light .navbar-nav .nav-link {
     color:black;
 }
-
-.backButton{
-    position: static;
-    float: right;
-}
 .logo{
   font-weight:normal;
   text-transform:uppercase;
@@ -19,6 +14,6 @@
   word-spacing:10pt;
   font-size:54px;
   text-align:center;
-  font-family:arial,helvetica, sans-serif;
+  font-family:arial, helvetica, sans-serif;
   background-color: black;
 }
