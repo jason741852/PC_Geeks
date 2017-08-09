@@ -82,6 +82,9 @@ export class SaleDetailComponent implements OnInit {
 
     }
   }
+  goBack(): void {
+    this.location.back();
+  }
 
   private loadSelf() {
     this.userService.getUser().then((user: User) => {

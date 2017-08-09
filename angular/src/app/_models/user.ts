@@ -8,6 +8,6 @@ export class User {
     email: string;
 
     phone_number: string;
-    buyer_ratings: Rating[];
-    seller_rating: Rating[];
+    buyer_rating: Rating[];
+    seller_ratings: Rating[];
 }

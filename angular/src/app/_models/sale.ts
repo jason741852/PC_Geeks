@@ -36,7 +36,7 @@ export class Sale {
     buyer_id: number;
     date_created: string;
     date_modified: string;
-    seller_rating: Rating[];
+    seller_ratings: Rating[];
 }
 
 
