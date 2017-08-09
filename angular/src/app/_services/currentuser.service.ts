@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Sale } from '../_models/sale';
 import { User } from "../_models/user";
+import {Rating} from "../_models/rating";
 
 @Injectable()
 export class CurrentUserService {
@@ -36,6 +37,16 @@ export class CurrentUserService {
             this.handleError
         );
     }
+  addRating(id: number, url: string): Promise<Rating> {
+    console.log(url);
+    return this.http.post(
+      this.salesUrl + id + '/images/new/',
+      JSON.stringify ({url: url}),
+      this.createHeader())
+      .toPromise()
+      .then(response => response.json() as Rating)
+      .catch(this.handleError);
+  }
 
     getPostDetails(id: number): Promise<Sale> {
         return this.http.get(
@@ -47,6 +58,39 @@ export class CurrentUserService {
             this.handleError
         );
     }
+    updatePost(sale: Sale, id:number): Promise<Response> {
+      return this.http.patch(
+        this.baseUrl + "posts/update/" + id + "/",
+        sale,
+        this.createAuthHeader()
+      ).toPromise().then(
+        (res: Response) => res
+      ).catch(
+        this.handleError
+      );
+    }
+
+  deletePost(id:number): Promise<Sale> {
+    return this.http.patch(
+      this.baseUrl + "posts/delete/" + id +"/", '',
+      this.createAuthHeader()
+    ).toPromise().then(
+
+      (res: Response) => res
+    ).catch(
+      this.handleError
+    );
+  }
+  sellPost(id:number): Promise<Sale> {
+    return this.http.patch(
+      this.baseUrl + "posts/sell/" + id +"/", '',
+      this.createAuthHeader()
+    ).toPromise().then(
+      (res: Response) => res
+    ).catch(
+      this.handleError
+    );
+  }
 
     update(user: User): Promise<Response> {
         return this.http.patch(
