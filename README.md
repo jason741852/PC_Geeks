@@ -5,9 +5,9 @@ PC Geeks is a website strictly for people to sell and buy pc parts. When we crea
 
 
 ### To run the web app:
-1. Use vagrant up to launch the VM.
-2. Access localhost:4200 on your host machine.
-3. Refresh the server using the build.sh script.
+1. Use `vagrant up` to launch the VM.
+2. Access `localhost:4200` on your host machine.
+3. Refresh the server using the `build.sh` script.
 
 
 ### Features
