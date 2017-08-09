@@ -1,0 +1,462 @@
+[
+{
+    "model": "api.post",
+    "pk": 1,
+    "fields": {
+        "title": "Selling: 1070",
+        "body": "Very good deal. I guarantee it.",
+        "item": "nVidia GTX 1070",
+        "category": "Video Card",
+        "quality": "Great",
+        "manufacturer": "EVGA",
+        "price": 500,
+        "location": "SFU Burnaby",
+        "latitude": 49.278094,
+        "longitude": -122.919883,
+        "owner_id": 1,
+        "buyer_id": null,
+        "date_created": "2017-07-25T00:57:48.217Z",
+        "date_modified": "2017-07-25T00:57:48.217Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 2,
+    "fields": {
+        "title": "Selling: Used AM4 CPU",
+        "body": "Lightly used, like a folded-up napkin.",
+        "item": "R5 1600X",
+        "category": "CPU",
+        "quality": "Average",
+        "manufacturer": "AMD",
+        "price": 300,
+        "location": "SFU Burnaby",
+        "latitude": 49.278094,
+        "longitude": -122.919883,
+        "owner_id": 1,
+        "buyer_id": 2,
+        "date_created": "2017-07-25T13:12:35.943Z",
+        "date_modified": "2017-07-26T22:04:44.689Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 3,
+    "fields": {
+        "title": "Selling: BEASTLY CPU - GREAT PRICE!!!",
+        "body": "Not a scam, just wanted to pay for surgery. I promise you.",
+        "item": "i7 6900X",
+        "category": "CPU",
+        "quality": "Good",
+        "manufacturer": "Intel",
+        "price": 150,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-07-26T00:01:05.316Z",
+        "date_modified": "2017-07-26T00:01:05.316Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 4,
+    "fields": {
+        "title": "Selling: DESTRYER OF WORLDS!!!",
+        "body": "DUDE, THIS IS THE BEST GFX CARD EVER. I'VE GOT TWO ALREADY, SO BUY THIS ONE UP QUICK!!!1",
+        "item": "GTX 1080ti",
+        "category": "Video Card",
+        "quality": "Excellent",
+        "manufacturer": "AMD",
+        "price": 200,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-07-26T00:01:05.316Z",
+        "date_modified": "2017-07-26T00:01:05.316Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 5,
+    "fields": {
+        "title": "Buying: RGB full-sized keyboard (K70)",
+        "body": "Will pay high price because of great memories with old board.",
+        "item": "K70 RGB (Red Switch)",
+        "category": "Peripherals",
+        "quality": "Average",
+        "manufacturer": "Corsair",
+        "price": 500,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": 2,
+        "date_created": "2017-07-26T00:06:46.954Z",
+        "date_modified": "2017-07-26T00:06:46.954Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 6,
+    "fields": {
+        "title": "Selling: Good 1080p card",
+        "body": "Great card, can run most games 1080 on medium to high settings.",
+        "item": "R9 380 4GB",
+        "category": "Video Card",
+        "quality": "Average",
+        "manufacturer": "Club 3D",
+        "price": 100,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-07-27T15:24:46.154Z",
+        "date_modified": "2017-07-27T15:24:46.154Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 7,
+    "fields": {
+        "title": "Selling: Sturdy case 10/10",
+        "body": "The only thing sturdier than this case is a rock. But you can't even put a computer in a rock, so this is better.",
+        "item": "Obsidian 900D",
+        "category": "Case",
+        "quality": "Average",
+        "manufacturer": "Corsair",
+        "price": 350,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": 4,
+        "date_created": "2017-07-30T12:45:19.175Z",
+        "date_modified": "2017-07-31T11:44:35.985Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 8,
+    "fields": {
+        "title": "Selling: Tier 1 PSU - P2 650W",
+        "body": "If this was a girl, I'd do things to it. And by things, I mean treat it nicely and with respect, because that's how you should treat all women. But what do I know, I don't have a girlfriend. Well, at least I have my games and computers.",
+        "item": "SuperNOVA 650 P2",
+        "category": "Power Supply",
+        "quality": "Good",
+        "manufacturer": "EVGA",
+        "price": 120,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 3,
+        "buyer_id": 1,
+        "date_created": "2017-07-27T23:00:24.664Z",
+        "date_modified": "2017-07-30T16:24:11.121Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 9,
+    "fields": {
+        "title": "Buying: 1TB harddrive",
+        "body": "i need 1TB harddrive to replace old harddrive",
+        "item": "1TB harddrive",
+        "category": "Storage",
+        "quality": "Excellent",
+        "manufacturer": "OTHER",
+        "price": 40,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 4,
+        "buyer_id": null,
+        "date_created": "2017-08-03T23:00:24.664Z",
+        "date_modified": "2017-08-03T23:00:24.664Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 10,
+    "fields": {
+        "title": "Selling: Rgb ram",
+        "body": "i got Rgb ram, so i don't need this anymore",
+        "item": "16x2 gb ram 2133mhz ddr4 (am4/lga2011 compatible)",
+        "category": "Memory",
+        "quality": "Very Good",
+        "manufacturer": "ECS",
+        "price": 200,
+        "location": "SFU Burnaby",
+        "latitude": 49.278094,
+        "longitude": -122.919883,
+        "owner_id": 4,
+        "buyer_id": null,
+        "date_created": "2017-08-02T23:15:33.917Z",
+        "date_modified": "2017-08-02T23:15:33.917Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 11,
+    "fields": {
+        "title": "Selling: Corsair H100i AIO CPU Cooler",
+        "body": "This is a great all-in-one CPU cooler. It runs like Usain Bolt, if you know what I'm saying.",
+        "item": "Corsair H100i AIO CPU Cooler",
+        "category": "CPU Cooler",
+        "quality": "Very Good",
+        "manufacturer": "Corsair",
+        "price": 80,
+        "location": "Metrotown",
+        "latitude": 49.226150,
+        "longitude": -122.999113,
+        "owner_id": 1,
+        "buyer_id": null,
+        "date_created": "2017-08-03T16:59:43.249Z",
+        "date_modified": "2017-08-03T16:59:43.249Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 12,
+    "fields": {
+        "title": "Selling: BRAND NEW Rx Vega 64",
+        "body": "dont ask where i got it from ,but i got that new amd card",
+        "item": "Rx bega 64",
+        "category": "Video Card",
+        "quality": "Excellent",
+        "manufacturer": "AMD",
+        "price": 1200,
+        "location": "SFU Burnaby",
+        "latitude": 49.278094,
+        "longitude": -122.919883,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-08-04T21:14:35.226Z",
+        "date_modified": "2017-08-04T21:14:35.226Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 13,
+    "fields": {
+        "title": "Selling: BRAND NEW Rx Vega 55",
+        "body": "dont ask where i got it from ,but i got that new amd card x2 this ones not as good, but still very good",
+        "item": "Rx bvega 56",
+        "category": "Video Card",
+        "quality": "Excellent",
+        "manufacturer": "AMD",
+        "price": 1000,
+        "location": "SFU Burnaby",
+        "latitude": 49.278094,
+        "longitude": -122.919883,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-08-04T21:15:59.356Z",
+        "date_modified": "2017-08-04T21:15:59.356Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 14,
+    "fields": {
+        "title": "Selling: Old Dell Business Class Computers",
+        "body": "Selling old Dell computers from 2007. All of them are in great condition. I've got 3 computers that you can pick up.",
+        "item": "Dell Business Computers",
+        "category": "CPU",
+        "quality": "Excellent",
+        "manufacturer": "Dell",
+        "price": 250,
+        "location": "Downtown",
+        "latitude": 49.281954,
+        "longitude": -123.117074,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-08-04T09:44:21.111Z",
+        "date_modified": "2017-08-04T09:44:21.111Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 15,
+    "fields": {
+        "title": "Selling: Old Dell Business Class Computers",
+        "body": "Selling old Dell computers from 2007. All of them are in great condition. I've got 3 computers that you can pick up.",
+        "item": "Dell Business Computers",
+        "category": "CPU",
+        "quality": "Excellent",
+        "manufacturer": "Dell",
+        "price": 250,
+        "location": "Downtown",
+        "latitude": 49.281954,
+        "longitude": -123.117074,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-07-30T11:21:00.900Z",
+        "date_modified": "2017-07-30T11:21:00.900Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 16,
+    "fields": {
+        "title": "Selling: i7-7740X",
+        "body": "I like AMD way better",
+        "item": "INTEL CORE I7-7740X Processor (8M Cache Up to 4.50 GHz) FC-LGA14B",
+        "category": "CPU",
+        "quality": "Excellent",
+        "manufacturer": "Intel",
+        "price": 500,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-08-02T23:15:33.917Z",
+        "date_modified": "2017-08-02T23:15:33.917Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 17,
+    "fields": {
+        "title": "Selling: Ryzen 7 1700",
+        "body": "I like Intel way better",
+        "item": "AMD RYZEN 7 1700 Processor 3.7/3.0GHZ 8 Core 16 Thread 65W TDP AM4 Retail Box w/ Wraith Spire Cooler",
+        "category": "CPU",
+        "quality": "Excellent",
+        "manufacturer": "AMD",
+        "price": 400,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 2,
+        "buyer_id": null,
+        "date_created": "2017-08-01T11:22:57.145Z",
+        "date_modified": "2017-08-01T11:22:57.145Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 18,
+    "fields": {
+        "title": "Selling: Plextor 256 GB SSD",
+        "body": "I've since upgraded, but this works mostly perfectly",
+        "item": "Plextor M8Pe M.2 2280 256GB NVMe PCI-Express 3.0 x4 MLC Internal Solid State Drive (SSD)",
+        "category": "Storage",
+        "quality": "Very Good",
+        "manufacturer": "OTHER",
+        "price": 400,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 4,
+        "buyer_id": null,
+        "date_created": "2017-07-30T23:15:33.917Z",
+        "date_modified": "2017-07-30T23:15:33.917Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 19,
+    "fields": {
+        "title": "Selling: MSI Z270 GAMING M5 ATX Z270",
+        "body": "I dont PC game anymore, since swapped to inferior console-gaming",
+        "item": "MSI Z270 Gaming M5 ATX Z270 LGA1151 DDR4 3PCI-E16 2PCI-E1 USB3.1 CrossFire SLI Motherboard",
+        "category": "Motherboard",
+        "quality": "Average",
+        "manufacturer": "MSI",
+        "price": 150,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-07-31T02:24:48.989Z",
+        "date_modified": "2017-07-31T02:24:48.989Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 20,
+    "fields": {
+        "title": "Selling: GIGABYTE Gaming Motherboard",
+        "body": "Need money for various things...can't afford anymore...",
+        "item": "GIGABYTE AORUS Z270X Gaming K5 LGA 1151 Motherboard",
+        "category": "Motherboard",
+        "quality": "Average",
+        "manufacturer": "GIGABYTE",
+        "price": 100,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 4,
+        "buyer_id": null,
+        "date_created": "2017-07-29T13:31:31.004Z",
+        "date_modified": "2017-07-29T13:31:31.004Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 21,
+    "fields": {
+        "title": "Selling: ASUS ROG Motherboard GOOD VALUE",
+        "body": "Cleaned my son's room after he left for the army, I think it still works",
+        "item": "ASUS ROG Maximus IX Hero LGA1151 Kaby Lake DDR4 DP HDMI M.2 USB 3.1 Z270 Aura Sync ATX Motherboard",
+        "category": "Motherboard",
+        "quality": "Poor",
+        "manufacturer": "ASUS",
+        "price": 100,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 3,
+        "buyer_id": null,
+        "date_created": "2017-07-28T11:57:44.435Z",
+        "date_modified": "2017-07-28T11:57:44.435Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 22,
+    "fields": {
+        "title": "Selling: Good Corsair Case",
+        "body": "It's very hot in my room and I needed a case with more fans",
+        "item": "Corsair Carbide Series 270R – Mid-Tower ATX Case - Solid Side Panel",
+        "category": "Case",
+        "quality": "Excellent",
+        "manufacturer": "Corsair",
+        "price": 50,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 1,
+        "buyer_id": null,
+        "date_created": "2017-07-27T11:57:51.531Z",
+        "date_modified": "2017-07-27T11:57:51.531Z"
+    }
+},
+{
+    "model": "api.post",
+    "pk": 23,
+    "fields": {
+        "title": "Selling: Corsair Expensive CASE but amazing quality",
+        "body": "I made some modifications to it and added more fans",
+        "item": "Corsair Obsidian Series 750D Airflow Edition Full Tower ATX Case 3XAF140L 140mm Fans USB 3.0 - Black",
+        "category": "Case",
+        "quality": "Excellent",
+        "manufacturer": "Corsair",
+        "price": 500,
+        "location": "Guildford Mall",
+        "latitude": 49.1905,
+        "longitude": -122.7994,
+        "owner_id": 1,
+        "buyer_id": null,
+        "date_created": "2017-08-03T18:27:34.415Z",
+        "date_modified": "2017-08-03T18:27:34.415Z"
+    }
+}
+]

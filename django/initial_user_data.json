@@ -1,0 +1,78 @@
+[
+{
+    "model": "api.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$0ONLnGZsKNxz$vdt94y6/M65eF//7CLWgGwT1bcdyL0HLTR/h+30aJTI=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Big",
+        "last_name": "Iron",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-07-25T00:37:19.729Z",
+        "phone_number": "123-456-7890",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "api.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$An4UGgZOupnR$moQHzdfV2WU4aRxt6qQzCoHq4JoOO34uHb+Du73f2T4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "tester1",
+        "first_name": "Small",
+        "last_name": "Fry",
+        "email": "test1@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-07-25T01:58:56.515Z",
+        "phone_number": "(321)-654-0987",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "api.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$An4UGgZOupnR$moQHzdfV2WU4aRxt6qQzCoHq4JoOO34uHb+Du73f2T4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "tester2",
+        "first_name": "Italian",
+        "last_name": "Sausage",
+        "email": "test2@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-07-25T01:58:56.515Z",
+        "phone_number": "9876543210",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "api.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$An4UGgZOupnR$moQHzdfV2WU4aRxt6qQzCoHq4JoOO34uHb+Du73f2T4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "tester3",
+        "first_name": "Pogs",
+        "last_name": "Champ",
+        "email": "test3@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-07-25T01:58:56.515Z",
+        "phone_number": "+1-(222)-333-4444",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

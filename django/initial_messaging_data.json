@@ -1,0 +1,134 @@
+[
+{
+    "model": "api.messaging",
+    "pk": 1,
+    "fields": {
+        "body": "yo BROTHA, wus good DUDE?",
+        "owner": 2,
+        "post_id": 2,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:35:14.656Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 2,
+    "fields": {
+        "body": "i saw you got this cpu? 1600?",
+        "owner": 2,
+        "post_id": 1,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:35:22.332Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 2,
+    "fields": {
+        "body": "hey, yeah i have it",
+        "owner": 1,
+        "post_id": 1,
+        "receiver_id": 2,
+        "date_created": "2017-07-25T18:37:10.006Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 3,
+    "fields": {
+        "body": "yaa like can you bump down to 200? i only got 200 bones 4 2day",
+        "owner": 2,
+        "post_id": 1,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:37:58.121Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 4,
+    "fields": {
+        "body": "gotta hook a BROTHA UP with the good good, u no?",
+        "owner": 2,
+        "post_id": 1,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:38:12.998Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 5,
+    "fields": {
+        "body": "im not really sure what you are saying, but i can do 250",
+        "owner": 1,
+        "post_id": 1,
+        "receiver_id": 2,
+        "date_created": "2017-07-25T18:38:34.487Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "aah yaa",
+        "owner": 2,
+        "post_id": 1,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:38:41.126Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "GOOD MAN, ill cum pick up tomorrow",
+        "owner": 2,
+        "post_id": 1,
+        "receiver_id": 1,
+        "date_created": "2017-07-25T18:38:50.326Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 6,
+    "fields": {
+        "body": "soudns good",
+        "owner": 1,
+        "post_id": 1,
+        "receiver_id": 2,
+        "date_created": "2017-07-25T18:39:11.887Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "hey, you still got that psu?",
+        "owner": 1,
+        "post_id": 8,
+        "receiver_id": 3,
+        "date_created": "2017-07-29T15:15:33.367Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "i'll buy it off you for 80",
+        "owner": 1,
+        "post_id": 8,
+        "receiver_id": 3,
+        "date_created": "2017-07-29T15:15:44.981Z"
+    }
+},
+{
+    "model": "api.messaging",
+    "pk": 7,
+    "fields": {
+        "body": "OMG thats the best price ever! SOLD!",
+        "owner": 3,
+        "post_id": 8,
+        "receiver_id": 1,
+        "date_created": "2017-07-29T15:16:59.510Z"
+    }
+}
+]

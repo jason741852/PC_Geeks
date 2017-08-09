@@ -1,0 +1,54 @@
+[
+{
+    "model": "api.buyerrating",
+    "pk": 1,
+    "fields": {
+        "rating": 5,
+        "comment": "Great guy, had money ready. Lots of money. Like, fat stacks.",
+        "post_id": 8,
+        "rater_id": 3,
+        "buyer_id": 1,
+        "date_created": "2017-08-01T11:11:35.654Z",
+        "date_modified": "2017-08-01T11:11:35.654Z"
+    }
+},
+{
+    "model": "api.buyerrating",
+    "pk": 2,
+    "fields": {
+        "rating": 1,
+        "comment": "I don't know what his problem was, but he kept sniffing me and asking if I had the 'good good'. What does that even mean?",
+        "post_id": 2,
+        "rater_id": 1,
+        "buyer_id": 2,
+        "date_created": "2017-07-27T07:57:55.110Z",
+        "date_modified": "2017-07-27T07:57:55.110Z"
+    }
+},
+{
+    "model": "api.sellerrating",
+    "pk": 1,
+    "fields": {
+        "rating": 3,
+        "comment": "2/10 personality, but at least the item was in good shape.",
+        "post_id": 8,
+        "rater_id": 1,
+        "seller_id": 3,
+        "date_created": "2017-08-01T23:00:24.664Z",
+        "date_modified": "2017-08-01T23:00:24.664Z"
+    }
+},
+{
+    "model": "api.sellerrating",
+    "pk": 2,
+    "fields": {
+        "rating": 4,
+        "comment": "Really nice guy, too bad he spit on me once and didn't say sorry.",
+        "post_id": 7,
+        "rater_id": 4,
+        "seller_id": 3,
+        "date_created": "2017-07-31T14:08:33.354Z",
+        "date_modified": "2017-07-31T14:08:33.354Z"
+    }
+}
+]

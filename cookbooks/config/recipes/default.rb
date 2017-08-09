@@ -58,8 +58,28 @@ end
 # 	command 'python3 manage.py collectstatic --noinput'
 # 	cwd '/home/ubuntu/django'
 # end
-execute 'django_load_data' do
-	command 'python3 manage.py loaddata test_data.json'
+execute 'django_load_user_data' do
+	command 'python3 manage.py loaddata initial_user_data.json'
+	cwd '/home/ubuntu/django'
+end
+execute 'django_load_post_data' do
+	command 'python3 manage.py loaddata initial_post_data.json'
+	cwd '/home/ubuntu/django'
+end
+execute 'django_load_messaging_data' do
+	command 'python3 manage.py loaddata initial_messaging_data.json'
+	cwd '/home/ubuntu/django'
+end
+execute 'django_load_potential_buyer_data' do
+	command 'python3 manage.py loaddata initial_potential_buyer_data.json'
+	cwd '/home/ubuntu/django'
+end
+execute 'django_load_rating_data' do
+	command 'python3 manage.py loaddata initial_rating_data.json'
+	cwd '/home/ubuntu/django'
+end
+execute 'django_load_image_data' do
+	command 'python3 manage.py loaddata initial_image_data.json'
 	cwd '/home/ubuntu/django'
 end
 

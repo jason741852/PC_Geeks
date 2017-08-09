@@ -1,0 +1,42 @@
+[
+{
+    "model": "api.potentialbuyer",
+    "pk": 1,
+    "fields": {
+        "post_id": 2,
+        "user_id": 2,
+        "date_created": "2017-07-25T14:35:17.009Z",
+        "date_modified": "2017-07-25T14:35:17.009Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 2,
+    "fields": {
+        "post_id": 2,
+        "user_id": 3,
+        "date_created": "2017-07-25T16:09:30.554Z",
+        "date_modified": "2017-07-25T16:09:30.554Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 3,
+    "fields": {
+        "post_id": 2,
+        "user_id": 4,
+        "date_created": "2017-07-25T23:57:18.398Z",
+        "date_modified": "2017-07-25T23:57:18.398Z"
+    }
+},
+{
+    "model": "api.potentialbuyer",
+    "pk": 4,
+    "fields": {
+        "post_id": 8,
+        "user_id": 1,
+        "date_created": "2017-07-29T15:15:01.150Z",
+        "date_modified": "2017-07-29T15:15:01.150Z"
+    }
+}
+]
