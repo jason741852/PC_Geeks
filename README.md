@@ -1,30 +1,38 @@
-# PC Part Sale Website
+# PC Geeks
+## A PC Part Trading Website
+PC Geeks is a website strictly for people to sell and buy pc parts. When we created this site, we wanted to make a platform that is easy to navigate, less convoluted than CraigsList, and a channel for users to cummunicate directly in-app.
 
-Admin Email info:
-Email: pcgeeks470@gmail.com
-Password: ytrewq123
 
 
 ### To run the web app:
-1. Use `vagrant up` to launch the VM.
-2. Access `localhost:4200` on your host machine.
-3. Refresh the server using the `build.sh` script.
+1. Use vagrant up to launch the VM.
+2. Access localhost:4200 on your host machine.
+3. Refresh the server using the build.sh script.
 
 
-#PLEASE LOOK AT THE BRANCHES and NETWORK, WE ARE WORKING ON SEPERATE BRANCHES AND CAN'T MERGE IT INTO ONE BRANCH YET
-#IF YOU WANT TO SEE A DEMO, GO INTO woody/chris/combined cd angular and run npm install > npm start
-#Checkpoint text:
-Look at Network to see the progress of the group
+### Features
+#### Posting
+PC Geeks provide a structured posting format. The seller must select the type (video card, CPU, etc..) and manufacturer of the item they are selling from a drop-down menu. Seller must also provide their preferred location of transaction which will be shown to other viewers.
 
-    Woody Chen Lin Chang: inside the http/dashboard/form and woody/chris/combined branches.
-    Implemented the dashboard, form, detail, the components that make up the page, some css
+#### Messaging
+When a user see an item they are interested in buying/selling, they can go inside the detail page of the posting and send the other party a message. All parties are anonymous in a conversation to ensure security.
 
-    Chang Yook Ahn: inside the chang branch:
-    The login feature has been implemented which includes the register feature and the view profile.
-    In-progress: 1. The PC Parts rating feature 2.Change password 
-    
-    Alin Paunescu: alin-messaging branch and chris/vagrant branch and userlogin branch.
-    Django Backend DB. Django API, GET, POST, DELETE, user ownership, models.
-    
-    Brandon Tuong Quan Nguyen: brandon/googlemapsapi branch
-    Implemented map to show the location of a sale post, using Google Maps API
+#### Rating
+Inside every sales detail page, users can give feedback to the the post owner. These anonymous ratings can be seen by other users.
+
+#### Reporting
+Due to the nature of people, we also created a reporting feature to report posts that are inappropriate or misleading. The reporting feature sends an email to a admin account.
+
+### Admin Email info:
+Email: pcgeeks470@gmail.com
+Password: ytrewq123
+
+### Test Users info:
+User name: tester1
+Pasword: password
+
+User name: tester2
+Pasword: password
+
+User name: tester3
+Pasword: password
