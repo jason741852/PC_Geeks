@@ -29,10 +29,10 @@ Password: ytrewq123
 
 ### Test Users info:
 User name: tester1
-Pasword: password
+Password: password
 
 User name: tester2
-Pasword: password
+Password: password
 
 User name: tester3
-Pasword: password
+Password: password
