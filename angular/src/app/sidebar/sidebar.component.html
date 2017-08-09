@@ -1,15 +1,32 @@
-<div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+<div class="w3-large w3-text-grey menu" style="font-weight:bold">
     <ul>
-        <a class="w3-bar-item w3-button" routerLink="/">Home</a>
-        <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sale</a>
+        <button (click)="goBack()" class="btn btn-primary backButton">Back</button>
+    </ul>
+    <ul>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/">Home</a>
+        </div>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sale</a>
+        </div>
     </ul>
     <ul *ngIf="!auth.isLoggedIn()">
-        <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
-        <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
+        </div>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
+        </div>
     </ul>
     <ul *ngIf="auth.isLoggedIn()">
-        <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
-        <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
-        <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
+        <div class="row">
+            <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
+        </div>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
+        </div>
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
+        </div>
     </ul>
 </div>

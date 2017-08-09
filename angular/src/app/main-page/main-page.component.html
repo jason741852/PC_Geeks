@@ -11,16 +11,9 @@
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
-<body class="w3-content" style="max-width:1200px">
-
-<body class="w3-content" style="max-width:1200px">
-
-</body>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
+<body class="w3-content" style="max-width:1000px">
+<div class="row">
+  <div class="col-xl-10 offset-xl-1">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:250px">
 
@@ -41,9 +34,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Subscribe section -->
   <div class="w3-container w3-black w3-padding-32">
     <h1>Subscribe</h1>
-    <p>To receive news and updates about our app:</p>
-    <p><input class="w3-input w3-border" type="text" [(ngModel)]="email" name = "email" placeholder="Enter e-mail" style="width:100%"></p>
-    <button (click)="subscribe()" class ="w3-button w3-red w3-margin-bottom">Subscribe</button>
+    <p>To recieve news and updates about our app:</p>
+    <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail" style="width:100%"></p>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Subscribe</button>
   </div>
 
   <!-- Footer -->
@@ -53,21 +46,19 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <h4>Contact</h4>
         <p>Questions or feedback is welcome!</p>
         <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" [(ngModel)]="personName" name = "personName" placeholder="Name" name="Name" required></p>
-          <p><input class="w3-input w3-border" type="text" [(ngModel)]="contactEmail" name = "contactEmail" placeholder="Email" name="Email" required></p>
-          <p><input class="w3-input w3-border" type="text" [(ngModel)]="subject" name = "subject" placeholder="Subject" name="Subject" required></p>
-          <p><input class="w3-input w3-border" type="text" [(ngModel)]="info" name = "info" placeholder="Message" name="Message" required></p>
-          <button (click)="send()" class ="w3-button w3-block w3-black">Send</button>
-
-
+          <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required></p>
+          <button type="submit" class="w3-button w3-block w3-black">Send</button>
         </form>
       </div>
 
       <div class="w3-col s4">
         <h4>About</h4>
-        <p><a href="about">About us</a></p>
-        <p><a href="support">Support</a></p>
-        <p><a href="help">Help</a></p>
+        <p><a href="#">About us</a></p>
+        <p><a href="#">Support</a></p>
+        <p><a href="#">Help</a></p>
       </div>
 
       <div class="w3-col s4 w3-justify">
@@ -77,12 +68,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <p><i class="fa fa-fw fa-envelope"></i> pcgeeks470@gmail.com</p>
 
         <br>
-        <button (click)="facebook()" class ="fa fa-facebook-official w3-hover-opacity w3-large"></button>
-        <button (click)="instagram()" class="fa fa-instagram w3-hover-opacity w3-large"></button>
-        <button (click)="snapchat()" class="fa fa-snapchat w3-hover-opacity w3-large"></button>
-        <button (click)="pinterest()" class="fa fa-pinterest-p w3-hover-opacity w3-large"></button>
-        <button (click)="twitter()" class="fa fa-twitter w3-hover-opacity w3-large"></button>
-        <button (click)="linkedin()" class="fa fa-linkedin w3-hover-opacity w3-large"></button>
+        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
+        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
+        <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
+        <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
+        <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
       </div>
     </div>
   </footer>
@@ -91,23 +82,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- End page content -->
 </div>
+</div>
+</div>
 
-
-<script>
-// Accordion
-function myAccFunc() {
-    var x = document.getElementById("demoAcc");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-
-// Click on the "Jeans" link on page load to open the accordion for demo purposes
-document.getElementById("myBtn").click();
-
-</script>
 
 </body>
 </html>

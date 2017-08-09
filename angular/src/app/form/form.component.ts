@@ -17,7 +17,6 @@ import { AlertService } from '../_services/alert.service';
 export class FormComponent implements OnInit {
   saleForm: FormGroup;
   images: any[] = [];
-  imageUrl: string = '';
   manufacturer = ['AMD', 'Asus', 'ATI',
 'BFG', 'Biostar', 'Club 3D', 'Corsair', 'Dell', 'Diamond', 'ECS', 'EVGA', 'Gainward',
 'GALAX', 'Galaxy', 'Gigabyte', 'HIS', 'HP', 'Inno3D', 'Jaton', 'KFA2', 'Lenovo', 'MSI',
@@ -147,10 +146,10 @@ export class FormComponent implements OnInit {
     }
   }
 
-  addImage() {
+  addImage(img: string) {
     if (this.images.length < 5) {
-      this.images.push(this.imageUrl);
-      this.imageUrl = '';
+      this.images.push(img);
+      img = '';
     }
     else {
       // error message here
