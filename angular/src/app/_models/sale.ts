@@ -1,4 +1,5 @@
 import {Image} from "./image";
+import {Rating} from "./rating";
 
 export class Sale {
 
@@ -35,6 +36,7 @@ export class Sale {
     buyer_id: number;
     date_created: string;
     date_modified: string;
+    seller_rating: Rating[];
 }
 
 

@@ -73,9 +73,10 @@ export class SaleDetailComponent implements OnInit {
       this.saleForm.get('comment').value,
         this.saleForm.get('rate').value)
         .then(sale => {
-
+          alert("Seller has been rated!")
         }).catch(error => {
-          console.log(error);
+          alert("This post has already been rated")
+
         }
       );
 

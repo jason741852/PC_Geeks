@@ -9,5 +9,5 @@ export class User {
 
     phone_number: string;
     buyer_ratings: Rating[];
-    seller_ratings: Rating[];
+    seller_rating: Rating[];
 }
