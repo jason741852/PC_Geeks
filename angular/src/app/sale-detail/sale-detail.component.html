@@ -85,7 +85,7 @@
 
   <div *ngIf="currentUser" class="detailBody">
 
-    <div *ngIf="sale.owner_id == currentUser.id || currentUser.id == 1" class ="deleteButton">
+    <div *ngIf="sale.owner_id == currentUser.id" class ="deleteButton">
       <div class = "buttonbox">
         <button (click)="deletePost()" class="btn btn-danger">Delete Post</button>
       </div>
