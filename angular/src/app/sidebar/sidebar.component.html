@@ -7,7 +7,7 @@
             <a class="w3-bar-item w3-button" routerLink="/">Home</a>
         </div>
         <div class="row">
-            <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sale</a>
+            <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sales</a>
         </div>
     </ul>
     <ul *ngIf="!auth.isLoggedIn()">
@@ -27,6 +27,10 @@
         </div>
         <div class="row">
             <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
+        </div>
+        
+        <div class="row">
+            <a class="w3-bar-item w3-button" routerLink="/message/all">All Messages</a>
         </div>
     </ul>
 </div>

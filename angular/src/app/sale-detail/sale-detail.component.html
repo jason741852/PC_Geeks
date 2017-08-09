@@ -1,43 +1,49 @@
-<div *ngIf="sale" class="detailBody">
-  <div class="panel panel-default panel-heading">
-    <h2 class="panel-title">{{sale.title}}: {{sale.item}}</h2>
-  </div>
-  <div class="panel-body">
-      <ul class="list-group description">
-        <li class="list-group-item">Item Name: {{sale.item}}</li>
-        <li class="list-group-item">Category: {{sale.category}}</li>
-        <li class="list-group-item">Manufacturer: {{sale.manufacturer}}</li>
-        <li class="list-group-item">Quality: {{sale.quality}}</li>
-        <li class="list-group-item">Price: {{sale.price}}</li>
-        <li class="list-group-item">Location: {{sale.location}}</li>
-      </ul>
-  </div>
-    
-  <div class="panel-body">
-    <ul class="list-group description">
-      <li class="list-group-item">Description: {{sale.body}}</li>
-    </ul>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="map">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
+<div class="row">
+    <div *ngIf="sale" class="detailBody">
+        <div class="panel panel-default panel-heading">
+            <h2 class="panel-title">{{sale.title}}: {{sale.item}}</h2>
         </div>
-      </div>
+        <div class="panel-body">
+            <ul class="list-group description">
+                <li class="list-group-item">Item Name: {{sale.item}}</li>
+                <li class="list-group-item">Category: {{sale.category}}</li>
+                <li class="list-group-item">Manufacturer: {{sale.manufacturer}}</li>
+                <li class="list-group-item">Quality: {{sale.quality}}</li>
+                <li class="list-group-item">Price: {{sale.price}}</li>
+                <li class="list-group-item">Location: {{sale.location}}</li>
+            </ul>
+        </div>
+
+        <div class="panel-body">
+            <ul class="list-group description">
+                <li class="list-group-item">Description: {{sale.body}}</li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="map">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <input type="text" [(ngModel)]="new_message" #name="ngModel" />
-  <button (click)="createMessage(message)" routerLink="/message/all" class="btn btn-primary">I'm interested! Send seller a message</button>
-  <button (click)="goBack()" class="btn btn-primary">Back</button>
-  
-  <div class = "imagebox">
-    <img class="img-responsive" src="{{sale.images['0']}}" alt = "" style="width:100px;height:100px;">
-    <img class="img-responsive" src="{{sale.images['1']}}" alt = "" style="width:100px;height:100px;">
-    <img class="img-responsive" src="{{sale.images['2']}}" alt = "" style="width:100px;height:100px;">
-    <img class="img-responsive" src="{{sale.images['3']}}" alt = "" style="width:100px;height:100px;">
-    <img class="img-responsive" src="{{sale.images['4']}}" alt = "" style="width:100px;height:100px;">
 </div>
+<div class="row" style="padding:20px 10px 20px 10px;">
+    <div class="col-12 col-lg-8">
+        <input type="text" [(ngModel)]="new_message" #name="ngModel" />
+        <button (click)="createMessage(message)" routerLink="/message/all" class="btn btn-primary">I'm interested! Send seller a message</button>
+    </div>
+</div>
+<div class="row" style="margin-bottom: 60px">
+    <div *ngIf="sale" class="imagebox">
+        <div *ngFor="let img of sale.images" class="col-lg-3" style="margin:0px;">
+            <a href="{{img}}" target="_blank">
+                <img class="img-responsive" src="{{img}}" alt="" style="width:200px;height:200px;margin:4px">
+            </a>
+        </div>
+    </div>
 </div>
