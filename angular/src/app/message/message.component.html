@@ -1,31 +1,40 @@
 <div class="row">
-<a *ngFor="let message of messages">
-      <div class="convoHeads col" (click)="getConversation(message.post_id, message.owner, message.receiver_id)">
-        <h1>{{message.post_id}}</h1>
-        <p>{{message.body}}</p>
+  <div class="col-xl-10  offset-xl-1">
+<div class="row">
+    <div class="col-md-6">
+      <h3>All your Conversation</h3>
+        <ul class="list-group">
+          <li *ngFor="let message of messages" class="eachBox list-group-item">
+                <div class="convoHeads col" (click)="getConversation(message.post_id, message.owner, message.receiver_id)">
+                  <h1>Sale#{{message.post_id}} - Conversation</h1>
+                  <p>{{message.body}}</p>
+              </div>
+          </li>
+        </ul>
     </div>
-</a>
+    <div class="lineBetween col-md-6">
+      <h3>Conversation</h3>
+      <a *ngFor="let msg of convo; let last = last;" class="col-1-4 loopDisplay">
+        <div class="self_message media" *ngIf="msg.owner==currentUser.id">
+          <div class="media-body text-box-anon">
+            <h4 class="media-heading">Anon
+              <span class="small pull-right">{{msg.date_created}}</span>
+            </h4>
+            <p>{{msg.body}}</p>
+          </div>
+        </div>
+        <div class="other_message media" *ngIf="msg.owner!=currentUser.id">
+          <div class="media-body text-box-me">
+            <h4 class="media-heading">Me
+              <span class="small pull-right">{{msg.date_created}}</span>
+            </h4>
+            <p>{{msg.body}}</p>
+          </div>
+        </div>
+      </a>
+        <input type="text" [(ngModel)]="new_message" #name="ngModel" />
+        <button (click)="createMessage(message)" class="btn btn-primary">Send</button>
+    </div>
 </div>
-
-<a *ngFor="let msg of convo; let last = last;" class="col-1-4 loopDisplay">
-  <div class="self_message media" *ngIf="msg.owner==currentUser.id">
-    <div class="media-body text-box-anon">
-      <h4 class="media-heading">Anon
-        <span class="small pull-right">{{msg.date_created}}</span>
-      </h4>
-      <p>{{msg.body}}</p>
-    </div>
-  </div>
-  <div class="other_message media" *ngIf="msg.owner!=currentUser.id">
-    <div class="media-body text-box-me">
-      <h4 class="media-heading">Me
-        <span class="small pull-right">{{msg.date_created}}</span>
-      </h4>
-      <p>{{msg.body}}</p>
-    </div>
-  </div>
-</a>
-
-
-<input type="text" [(ngModel)]="new_message" #name="ngModel" />
-<button (click)="createMessage(message)" class="btn btn-primary">Send</button>
+</div>
+</div>
