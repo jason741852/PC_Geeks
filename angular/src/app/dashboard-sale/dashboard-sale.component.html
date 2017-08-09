@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xl-10 offset-xl-1">
+  <div class="col-xl-10 offset-xl-1 mb-4">
       <div class="row">
           <div class="col-lg-6 col-xs-12">
                 <label for="saleItem">
@@ -17,7 +17,7 @@
           <button class="list-view" [routerLink]="['/list']">List</button>
       </div>
       <div class="row">
-          <div id="page">
+          <div class="page col-4 offset-4">
               <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
           </div>
       </div>
@@ -29,8 +29,8 @@
                           <h5 class="title">{{sale.title}}: {{sale.item}}</h5>
                       </div>
                       <div class="thumbnail postImage col-lg-12 img-responsive">
-                              <img src="{{sale.images[0]}}">
-            
+                          <img *ngIf="sale.images[0]" src="{{sale.images[0]}}">
+                          <img *ngIf="!sale.images[0]" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/device-computer-icon.png">
                       </div>
                       <ul>
                           <li>Selling {{sale.item}}</li>
@@ -44,6 +44,11 @@
                       </div>
                   </div>
               </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="page col-4 offset-4">
+              <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
           </div>
       </div>
   </div>

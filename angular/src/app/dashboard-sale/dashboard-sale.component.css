@@ -56,14 +56,14 @@ ul {
 }
 
 .thumbnail {
-  height: 230px;
+  height: 240px;
 }
 
 .divResize{
   height: 50%;
 }
 
-#page{
+.page{
   margin-top: 5em;
   padding-left: 0;
 }
@@ -79,6 +79,7 @@ button {
 
 .postImage {
     padding: 2px;
+    margin-bottom: 8px;
 }
 
 .offset-md-1{
@@ -86,7 +87,8 @@ button {
 }
 
 .titleBox{
-  height:40px;
+  height:60px;
+  overflow:hidden;
 }
 
 .noteButton{
