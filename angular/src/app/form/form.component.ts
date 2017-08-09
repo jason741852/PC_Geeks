@@ -27,6 +27,8 @@ export class FormComponent implements OnInit {
 
   category = ['CPU', 'CPU Cooler', 'Motherboard', 'Memory', 'Storage', 'VideoCard', 'Power Supply', 'Case'];
 
+  title = ['Buying','Selling'];
+
   createRequest = {
       title: '',
       item: '',
@@ -62,7 +64,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleForm = new FormGroup({
-      'title': new FormControl(this.createRequest.title, [Validators.required]),
+      'title': new FormControl(this.createRequest.title),
       'item': new FormControl(this.createRequest.item, [Validators.required]),
       'category': new FormControl(this.createRequest.category),
       'quality': new FormControl(this.createRequest.quality),
@@ -99,9 +101,6 @@ export class FormComponent implements OnInit {
           }
 
           //set latitude, longitude and zoom
-          this.latitude = parseFloat(this.latitude.toFixed(6));
-          this.longitude = parseFloat(this.longitude.toFixed(9));
-
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
@@ -121,19 +120,19 @@ export class FormComponent implements OnInit {
     }
 
   add(): void {
-    this.submitted = true;
+      this.submitted = true;
     if (this.saleForm.valid) {
       this.saleService.create(
-      this.saleForm.get('item').value,
-      this.saleForm.get('title').value,
-      this.saleForm.get('category').value,
-      this.saleForm.get('quality').value,
-      this.saleForm.get('manufacturer').value,
-      this.saleForm.get('price').value,
-      this.saleForm.get('location').value,
-      this.latitude = parseFloat(this.latitude.toFixed(3)),
-      this.longitude = parseFloat(this.longitude.toFixed(3)),
-      this.saleForm.get('body').value)
+        this.saleForm.get('item').value,
+        this.saleForm.get('title').value,
+        this.saleForm.get('category').value,
+        this.saleForm.get('quality').value,
+        this.saleForm.get('manufacturer').value,
+        this.saleForm.get('price').value,
+        this.saleForm.get('location').value,
+        this.latitude = parseFloat(this.latitude.toFixed(3)),
+        this.longitude = parseFloat(this.longitude.toFixed(3)),
+        this.saleForm.get('body').value)
         .then(sale => {
           for (let i in this.images) {
             this.saleService.addImage(sale.id, this.images[i]);
@@ -162,9 +161,8 @@ export class FormComponent implements OnInit {
     this.images.splice(this.images.indexOf(url), 1);
   }
 
-  get title() { return this.saleForm.get('title'); }
+  //get title() { return this.saleForm.get('title'); }
   get item() { return this.saleForm.get('item'); }
-
   get location() { return this.saleForm.get('location'); }
   //get category() { return this.saleForm.get('category'); }
   //get quality() { return this.saleForm.get('quality'); }

@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Sale } from '../_models/sale';
 import {Image} from '../_models/image';
+import {Rating} from "../_models/rating";
 
 @Injectable()
 export class SaleService {
@@ -30,7 +31,6 @@ export class SaleService {
     }
     // ------
     addImage(id: number, url: string): Promise<Image> {
-        console.log(url);
       return this.http.post(
         this.salesUrl + id + '/images/new/',
         JSON.stringify ({url: url}),
@@ -39,6 +39,16 @@ export class SaleService {
       .then(response => response.json() as Image)
       .catch(this.handleError);
   }
+  addRating(id: number, comment: string, rating:number): Promise<Rating> {
+    return this.http.post(
+      this.salesUrl + id + '/rate/seller/',
+      JSON.stringify ({comment: comment, rating:rating}),
+      this.createHeader())
+      .toPromise()
+      .then(response => response.json() as Rating)
+      .catch(this.handleError);
+  }
+
 
   create(item: string,
             title:string,

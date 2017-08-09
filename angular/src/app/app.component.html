@@ -1,4 +1,15 @@
-<app-navbar></app-navbar>
-<app-alert></app-alert>
-<router-outlet></router-outlet>
+<div class="row">
+    <div class="col-xl-12">
+        <app-navbar></app-navbar>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-1 col-lg-2 col-md-3">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-xl-11 col-lg-10 col-md-9">
+        <app-alert></app-alert>
+        <router-outlet></router-outlet>
+    </div>
+</div>
 

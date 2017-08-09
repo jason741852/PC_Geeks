@@ -37,16 +37,6 @@ export class CurrentUserService {
             this.handleError
         );
     }
-  addRating(id: number, url: string): Promise<Rating> {
-    console.log(url);
-    return this.http.post(
-      this.salesUrl + id + '/images/new/',
-      JSON.stringify ({url: url}),
-      this.createHeader())
-      .toPromise()
-      .then(response => response.json() as Rating)
-      .catch(this.handleError);
-  }
 
     getPostDetails(id: number): Promise<Sale> {
         return this.http.get(

@@ -8,6 +8,7 @@ import { SaleService } from '../_services/sale.service';
 import {User} from "../_models/user";
 import {UserService} from "../_services/user.service";
 import {CurrentUserService} from "../_services/currentuser.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-sale-detail',
@@ -19,6 +20,14 @@ export class SaleDetailComponent implements OnInit {
     params: ParamMap;
     currentUser: User;
     has_user_loaded = false;
+    saleForm: FormGroup;
+    rate = ['1','2','3','4','5'];
+
+
+  createRequest = {
+    comment: '',
+    rate: this.rate[0],
+  };
 
   lat: number;
     lng: number;
@@ -32,6 +41,11 @@ export class SaleDetailComponent implements OnInit {
     ) {}
 
     ngOnInit(): any {
+      this.saleForm = new FormGroup({
+        'comment': new FormControl(this.createRequest.comment),
+        'rate': new FormControl(this.createRequest.rate)
+      });
+
       this.route.paramMap
         .switchMap((params: ParamMap) => this.saleService.getPublicSaleDetails(+params.get('id')))
         .subscribe(sale => {this.sale = sale;
@@ -52,6 +66,22 @@ export class SaleDetailComponent implements OnInit {
   }
 
 
+  add(): void {
+    if (this.saleForm.valid) {
+      this.saleService.addRating(
+        this.sale["id"],
+      this.saleForm.get('comment').value,
+        this.saleForm.get('rate').value)
+        .then(sale => {
+
+        }).catch(error => {
+          console.log(error);
+        }
+      );
+
+    }
+  }
+
   private loadSelf() {
     this.userService.getUser().then((user: User) => {
       this.currentUser = user;
@@ -61,4 +91,5 @@ export class SaleDetailComponent implements OnInit {
     });
   }
 }
+
 

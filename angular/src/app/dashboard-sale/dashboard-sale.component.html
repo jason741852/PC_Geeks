@@ -1,41 +1,50 @@
-<div class="container">
-  <div class="body">
-    <form (keyup.enter)="search(saleItem.value)" class="col-md-8">
-      <div class="searchBar">
-        <label for="saleItem">Search:</label>
-        <input #saleItem type="text" class="form-control" id="saleItem">
-
-        <button (click)="search(saleItem.value)" class="searchButton btn btn-primary">
-          Search
-        </button>
-
-        <div class="toggle">
+<div class="row">
+  <div class="col-xl-10 offset-xl-1">
+      <div class="row">
+          <div class="col-lg-6 col-xs-12">
+                <label for="saleItem">
+                    Filter Posts:<button class="noteButton w3-button w3-circle w3-black"
+                    data-toggle="collapse" data-target="#note">?</button>
+                    <div id="note" class="collapse">
+                        Filter by category, manufacturer, Buying, Selling
+                    </div>
+                </label>
+              <input (keyup)="search()" [(ngModel)]="searchText" type="text" class="form-control" name="saleItem" id="saleItem">
+          </div>
+      </div>
+      <div class="row toggle">
           <button class="grid-view" [routerLink]="['/dashboard']">Grid</button>
           <button class="list-view" [routerLink]="['/list']">List</button>
-        </div>
       </div>
-    </form>
-
-    <div id="page">
-      <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
-    </div>
-    
-    <div class="row">
-      <div class="item col-lg-4 col-centered"
-      *ngFor="let sale of sales | paginate: { itemsPerPage: 6, currentPage: p }">
-        <div class="thumbnail" [ngStyle]="{'background-image': 'url('+sale.images['0']+')'}" style="background-repeat: no-repeat; background-size: 348px 271px;">
-          <ul>
-            <li>Selling {{sale.item}}</li>
-            <li>{{sale.manufacturer}} {{sale.category}}</li>
-            <li>${{sale.price}}</li>
-          </ul>
-          <p>
-            <button class="btn btn-primary detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
-            <button class="btn btn-primary reportButton" role="button" [routerLink]="['/report', sale.id]">Report This Post</button>
-          </p>
-        </div>
+      <div class="row">
+          <div id="page">
+              <pagination-controls (pageChange)="p = $event" class="pageing"></pagination-controls>
+          </div>
       </div>
-    </div>
+      <div class="row">
+          <div class="col-xl-4 col-lg-6 pt-xl-3 pb-xl-3 pt-xs-2 pb-xs-2" *ngFor="let sale of shownSales | paginate: { itemsPerPage: 12, currentPage: p }">
+              <div class="item">
+                  <div class="col-md-10 offset-md-1 pt-md-1 pb-md-1">
+                      <div class="row titleBox">
+                          <h5 class="title">{{sale.title}}: {{sale.item}}</h5>
+                      </div>
+                      <div class="thumbnail postImage col-lg-12 img-responsive">
+                              <img src="{{sale.images[0]}}">
+            
+                      </div>
+                      <ul>
+                          <li>Selling {{sale.item}}</li>
+                          <li>{{sale.manufacturer}} {{sale.category}}</li>
+                          <li>${{sale.price}}</li>
+                      </ul>
+                      <div  class="row">
+                          <button class="btn btn-default detailButton" role="button" [routerLink]="['/detail', sale.id]">I'm Interested</button>
+                          <button class="btn btn-default detailButton" role="button" [routerLink]="['/detail', sale.id]">View Details</button>
+                          <button class="btn btn-danger reportButton" role="button" [routerLink]="['/report', sale.id]">Report This Post</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-
 </div>

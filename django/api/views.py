@@ -412,8 +412,6 @@ class BuyerRatingCreateView(generics.CreateAPIView):
         data[u'post_id'] = post_id
         data[u'rater_id'] = self.request.user.id
         post = generics.get_object_or_404(Post, id=post_id)
-        if post.buyer_id == None:
-            return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
         data[u'buyer_id'] = post.buyer_id.id
 
         serializer = self.get_serializer(data=data)
@@ -453,8 +451,6 @@ class SellerRatingCreateView(generics.CreateAPIView):
         data[u'post_id'] = post_id
         data[u'rater_id'] = self.request.user.id
         post = generics.get_object_or_404(Post, id=post_id)
-        if post.buyer_id is None:
-            return Response({'error': 'This post has not ended yet.'}, status=status.HTTP_400_BAD_REQUEST)
         data[u'seller_id'] = post.owner_id.id
 
         serializer = self.get_serializer(data=data)

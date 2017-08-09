@@ -20,8 +20,8 @@ agm-map {
   top: 10%;
 }
 
-.list-group-item {
-
+.panel-body{
+  margin-top: 15px;
 }
 .imagebox{
   width:100%
