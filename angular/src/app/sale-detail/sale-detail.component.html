@@ -1,6 +1,6 @@
 <div *ngIf="sale" class="detailBody">
   <div class="panel panel-default panel-heading">
-    <h2 class="panel-title">{{sale.title}}</h2>
+    <h2 class="panel-title">{{sale.title}}: {{sale.item}}</h2>
   </div>
   <div class="panel-body">
       <ul class="list-group description">
@@ -10,20 +10,11 @@
         <li class="list-group-item">Quality: {{sale.quality}}</li>
         <li class="list-group-item">Price: {{sale.price}}</li>
         <li class="list-group-item">Location: {{sale.location}}</li>
-        <li class="list-group-item">Description: {{sale.body}}</li>
-        <div class = "imagebox">
-          <img src="{{sale.images['0']}}" alt = "" style="width:100px;height:100px;">
-          <img src="{{sale.images['1']}}" alt = "" style="width:100px;height:100px;">
-          <img src="{{sale.images['2']}}" alt = "" style="width:100px;height:100px;">
-          <img src="{{sale.images['3']}}" alt = "" style="width:100px;height:100px;">
-          <img src="{{sale.images['4']}}" alt = "" style="width:100px;height:100px;">
-        </div>
       </ul>
   </div>
-  <h2>Seller's contact information</h2>
+    
   <div class="panel-body">
     <ul class="list-group description">
-      <li class="list-group-item">Location: {{sale.location}}</li>
       <li class="list-group-item">Description: {{sale.body}}</li>
     </ul>
   </div>
@@ -38,6 +29,13 @@
       </div>
     </div>
   </div>
+</div>
+<div class = "imagebox">
+  <img src="{{sale.images['0']}}" alt = "" style="width:100px;height:100px;">
+  <img src="{{sale.images['1']}}" alt = "" style="width:100px;height:100px;">
+  <img src="{{sale.images['2']}}" alt = "" style="width:100px;height:100px;">
+  <img src="{{sale.images['3']}}" alt = "" style="width:100px;height:100px;">
+  <img src="{{sale.images['4']}}" alt = "" style="width:100px;height:100px;">
 </div>
 
 

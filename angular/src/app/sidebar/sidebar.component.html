@@ -1,0 +1,15 @@
+<div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <ul>
+        <a class="w3-bar-item w3-button" routerLink="/">Home</a>
+        <a class="w3-bar-item w3-button" routerLink="/dashboard">All Sale</a>
+    </ul>
+    <ul *ngIf="!auth.isLoggedIn()">
+        <a class="w3-bar-item w3-button" routerLink="/login">Login</a>
+        <a class="w3-bar-item w3-button" routerLink="/register">Register</a>
+    </ul>
+    <ul *ngIf="auth.isLoggedIn()">
+        <a class="w3-bar-item w3-button" [routerLink]="['/login']">Logout</a>
+        <a class="w3-bar-item w3-button" routerLink="/profile">Profile</a>
+        <a class="w3-bar-item w3-button" routerLink="/form">Create Sale</a>
+    </ul>
+</div>

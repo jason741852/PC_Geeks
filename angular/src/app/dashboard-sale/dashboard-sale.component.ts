@@ -11,6 +11,8 @@ import { SaleService } from '../_services/sale.service';
 })
 export class DashboardSaleComponent implements OnInit {
   sales: Sale[] = [];
+  shownSales: Sale[] = []
+  searchText: string = "";
 
   //List Classes
   /*
@@ -44,11 +46,25 @@ export class DashboardSaleComponent implements OnInit {
   ngOnInit(): void {
     //this.image = 'https://www.w3schools.com/images/w3schools_green.jpg'
     this.saleService.getSales()
-      .then(sales => this.sales = sales);
-
+      .then(sales => {
+        this.sales = sales;
+        this.shownSales = sales;
+      });
   }
-  search(saleItem: string) {
-    this.router.navigate(['/dashboard/' + saleItem])
-    location.reload()
+  search() {
+    if (this.searchText == '') {
+        this.shownSales = this.sales;
+    }
+    else {
+        this.shownSales = [];
+        this.sales.forEach((sale: Sale) => {
+            if (sale.title.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1 ||
+                sale.manufacturer.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1 ||
+                sale.category.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1 ||
+                sale.location.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1) {
+                this.shownSales.push(sale);
+            }
+        });
+    }
   }
 }
