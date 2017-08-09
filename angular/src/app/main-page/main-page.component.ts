@@ -26,7 +26,7 @@ export class MainPageComponent implements OnInit {
 	    this.subscribePost = 'You are subscribed';
 	    console.log(this.email);
 	    this.http
-  		.post('/api/report/', {message:this.email, id:9999999999},)
+  		.post('/api/report/', {message:this.email, id:-1},)
   		.subscribe(result => 
   			{
   				console.log(result);
@@ -38,7 +38,7 @@ export class MainPageComponent implements OnInit {
 		this.contactUs = 'Contact Admins';
 	    console.log(this.email);
 	    this.http
-  		.post('/api/report/', {message:"Name: " + this.personName + " Email: " +this.contactEmail + " Subject: " + this.subject + " Message: " + this.info, id:8888888},)
+  		.post('/api/report/', {message:"Name: " + this.personName + " Email: " +this.contactEmail + " Subject: " + this.subject + " Message: " + this.info, id:-2},)
   		.subscribe(result => 
   			{
   				console.log(result);
