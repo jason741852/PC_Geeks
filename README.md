@@ -1,6 +1,6 @@
 # PC Geeks
 ## A PC Part Trading Website
-PC Geeks is a website strictly for people to sell and buy pc parts. When we created this site, we wanted to make a platform that is easy to navigate, less convoluted than CraigsList, and a channel for users to cummunicate directly in-app.
+PC Geeks is a website strictly for people to sell and buy pc parts. We wanted to make a platform that is easy to navigate, less convoluted than CraigsList, and a channel for users to cummunicate directly wtihin the app.
 
 
 
@@ -12,10 +12,10 @@ PC Geeks is a website strictly for people to sell and buy pc parts. When we crea
 
 ### Features
 #### Posting
-PC Geeks provide a structured posting format. The seller must select the type (video card, CPU, etc..) and manufacturer of the item they are selling from a drop-down menu. Seller must also provide their preferred location of transaction which will be shown to other viewers.
+PC Geeks provides a structured posting format. The seller must select the type (video card, CPU, etc..) and manufacturer of the item they are selling from a drop-down menu. Seller must also provide their preferred location of transaction which will be shown to other viewers.
 
 #### Messaging
-When a user see an item they are interested in buying/selling, they can go inside the detail page of the posting and send the other party a message. All parties are anonymous in a conversation to ensure security.
+When a user sees an item they are interested in buying/selling, they can go inside the detail page of the posting and send the other party a message. All parties are anonymous in a conversation to ensure security.
 
 #### Rating
 Inside every sales detail page, users can give feedback to the the post owner. These anonymous ratings can be seen by other users.
